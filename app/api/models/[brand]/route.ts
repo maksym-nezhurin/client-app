@@ -1,11 +1,11 @@
-import type { NextApiRequest } from 'next';
+import type { RequestHandlerContext } from 'next/server';
 
 export async function GET(
-    req: NextApiRequest,
-    { params }: { params: { brand: string } }
+    req,
+    context: RequestHandlerContext<{ brand: string }>
 ) {
     const apiUrl = process.env.API_URL;
-    const brand = params.brand;
+    const { brand } = context.params;
     const res = await fetch(`${apiUrl}/cars/characteristics/brands/${brand}/models`);
     const data = await res.json();
 

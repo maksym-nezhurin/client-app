@@ -5,7 +5,7 @@ import { CarList } from '@/components/car/CarList';
 async function getCars(): Promise<ICar[]> {
   const url = `${env.API_URL}/cars` || 'http://gateway:3000/cars';
   const res = await fetch(url, { cache: 'no-store' });
-  console.log('env.NEXT_PUBLIC_API_URL', env.NEXT_PUBLIC_API_URL);
+
   if (!res.ok) throw new Error('Failed to fetch cars');
   return res.json();
 }

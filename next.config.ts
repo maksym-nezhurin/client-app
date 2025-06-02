@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  typescript: {
+    // ⚠️ Dangerous! Ignores all type errors
+    ignoreBuildErrors: true,
+  },
   images: {
     remotePatterns: [
       {

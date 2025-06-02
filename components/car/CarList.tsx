@@ -19,7 +19,7 @@ export function CarList(props: IProps) {
     const onFilterChange = (filter) => {
         console.log('change', filter);
     }
-    console.log('cars', cars);
+
     return (
         <QueryClientProvider client={queryClient}>
             {/* Filters Section */}
