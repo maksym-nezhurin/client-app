@@ -74,7 +74,7 @@ export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters) =
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed top-0 left-0 z-40 h-full w-64 bg-white p-4 shadow-md transition-transform transform',
+          'fixed p-4 pt-20 top-0 left-0 z-40 h-full w-64 bg-white shadow-md transition-transform transform',
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >

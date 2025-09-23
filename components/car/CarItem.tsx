@@ -7,13 +7,15 @@ import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 interface Props {
-  car: ICar;
+  car?: ICar;
+  isLoading?: boolean;
 }
 
-export default function CarItem({ car }: Props) {
+export default function CarItem({ car, isLoading = false }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isLoading) return;
     const el = containerRef.current;
     if (!el) return;
 
@@ -38,6 +40,18 @@ export default function CarItem({ car }: Props) {
     };
   }, []);
 
+  if (isLoading || !car) {
+    return (
+      <div className="relative rounded-2xl p-6 shadow-[0_0_25px_#00ffff30] bg-black text-white overflow-hidden animate-pulse border border-cyan-800">
+        <div className="w-16 h-16 mb-4 bg-cyan-900 rounded-full" />
+        <div className="h-6 bg-cyan-800 rounded w-3/4 mb-2" />
+        <div className="h-4 bg-cyan-800 rounded w-full mb-2" />
+        <div className="h-4 bg-cyan-800 rounded w-1/2 mb-2" />
+        <div className="h-4 bg-cyan-800 rounded w-1/3" />
+      </div>
+    );
+  }
+
   const emblem = CarEmblemMap[car.brand.toLowerCase()] || '/logos/default.svg';
 
   return (
@@ -55,10 +69,9 @@ export default function CarItem({ car }: Props) {
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
     >
-      {/* Блискавки SVG */}
       <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        xmlns="http://www.w3.org/2000/svg"
+        className="none hover:block absolute inset-0 w-full h-full pointer-events-none"
+
         preserveAspectRatio="none"
         viewBox="0 0 200 200"
       >
