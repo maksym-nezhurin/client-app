@@ -6,6 +6,7 @@
     "dev": "pnpm --filter client-app dev",
     "build": "pnpm --filter client-app build",
     "start": "pnpm --filter client-app start",
+    "vercel-build": "pnpm install --filter . && next build",
     "lint": "next lint"
   },
   "dependencies": {
