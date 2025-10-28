@@ -1,3 +1,7 @@
+function mpgToL100km(mpg: number): number {
+  return +(235.214583 / parseInt(String(mpg))).toFixed(1); // округляємо до 1 знака
+}
+
 const convertCarItemInfo = (item) => {
     const {
         model_id,
@@ -40,6 +44,7 @@ const convertCarItemInfo = (item) => {
         make_display,
         make_country,
     } = item;
+
     return {
         id: model_id,
         makeId: model_make_id,
@@ -71,9 +76,9 @@ const convertCarItemInfo = (item) => {
         widthMm: model_width_mm,
         heightMm: model_height_mm,
         wheelbaseMm: model_wheelbase_mm,
-        lkmHwy: model_lkm_hwy,
-        lkmMixed: model_lkm_mixed,
-        lkmCity: model_lkm_city,
+        lkmHwy: mpgToL100km(model_lkm_hwy),
+        lkmMixed: mpgToL100km(model_lkm_mixed),
+        lkmCity: mpgToL100km(model_lkm_city),
         fuelCapL: model_fuel_cap_l,
         soldInUs: model_sold_in_us === '1',
         co2: model_co2,
@@ -84,7 +89,7 @@ const convertCarItemInfo = (item) => {
 
 export async function GET(
     req,
-    context: RequestHandlerContext<{ model: string }>
+    context,
 ) {
     const { model } = await context.params;
     const apiUrl = process.env.CARQUERY_API_URL;

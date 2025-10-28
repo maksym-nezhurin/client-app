@@ -2,6 +2,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import { Button } from '../ui/Button'
 import { usePathname } from 'next/navigation';
@@ -16,7 +17,7 @@ export function Navbar({ items }) {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="text-brand-primary font-bold text-xl tracking-tight">
-          AutoMarket
+          <Image src="/logo.webp" alt="Logo" width={100} height={50} />
         </Link>
 
         {/* Desktop Nav */}
