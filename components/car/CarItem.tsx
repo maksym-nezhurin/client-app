@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { CarEmblemMap } from './CarEmblemMap';
-import { ICar } from './types';
+import { ICar } from '@/types/car';
 import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 
@@ -38,7 +38,7 @@ export default function CarItem({ car, isLoading = false }: Props) {
       el.removeEventListener('mousemove', onMouseMove);
       el.removeEventListener('mouseleave', onMouseLeave);
     };
-  }, []);
+  }, [isLoading]);
 
   if (isLoading || !car) {
     return (

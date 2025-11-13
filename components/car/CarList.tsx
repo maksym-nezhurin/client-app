@@ -7,6 +7,7 @@ import { SidebarFilters } from '@/components/sidebar/SidebarFilters'
 import CarItem from '@/components/car/CarItem';
 import Link from 'next/link';
 import { ICar } from '@/types/car';
+import { Filters } from '@/components/sidebar/SidebarFilters';
 
 interface IProps {
     cars: [] | ICar[];
@@ -20,16 +21,16 @@ const queryClient = new QueryClient();
 
 export function CarList(props: IProps) {
     const isFirstRender = useRef(true);
-    const { limit } = props;
+    const { limit, rent } = props;
     const [cars, setCars] = useState(props.cars);
     const [page, setPage] = useState(props.page);
     const [pages, setPages] = useState(props.pages);
 
-    const onFilterChange = (filter) => {
+    const onFilterChange = (filter: Filters) => {
         console.log('change', filter);
     }
 
-    const handleChangePage = (p) => {
+    const handleChangePage = (p: number) => {
         if (p > 0 && p <= pages) {
             setPage(p);
         }
@@ -56,7 +57,7 @@ export function CarList(props: IProps) {
         }
 
         getData();
-    }, [page, limit]);
+    }, [page, limit, rent]);
 
     return (
         <QueryClientProvider client={queryClient}>

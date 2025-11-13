@@ -9,8 +9,9 @@ import { Select } from '@/components/ui/Select';
 import { Menu, X } from 'lucide-react';
 import { YearRangePicker } from '@/components/ui/YearRangePicker';
 import { ROUTES } from "@/lib/routes";
+import type { ICarModel } from '@/types/car';
 
-type Filters = Record<string, any>;
+export type Filters = Record<string, string | number | string[] | number[]>;
 
 // simple generic debounce hook
 function useDebounce<T>(value: T, delay = 300): T {
@@ -183,7 +184,7 @@ export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters: F
                 }
                 className="w-full border rounded p-2 h-28"
             >
-              {variants.map((opt) => (
+              {variants.map((opt: ICarModel) => (
                   <option key={opt.id} value={opt.id}>
                     {opt.name} {opt.trim && `- ${opt.trim}`}
                   </option>

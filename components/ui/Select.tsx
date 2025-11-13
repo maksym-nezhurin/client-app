@@ -19,6 +19,7 @@ interface BaseSelectProps {
   id?: string;
   name?: string;
   emptyLabel?: string;
+  label?: string;
 }
 
 export function Select({
