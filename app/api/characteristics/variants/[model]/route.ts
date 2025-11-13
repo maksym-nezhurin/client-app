@@ -1,3 +1,7 @@
+function mpgToL100km(mpg: number): number {
+  return +(235.214583 / parseInt(String(mpg))).toFixed(1); // округляємо до 1 знака
+}
+
 const convertCarItemInfo = (item) => {
     const {
         model_id,
@@ -40,6 +44,7 @@ const convertCarItemInfo = (item) => {
         make_display,
         make_country,
     } = item;
+
     return {
         id: model_id,
         makeId: model_make_id,
@@ -71,9 +76,9 @@ const convertCarItemInfo = (item) => {
         widthMm: model_width_mm,
         heightMm: model_height_mm,
         wheelbaseMm: model_wheelbase_mm,
-        lkmHwy: model_lkm_hwy,
-        lkmMixed: model_lkm_mixed,
-        lkmCity: model_lkm_city,
+        lkmHwy: mpgToL100km(model_lkm_hwy),
+        lkmMixed: mpgToL100km(model_lkm_mixed),
+        lkmCity: mpgToL100km(model_lkm_city),
         fuelCapL: model_fuel_cap_l,
         soldInUs: model_sold_in_us === '1',
         co2: model_co2,
@@ -82,25 +87,63 @@ const convertCarItemInfo = (item) => {
     }
 };
 
+const generateYearsFromRange = (from: number, to: number): number[] => {
+    const years: number[] = [];
+    for (let year = from; year <= to; year++) {
+        years.push(year);
+    }
+    return years;
+};
+
 export async function GET(
     req,
-    context: RequestHandlerContext<{ year: string, brand: string }>
+    context,
 ) {
-    const { year, brand } = await context.params;
+    const { model } = await context.params;
     const apiUrl = process.env.CARQUERY_API_URL;
-    const url = `${apiUrl}?cmd=getTrims&make=${brand}&year=${year}`;
+    const url = `${apiUrl}?cmd=getTrims&model=${model}`;
+    const reqUrl = new URL(req.url);
+    const search = reqUrl.searchParams;
+    const qFrom = search.get('from') || undefined;
+    const qTo = search.get('to') || undefined;
 
-    const res = await fetch(url);
-    const data = await res.json();
+    if (qFrom && qTo) {
+        const years = generateYearsFromRange(parseInt(qFrom), parseInt(qTo));
+        const results = [];
 
-    if (!data) {
-        return new Response(JSON.stringify({ data: 'failed' }), { status: 500 });
+        for (const year of years) {
+            try {
+                const url = `https://www.carqueryapi.com/api/0.3/?cmd=getTrims&model=${model}&year=${year}`;
+                const res = await fetch(url);
+                const text = await res.text();
+                const cleanText = text.replace(/^callback\(|\);?$/g, '');
+                const data = JSON.parse(cleanText);
+
+                console.log(`📅 ${year}: знайдено ${data.Trims.length} варіантів`);
+                const preparedItems = data.Trims.map(convertCarItemInfo);
+                results.push(...preparedItems);
+            } catch (error) {
+                console.error(`❌ Помилка при отриманні даних за ${year}:`, error);
+                continue;
+            }
+        }
+
+        return new Response(JSON.stringify(results), {
+            headers: { 'Content-Type': 'application/json' },
+        });
+    } else {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (!data) {
+            return new Response(JSON.stringify({ data: 'failed' }), { status: 500 });
+        }
+
+
+        const values = data.Trims.map(convertCarItemInfo);
+
+        return new Response(JSON.stringify(values), {
+            headers: { 'Content-Type': 'application/json' },
+        });
     }
-
-    
-    const values = data.Trims.map(convertCarItemInfo);
-
-    return new Response(JSON.stringify(values), {
-        headers: { 'Content-Type': 'application/json' },
-    });
 }

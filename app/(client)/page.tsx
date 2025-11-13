@@ -1,11 +1,13 @@
 import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
+// import { Button } from '@/components/ui/Button';
+import { Button } from '@reelo/ui';
 import CarItem from '@/components/car/CarItem';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { FeaturesSection } from '@/components/sections/FeaturesSection';
 import { PartnersSection } from '@/components/sections/PartnerSection';
 import TrustBenefits from '@/components/sections/TrustBenefitsSection';
 import { ICar } from '@/types/car';
+import { ROUTES } from "@/lib/routes";
 
 // Mock latest cars - Replace with real API later
 const latestCars: ICar[] = [
@@ -58,7 +60,7 @@ export default function HomePage() {
           ))}
         </div>
         <div className="text-center mt-8">
-          <Link href="/cars">
+          <Link href={ROUTES.BROWSE}>
             <Button>View All Cars</Button>
           </Link>
         </div>

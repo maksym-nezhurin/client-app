@@ -9,10 +9,11 @@ import Link from 'next/link';
 import { ICar } from '@/types/car';
 
 interface IProps {
-    cars: ICar[];
+    cars: [] | ICar[];
     page: number;
     pages: number;
-    rent: boolean;
+    rent?: boolean;
+    limit: number;
 }
 
 const queryClient = new QueryClient();

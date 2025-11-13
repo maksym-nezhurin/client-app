@@ -1,6 +1,6 @@
 export async function GET() {
     const apiUrl = process.env.CARQUERY_API_URL;
-    const url = `${apiUrl}?cmd=getMakes`;
+    const url = `${apiUrl}?cmd=getMakes&year=2022`;
     const res = await fetch(url);
     const data = await res.json();
 

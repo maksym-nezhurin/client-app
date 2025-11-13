@@ -55,7 +55,7 @@ export function Select({
           className="z-50 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md"
           position="popper"
         >
-          <RadixSelect.Viewport className="p-1">
+          <RadixSelect.Viewport className="p-1 max-h-[60vh]">
             {options.length === 0 ? (
               <div className="px-3 py-2 text-sm text-gray-500">{emptyLabel}</div>
             ) : (

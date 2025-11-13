@@ -1,26 +1,47 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, type ChangeEvent } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { Select } from '@/components/ui/Select';
 import { Menu, X } from 'lucide-react';
+import { YearRangePicker } from '@/components/ui/YearRangePicker';
+import { ROUTES } from "@/lib/routes";
 
-export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters) => void }) {
+type Filters = Record<string, any>;
+
+// simple generic debounce hook
+function useDebounce<T>(value: T, delay = 300): T {
+  const [debounced, setDebounced] = useState<T>(value);
+
+  useEffect(() => {
+    const id = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(id);
+  }, [value, delay]);
+
+  return debounced;
+}
+
+export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters: Filters) => void }) {
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
   const [type, setType] = useState('');
-  const [variant, setVariant] = useState('');
-  const [minYear, setMinYear] = useState('');
+  const [variant, setVariant] = useState<string[]>([]);
+  const [years, setYears] = useState<[number, number]>([1990, 2022]);
+  const [fromYear, setFromYear] = useState(2008);
+  const [toYear, setToYear] = useState(2022);
   const [maxPrice, setMaxPrice] = useState('');
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  console.log('variant', variant);
+  const debouncedFromYear = useDebounce<number>(fromYear, 400);
+  const debouncedToYear = useDebounce<number>(toYear, 400);
 
   const { data: brands = [] } = useQuery({
     queryKey: ['brands'],
     queryFn: async () => {
-      const res = await fetch('/api/brands');
+      const res = await fetch(ROUTES.API.CHARACTERISTICS.BRANDS);
       if (!res.ok) throw new Error('Failed to fetch brands');
       return res.json();
     },
@@ -30,30 +51,46 @@ export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters) =
     queryKey: ['models', brand],
     queryFn: async () => {
       if (!brand) return {};
-      const res = await fetch(`/api/models/${brand}`);
+      const res = await fetch(ROUTES.API.CHARACTERISTICS.MODELS(brand));
       if (!res.ok) throw new Error('Failed to fetch models');
       return res.json();
     },
     enabled: !!brand,
   });
 
+  const { data: variants = [] } = useQuery({
+    queryKey: ['variants', brand, model, debouncedFromYear, debouncedToYear],
+    queryFn: async () => {
+      if (!brand || !model) return [];
+      // append year range as query params (your backend can read them)
+      const url = `${ROUTES.API.CHARACTERISTICS.VARIANTS(model)}?from=${encodeURIComponent(
+          String(debouncedFromYear)
+      )}&to=${encodeURIComponent(String(debouncedToYear))}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Failed to fetch models');
+      return res.json();
+    },
+    enabled: !!brand && debouncedFromYear <= debouncedToYear,
+  });
+
   const applyFilters = () => {
-    onFilterChange({ brand, model, variant, type, minYear, maxPrice });
+    onFilterChange({ brand, model, variants: variant, type, fromYear, toYear, maxPrice });
   };
 
   const resetFilters = () => {
     setBrand('');
     setModel('');
-    setVariant('');
+    setVariant([]);
     setType('');
-    setMinYear('');
+    setFromYear(1980);
+    setToYear(2022);
+    setYears([1980, 2022]);
     setMaxPrice('');
     onFilterChange({});
   };
 
   return (
     <>
-      {/* Toggle button (always visible) */}
       <Button
         onClick={() => setSidebarOpen(true)}
         className="-top-15 left-0 z-2 absolute"
@@ -115,10 +152,43 @@ export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters) =
             />
           </div>
 
-          {/* Min Year */}
+          <YearRangePicker
+              value={years}
+              onChange={(v) => {
+                setYears(v);
+                setFromYear(v[0]);
+                setToYear(v[1]);
+              }}
+              min={1980}
+              max={new Date().getFullYear()}
+          />
+
           <div>
-            <label className="block text-sm font-medium mb-1">Min Year</label>
-            <Input value={minYear} onChange={(e) => setMinYear(e.target.value)} type="number" />
+            <label className="block text-sm font-medium mb-1">Variants</label>
+            <div className="flex gap-2 items-center mb-2">
+              <button
+                  type="button"
+                  onClick={() => setVariant([])}
+                  className="text-sm text-slate-600 hover:underline"
+              >
+                Clear
+              </button>
+              <span className="text-xs text-slate-400">(hold Cmd/Ctrl to multi-select)</span>
+            </div>
+            <select
+                multiple
+                value={variant}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                    setVariant(Array.from(e.target.selectedOptions, (o) => o.value))
+                }
+                className="w-full border rounded p-2 h-28"
+            >
+              {variants.map((opt) => (
+                  <option key={opt.id} value={opt.id}>
+                    {opt.name} {opt.trim && `- ${opt.trim}`}
+                  </option>
+              ))}
+            </select>
           </div>
 
           {/* Max Price */}

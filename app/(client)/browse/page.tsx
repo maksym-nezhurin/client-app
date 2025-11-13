@@ -1,13 +1,15 @@
 import { ICar } from '@/types/car';
 import { env } from 'process';
 import { CarList } from '@/components/car/CarList';
+import { IApiResponse } from "@/types/api";
 
 const limit = 5;
 const page = 1;
 
-async function getCars(): Promise<ICar[]> {
+
+async function getCars(): Promise<IApiResponse<ICar>> {
   try {
-    const url = `${env.API_URL}/cars`;
+    const url = `${env.API_URL}/v1/cars`;
     const res = await fetch(url + `?page=${page}&limit=${limit}`, { cache: 'no-store' });
 
     if (!res.ok) throw new Error('Failed to fetch cars');
@@ -32,10 +34,10 @@ export default async function CarsPage() {
 
       <CarList
         cars={data}
-        limit={limit}
-        page={page}
+        limit={pagination.limit}
+        page={pagination.page}
         pages={pagination.pages}
- />
+      />
     </div>
   );
 }
