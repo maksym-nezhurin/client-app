@@ -4,5 +4,7 @@
       "source": "/(.*)",
       "destination": "/"
     }
-  ]
+  ],
+  "buildCommand": "pnpm --filter web build",
+  "installCommand": "pnpm install --recursive"
 }

@@ -1,12 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@reelo/ui';
 
 export function HeroSection() {
   return (
     <section className="bg-surface-base text-text-primary py-16 px-4 md:px-8">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        {/* Text Content */}
         <div>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight">
             Find Your Perfect Ride Today
@@ -17,7 +16,7 @@ export function HeroSection() {
 
          <div className="flex justify-center gap-4 p-6">
           <Link href="/cars">
-            <Button size="lg">Browse Cars</Button>
+            <Button size="lg" variant='primary'>Browse Cars</Button>
           </Link>
           <Link href="/cars?rent=true">
             <Button variant="outline" size="lg">Rent a Car</Button>
