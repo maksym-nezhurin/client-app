@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['@reelo/ui', '@reelo/ui-web'],
+  transpilePackages: ['@reelo/ui', '@reelo/ui-web', '@reelo/i18n'],
   typescript: {
     // ⚠️ Dangerous! Ignores all type errors
     ignoreBuildErrors: true,
