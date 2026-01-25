@@ -7,6 +7,11 @@ export const ROUTES = {
     CARS: '/cars',
     CAR: (id?: string) => (id ? `/cars/${id}` : '/cars/[id]'),
     ACCOUNT: '/account',
+    ACCOUNT_SETTINGS: '/account/settings',
+    ACCOUNT_CARS: '/account/cars',
+    ACCOUNT_CARS_NEW: '/account/cars/new',
+    ACCOUNT_CARS_FOR_SALE: '/account/cars/for-sale',
+    ACCOUNT_BILLING: '/account/billing',
     AUTH: {
         LOGIN: '/auth/login',
         SIGNUP: '/auth/signup',
@@ -29,3 +34,9 @@ export const ROUTES = {
 } as const;
 
 export type Routes = typeof ROUTES;
+
+export function withMarketPrefix(path: string, market?: 'ua' | 'pl' | 'sk'): string {
+  if (!market) return path;
+  if (path.startsWith(`/${market}`)) return path;
+  return `/${market}${path.startsWith('/') ? '' : '/'}${path}`;
+}

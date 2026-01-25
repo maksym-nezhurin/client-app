@@ -1,20 +1,30 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { AUTH_TOKEN_COOKIE } from '@/lib/auth/constants';
 
-export function middleware(req: NextRequest) {
-  const res = NextResponse.next()
-
-  // Додаємо CORS тільки для /api/*
-  if (req.nextUrl.pathname.startsWith('/api/')) {
-    res.headers.set('Access-Control-Allow-Origin', '*')
-    res.headers.set('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
-    res.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+export function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith('/api/')) {
+    const res = request.method === 'OPTIONS' ? new NextResponse(null, { status: 200 }) : NextResponse.next();
+    const origin = request.headers.get('origin') ?? request.nextUrl.origin;
+    res.headers.set('Access-Control-Allow-Origin', origin);
+    res.headers.set('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    res.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.headers.set('Access-Control-Allow-Credentials', 'true');
+    res.headers.set('Vary', 'Origin');
+    return res;
   }
 
-  return res;
+  const token = request.cookies.get(AUTH_TOKEN_COOKIE)?.value;
+  if (!token) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/auth/login';
+    url.searchParams.set('redirect', request.nextUrl.pathname);
+    return NextResponse.redirect(url);
+  }
+
+  return NextResponse.next();
 }
 
-// Вмикаємо middleware тільки на API-шляхах
 export const config = {
-  matcher: '/api/:path*',
-}
+  matcher: ['/api/:path*', '/list/:path*', '/account/:path*'],
+};

@@ -6,6 +6,7 @@
     "dev": "next dev -p 3005",
     "build": "next build",
     "start": "next start -p 3005",
+    "postinstall": "node scripts/copy-locales.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -23,7 +24,8 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwind-merge": "^3.3.0",
-    "@reelo/ui": "git+https://github.com/maksym-nezhurin/reelo-ui"
+    "@reelo/ui": "git+https://github.com/maksym-nezhurin/reelo-ui",
+    "@reelo/i18n": "workspace:*"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

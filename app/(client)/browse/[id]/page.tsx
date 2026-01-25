@@ -26,9 +26,13 @@ export default async function CarPage({ params }: CarPageProps) {
     <main className="max-w-4xl mx-auto p-6 space-y-8">
       <div>
         <h1 className="text-3xl font-bold mb-2">
-          {data.brand} {data.model} ({data.year})
+          {data.brand} {data.model} {data.year ? `(${data.year})` : ''}
         </h1>
-        <p className="text-gray-600">{data.complectation} • {data.type} • {data.engine}L</p>
+        <p className="text-gray-600">
+          {[data.complectation, data.type, data.engine ? `${data.engine}L` : null]
+            .filter(Boolean)
+            .join(' • ') || 'Vehicle details unavailable'}
+        </p>
       </div>
 
       {/* 🖼 Image Section */}

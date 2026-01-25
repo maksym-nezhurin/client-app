@@ -25,7 +25,15 @@ function useDebounce<T>(value: T, delay = 300): T {
   return debounced;
 }
 
-export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters: Filters) => void }) {
+export function SidebarFilters({
+  onFilterChange,
+  variant: displayVariant = 'drawer',
+  className,
+}: {
+  onFilterChange: (filters: Filters) => void;
+  variant?: 'drawer' | 'inline';
+  className?: string;
+}) {
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
   const [type, setType] = useState('');
@@ -35,9 +43,10 @@ export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters: F
   const [toYear, setToYear] = useState(2022);
   const [maxPrice, setMaxPrice] = useState('');
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  console.log('variant', variant);
   const debouncedFromYear = useDebounce<number>(fromYear, 400);
   const debouncedToYear = useDebounce<number>(toYear, 400);
+  const isInline = displayVariant === 'inline';
+  const isOpen = isInline ? true : isSidebarOpen;
 
   const { data: brands = [] } = useQuery({
     queryKey: ['brands'],
@@ -92,17 +101,19 @@ export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters: F
 
   return (
     <>
-      <Button
-        onClick={() => setSidebarOpen(true)}
-        className="-top-15 left-0 z-2 absolute"
-        variant="secondary"
-      >
-        <Menu className="w-5 h-5 mr-2" />
-        Filters
-      </Button>
+      {!isInline && (
+        <Button
+          onClick={() => setSidebarOpen(true)}
+          className="-top-15 left-0 z-2 absolute"
+          variant="secondary"
+        >
+          <Menu className="w-5 h-5 mr-2" />
+          Filters
+        </Button>
+      )}
 
       {/* Backdrop */}
-      {isSidebarOpen && (
+      {!isInline && isSidebarOpen && (
         <div
           className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm transition-opacity"
           onClick={() => setSidebarOpen(false)}
@@ -112,16 +123,21 @@ export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters: F
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed p-4 pt-20 top-0 left-0 z-40 h-full w-64 bg-white shadow-md transition-transform transform',
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          isInline
+            ? 'w-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm'
+            : 'fixed p-4 pt-20 top-0 left-0 z-40 h-full w-64 bg-white shadow-md transition-transform transform',
+          isOpen ? 'translate-x-0' : '-translate-x-full',
+          className
         )}
       >
         {/* Close button */}
-        <div className="absolute top-4 right-4">
-          <Button size="icon" variant="ghost" onClick={() => setSidebarOpen(false)}>
-            <X className="w-5 h-5" />
-          </Button>
-        </div>
+        {!isInline && (
+          <div className="absolute top-4 right-4">
+            <Button size="icon" variant="ghost" onClick={() => setSidebarOpen(false)}>
+              <X className="w-5 h-5" />
+            </Button>
+          </div>
+        )}
 
         <h2 className="text-xl font-semibold mb-4">Filters</h2>
 

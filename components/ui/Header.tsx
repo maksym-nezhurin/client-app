@@ -7,8 +7,7 @@ import { Navbar } from '../nav/Navbar';
 
 const navItems = [
   { href: '/browse', label: 'Browse' },
-  { href: '/rent', label: 'Rent' },
-  { href: '/about ', label: 'About' },
+  { href: '/about', label: 'About' },
 ];
 
 export function Header() {

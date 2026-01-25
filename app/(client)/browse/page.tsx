@@ -1,43 +1,81 @@
-import { ICar } from '@/types/car';
-import { env } from 'process';
+'use client';
+
+import { useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CarList } from '@/components/car/CarList';
-import { IApiResponse } from "@/types/api";
+import { Input } from '@/components/ui/Input';
+import { Select } from '@/components/ui/Select';
+import { SidebarFilters, type Filters } from '@/components/sidebar/SidebarFilters';
 
-const limit = 5;
-const page = 1;
+const queryClient = new QueryClient();
 
-
-async function getCars(): Promise<IApiResponse<ICar>> {
-  try {
-    const url = `${env.API_URL}/v1/cars`;
-    const res = await fetch(url + `?page=${page}&limit=${limit}`, { cache: 'no-store' });
-
-    if (!res.ok) throw new Error('Failed to fetch cars');
-    return res.json();
-  } catch (error) {
-    console.error('Error fetching cars:', error);
-    return { data: [], pagination: { page: 1, limit: 5, total: 0, pages: 0 } };
-  }
-}
-
-export default async function CarsPage() {
-  const { data, pagination } = await getCars();
+export default function CarsPage() {
+  const [filters, setFilters] = useState<Filters>({});
+  const [search, setSearch] = useState('');
+  const [sort, setSort] = useState('newest');
+  const [condition, setCondition] = useState('all');
 
   return (
-    <div>
-      <div className="text-center space-y-2">
-        <h1 className="text-4xl font-bold tracking-tight">Find Your Next Car</h1>
-        <p className="text-muted-foreground text-lg my-2">
-          Browse our collection of cars available for sale.
-        </p>
-      </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="space-y-6">
+        <div className="sticky top-20 z-20 rounded-2xl border border-slate-200 bg-white/95 p-6 shadow-sm backdrop-blur">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex-1 min-w-[220px]">
+              <Input
+                id="search"
+                placeholder="Search by brand, model, or keyword"
+                aria-label="Search"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+              />
+            </div>
+            <div className="w-full sm:w-48">
+              <Select
+                value={sort}
+                onChange={setSort}
+                options={[
+                  { value: 'newest', label: 'Newest first' },
+                  { value: 'price_low', label: 'Price: low to high' },
+                  { value: 'price_high', label: 'Price: high to low' },
+                ]}
+              />
+            </div>
+            <div className="w-full sm:w-48">
+              <Select
+                value={condition}
+                onChange={setCondition}
+                options={[
+                  { value: 'all', label: 'All types' },
+                  { value: 'used', label: 'Used' },
+                  { value: 'new', label: 'New' },
+                ]}
+              />
+            </div>
+          </div>
+        </div>
 
-      <CarList
-        cars={data}
-        limit={pagination.limit}
-        page={pagination.page}
-        pages={pagination.pages}
-      />
-    </div>
+        <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
+          <SidebarFilters
+            variant="inline"
+            className="sticky top-32 h-fit"
+            onFilterChange={setFilters}
+          />
+
+          <section className="space-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h1 className="text-2xl font-semibold">Browse cars</h1>
+                <p className="text-sm text-slate-500">
+                  Browse our collection of cars available for sale.
+                </p>
+              </div>
+              <div className="text-sm text-slate-500">Updated listings</div>
+            </div>
+
+            <CarList cars={[]} limit={12} page={1} pages={1} filters={filters} search={search} sort={sort} condition={condition} />
+          </section>
+        </div>
+      </div>
+    </QueryClientProvider>
   );
 }
