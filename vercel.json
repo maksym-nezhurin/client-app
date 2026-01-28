@@ -5,6 +5,7 @@
       "destination": "/"
     }
   ],
-  "buildCommand": "pnpm --filter web build",
+  "buildCommand": "pnpm --filter app build",
+  "outputDirectory": "apps/client/.next",
   "installCommand": "pnpm install --recursive --no-frozen-lockfile"
 }
