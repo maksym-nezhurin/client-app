@@ -11,6 +11,10 @@ interface YearRangePickerProps {
     max?: number;
     step?: number;
     className?: string;
+    labelFrom?: string;
+    labelTo?: string;
+    ariaFrom?: string;
+    ariaTo?: string;
 }
 
 export function YearRangePicker({
@@ -20,6 +24,10 @@ export function YearRangePicker({
     max = new Date().getFullYear(),
     step = 1,
     className = '',
+    labelFrom = 'From',
+    labelTo = 'To',
+    ariaFrom = 'from year',
+    ariaTo = 'to year',
 }: YearRangePickerProps) {
     const [low, high] = value;
 
@@ -44,8 +52,12 @@ export function YearRangePicker({
     return (
         <div className={`w-full ${className}`}>
             <div className="mb-2 flex items-center justify-between text-sm text-gray-600">
-                <div>From: {low}</div>
-                <div>To: {high}</div>
+                <div>
+                    {labelFrom}: {low}
+                </div>
+                <div>
+                    {labelTo}: {high}
+                </div>
             </div>
 
             <div className="relative h-8">
@@ -99,7 +111,7 @@ export function YearRangePicker({
             {/* precise numeric inputs */}
             <div className="mt-3 flex gap-2">
                 <input
-                    aria-label="from year"
+                    aria-label={ariaFrom}
                     type="number"
                     value={low}
                     min={min}
@@ -108,7 +120,7 @@ export function YearRangePicker({
                     className="w-1/2 px-2 py-1 border rounded"
                 />
                 <input
-                    aria-label="to year"
+                    aria-label={ariaTo}
                     type="number"
                     value={high}
                     min={low}

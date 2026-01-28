@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { ROUTES } from '@/lib/routes';
+import { useTypedTranslation } from '@/lib/i18n';
 
 const cars = [
   { id: '1', title: 'Tesla Model 3', status: 'Active', views: 412 },
@@ -11,16 +12,18 @@ const cars = [
 ];
 
 export default function AccountCarsPage() {
+  const { t } = useTypedTranslation();
+
   return (
     <div className="space-y-6">
       <div className="rounded-lg border border-muted bg-white p-6 shadow">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold">My cars</h1>
-            <p className="text-sm text-muted-foreground">Manage your car listings.</p>
+            <h1 className="text-2xl font-semibold">{t('client.account_cars.title')}</h1>
+            <p className="text-sm text-muted-foreground">{t('client.account_cars.subtitle')}</p>
           </div>
           <Button asChild>
-            <Link href={ROUTES.ACCOUNT_CARS_NEW}>Add new car</Link>
+            <Link href={ROUTES.ACCOUNT_CARS_NEW}>{t('client.account.add_new_car')}</Link>
           </Button>
         </div>
       </div>
@@ -31,12 +34,16 @@ export default function AccountCarsPage() {
             <div key={car.id} className="flex flex-wrap items-center justify-between gap-4 rounded-md border border-muted p-4">
               <div>
                 <p className="text-sm font-semibold">{car.title}</p>
-                <p className="text-xs text-muted-foreground">Status: {car.status}</p>
+                <p className="text-xs text-muted-foreground">
+                  {t('client.account_cars.status')}: {car.status}
+                </p>
               </div>
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <span>{car.views} views</span>
+                <span>
+                  {car.views} {t('client.account_cars.views')}
+                </span>
                 <Button variant="ghost" size="sm">
-                  Edit
+                  {t('client.account_cars.edit')}
                 </Button>
               </div>
             </div>

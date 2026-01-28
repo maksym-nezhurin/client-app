@@ -31,9 +31,9 @@ export function Navbar({ items }: { items: { href: string; label: string }[] }) 
   };
 
   const navLabelMap: Record<string, string> = {
-    [ROUTES.BROWSE]: t('common.nav.browse'),
-    '/sell': t('common.nav.sell'),
-    '/about': t('common.nav.about'),
+    [ROUTES.BROWSE]: t('client.nav.browse'),
+    '/sell': t('client.nav.sell'),
+    '/about': t('client.nav.about'),
   };
 
   const handleLanguageChange = async (value: SupportedLanguage) => {
@@ -93,7 +93,7 @@ export function Navbar({ items }: { items: { href: string; label: string }[] }) 
             href="/list"
             className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:bg-white/20"
           >
-            {t('common.nav.list')}
+            {t('client.nav.list')}
           </Link>
           {!isLoading &&
             (user ? (
@@ -113,28 +113,28 @@ export function Navbar({ items }: { items: { href: string; label: string }[] }) 
                       onClick={() => setUserMenuOpen(false)}
                       className="block px-4 py-3 text-sm text-slate-200 hover:bg-white/10"
                     >
-                      {t('common.nav.dashboard')}
+                      {t('client.nav.dashboard')}
                     </Link>
                     <Link
                       href={ROUTES.ACCOUNT_SETTINGS}
                       onClick={() => setUserMenuOpen(false)}
                       className="block px-4 py-3 text-sm text-slate-200 hover:bg-white/10"
                     >
-                      {t('common.nav.settings')}
+                      {t('client.nav.settings')}
                     </Link>
                     <Link
                       href={ROUTES.ACCOUNT_BILLING}
                       onClick={() => setUserMenuOpen(false)}
                       className="block px-4 py-3 text-sm text-slate-200 hover:bg-white/10"
                     >
-                      {t('common.nav.billing')}
+                      {t('client.nav.billing')}
                     </Link>
                     <button
                       type="button"
                       onClick={handleLogout}
                       className="block w-full px-4 py-3 text-left text-sm text-slate-200 hover:bg-white/10"
                     >
-                      {t('common.nav.logout')}
+                      {t('client.nav.logout')}
                     </button>
                   </div>
                 )}
@@ -144,7 +144,7 @@ export function Navbar({ items }: { items: { href: string; label: string }[] }) 
                 href={ROUTES.AUTH.LOGIN}
                 className="text-sm font-medium text-slate-200 hover:text-white"
               >
-                {t('common.nav.login')}
+                {t('client.nav.login')}
               </Link>
             ))}
         </div>
@@ -179,37 +179,37 @@ export function Navbar({ items }: { items: { href: string; label: string }[] }) 
             ))}
           </div>
           <Link href={ROUTES.BROWSE} className="block text-slate-200">
-            {t('common.nav.browse')}
+            {t('client.nav.browse')}
           </Link>
           <Link href="/sell" className="block text-slate-200">
-            {t('common.nav.sell')}
+            {t('client.nav.sell')}
           </Link>
           <Link href="/list" className="block font-semibold text-white">
-            {t('common.nav.list')}
+            {t('client.nav.list')}
           </Link>
           {!isLoading &&
             (user ? (
               <>
                 <Link href={ROUTES.ACCOUNT} className="block text-slate-200">
-                  {t('common.nav.dashboard')}
+                  {t('client.nav.dashboard')}
                 </Link>
                 <Link href={ROUTES.ACCOUNT_SETTINGS} className="block text-slate-200">
-                  {t('common.nav.settings')}
+                  {t('client.nav.settings')}
                 </Link>
                 <Link href={ROUTES.ACCOUNT_BILLING} className="block text-slate-200">
-                  {t('common.nav.billing')}
+                  {t('client.nav.billing')}
                 </Link>
                 <button
                   type="button"
                   onClick={handleLogout}
                   className="block text-left text-slate-200"
                 >
-                  {t('common.nav.logout')}
+                  {t('client.nav.logout')}
                 </button>
               </>
             ) : (
               <Link href={ROUTES.AUTH.LOGIN} className="block text-slate-200">
-                {t('common.nav.login')}
+                {t('client.nav.login')}
               </Link>
             ))}
         </div>

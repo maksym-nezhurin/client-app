@@ -7,9 +7,11 @@ import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { ROUTES } from '@/lib/routes';
 import { authService } from '@/services/auth';
+import { useTypedTranslation } from '@/lib/i18n';
 
 export default function AccountSettingsPage() {
   const { user, isLoading, refresh } = useAuth();
+  const { t } = useTypedTranslation();
   const [firstName, setFirstName] = useState(user?.firstName ? String(user.firstName) : '');
   const [lastName, setLastName] = useState(user?.lastName ? String(user.lastName) : '');
   const [countryCode, setCountryCode] = useState(user?.countryCode ? String(user.countryCode) : '');
@@ -18,18 +20,18 @@ export default function AccountSettingsPage() {
   const [saving, setSaving] = useState(false);
 
   if (isLoading) {
-    return <div className="p-6 text-sm text-muted-foreground">Loading settings...</div>;
+    return <div className="p-6 text-sm text-muted-foreground">{t('client.account_settings.loading')}</div>;
   }
 
   if (!user) {
     return (
       <div className="mx-auto max-w-xl space-y-4 rounded-lg border border-muted bg-white p-8 shadow">
-        <h1 className="text-2xl font-semibold">Account settings</h1>
+        <h1 className="text-2xl font-semibold">{t('client.account_settings.title')}</h1>
         <p className="text-sm text-muted-foreground">
-          Please sign in to manage your settings.
+          {t('client.account_settings.guest_subtitle')}
         </p>
         <Button asChild>
-          <Link href={ROUTES.AUTH.LOGIN}>Go to login</Link>
+          <Link href={ROUTES.AUTH.LOGIN}>{t('client.account.go_to_login')}</Link>
         </Button>
       </div>
     );
@@ -48,10 +50,10 @@ export default function AccountSettingsPage() {
         countryCode: countryCode.trim() || undefined,
       });
       await refresh();
-      setSuccess('Settings updated.');
+      setSuccess(t('client.account_settings.updated'));
     } catch (err) {
       console.error('Failed to update settings:', err);
-      setError('Unable to update settings.');
+      setError(t('client.account_settings.update_error'));
     } finally {
       setSaving(false);
     }
@@ -60,29 +62,29 @@ export default function AccountSettingsPage() {
   return (
     <div className="mx-auto max-w-xl space-y-6">
       <div className="rounded-lg border border-muted bg-white p-6 shadow">
-        <h1 className="text-2xl font-semibold">Account settings</h1>
-        <p className="text-sm text-muted-foreground">Update your profile information.</p>
+        <h1 className="text-2xl font-semibold">{t('client.account_settings.title')}</h1>
+        <p className="text-sm text-muted-foreground">{t('client.account_settings.subtitle')}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4 rounded-lg border border-muted bg-white p-6 shadow">
         <Input
           id="firstName"
           type="text"
-          label="First name"
+          label={t('client.account_settings.first_name')}
           value={firstName}
           onChange={(event) => setFirstName(event.target.value)}
         />
         <Input
           id="lastName"
           type="text"
-          label="Last name"
+          label={t('client.account_settings.last_name')}
           value={lastName}
           onChange={(event) => setLastName(event.target.value)}
         />
         <Input
           id="countryCode"
           type="text"
-          label="Country code"
+          label={t('client.account_settings.country_code')}
           value={countryCode}
           onChange={(event) => setCountryCode(event.target.value)}
         />
@@ -92,10 +94,10 @@ export default function AccountSettingsPage() {
 
         <div className="flex items-center justify-between">
           <Button type="submit" disabled={saving}>
-            {saving ? 'Saving...' : 'Save changes'}
+            {saving ? t('client.account_settings.saving') : t('client.account_settings.save_changes')}
           </Button>
           <Button asChild variant="ghost">
-            <Link href={ROUTES.ACCOUNT}>Back to profile</Link>
+            <Link href={ROUTES.ACCOUNT}>{t('client.account_settings.back_to_profile')}</Link>
           </Button>
         </div>
       </form>

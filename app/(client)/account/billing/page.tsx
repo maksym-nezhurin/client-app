@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import { useTypedTranslation } from '@/lib/i18n';
 
 const plans = [
   {
@@ -28,6 +29,7 @@ const plans = [
 ];
 
 export default function AccountBillingPage() {
+  const { t } = useTypedTranslation();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [error, setError] = useState('');
 
@@ -54,7 +56,7 @@ export default function AccountBillingPage() {
       window.location.href = data.url;
     } catch (err) {
       console.error('Error in handleCheckout:', err);
-      setError('Unable to start Stripe checkout.');
+      setError(t('client.account_billing.checkout_error'));
     } finally {
       setLoadingPlan(null);
     }
@@ -63,10 +65,8 @@ export default function AccountBillingPage() {
   return (
     <div className="space-y-6">
       <div className="rounded-lg border border-muted bg-white p-6 shadow">
-        <h1 className="text-2xl font-semibold">Billing & plans</h1>
-        <p className="text-sm text-muted-foreground">
-          Choose a plan and pay securely via Stripe.
-        </p>
+        <h1 className="text-2xl font-semibold">{t('client.account_billing.title')}</h1>
+        <p className="text-sm text-muted-foreground">{t('client.account_billing.subtitle')}</p>
       </div>
 
       {error && <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">{error}</div>}
@@ -89,7 +89,9 @@ export default function AccountBillingPage() {
               onClick={() => handleCheckout(plan.id)}
               disabled={loadingPlan === plan.id}
             >
-              {loadingPlan === plan.id ? 'Redirecting...' : 'Pay with Stripe'}
+              {loadingPlan === plan.id
+                ? t('client.account_billing.redirecting')
+                : t('client.account_billing.pay_with_stripe')}
             </Button>
           </div>
         ))}

@@ -6,10 +6,12 @@ import { CarList } from '@/components/car/CarList';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { SidebarFilters, type Filters } from '@/components/sidebar/SidebarFilters';
+import { useTypedTranslation } from '@/lib/i18n';
 
 const queryClient = new QueryClient();
 
 export default function CarsPage() {
+  const { t } = useTypedTranslation();
   const [filters, setFilters] = useState<Filters>({});
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('newest');
@@ -23,8 +25,8 @@ export default function CarsPage() {
             <div className="flex-1 min-w-[220px]">
               <Input
                 id="search"
-                placeholder="Search by brand, model, or keyword"
-                aria-label="Search"
+                placeholder={t('client.browse.search_placeholder')}
+                aria-label={t('common.search')}
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
               />
@@ -34,9 +36,9 @@ export default function CarsPage() {
                 value={sort}
                 onChange={setSort}
                 options={[
-                  { value: 'newest', label: 'Newest first' },
-                  { value: 'price_low', label: 'Price: low to high' },
-                  { value: 'price_high', label: 'Price: high to low' },
+                  { value: 'newest', label: t('client.browse.filters.sort_newest') },
+                  { value: 'price_low', label: t('client.browse.filters.sort_price_low') },
+                  { value: 'price_high', label: t('client.browse.filters.sort_price_high') },
                 ]}
               />
             </div>
@@ -45,9 +47,9 @@ export default function CarsPage() {
                 value={condition}
                 onChange={setCondition}
                 options={[
-                  { value: 'all', label: 'All types' },
-                  { value: 'used', label: 'Used' },
-                  { value: 'new', label: 'New' },
+                  { value: 'all', label: t('client.browse.filters.condition_all') },
+                  { value: 'used', label: t('client.browse.filters.condition_used') },
+                  { value: 'new', label: t('client.browse.filters.condition_new') },
                 ]}
               />
             </div>
@@ -64,12 +66,12 @@ export default function CarsPage() {
           <section className="space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <h1 className="text-2xl font-semibold">Browse cars</h1>
+                <h1 className="text-2xl font-semibold">{t('client.browse.title')}</h1>
                 <p className="text-sm text-slate-500">
-                  Browse our collection of cars available for sale.
+                  {t('client.browse.subtitle')}
                 </p>
               </div>
-              <div className="text-sm text-slate-500">Updated listings</div>
+              <div className="text-sm text-slate-500">{t('client.browse.updated')}</div>
             </div>
 
             <CarList cars={[]} limit={12} page={1} pages={1} filters={filters} search={search} sort={sort} condition={condition} />

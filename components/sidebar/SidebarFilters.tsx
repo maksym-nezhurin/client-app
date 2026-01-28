@@ -9,6 +9,7 @@ import { Select } from '@/components/ui/Select';
 import { Menu, X } from 'lucide-react';
 import { YearRangePicker } from '@/components/ui/YearRangePicker';
 import { ROUTES } from "@/lib/routes";
+import { useTypedTranslation } from '@/lib/i18n';
 import type { ICarModel } from '@/types/car';
 
 export type Filters = Record<string, string | number | string[] | number[]>;
@@ -34,6 +35,7 @@ export function SidebarFilters({
   variant?: 'drawer' | 'inline';
   className?: string;
 }) {
+  const { t } = useTypedTranslation();
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
   const [type, setType] = useState('');
@@ -108,7 +110,7 @@ export function SidebarFilters({
           variant="secondary"
         >
           <Menu className="w-5 h-5 mr-2" />
-          Filters
+          {t('client.filters.open')}
         </Button>
       )}
 
@@ -139,33 +141,33 @@ export function SidebarFilters({
           </div>
         )}
 
-        <h2 className="text-xl font-semibold mb-4">Filters</h2>
+        <h2 className="text-xl font-semibold mb-4">{t('client.filters.title')}</h2>
 
         <div className="space-y-4">
           {/* Brand Select */}
           <div>
-            <label className="block text-sm font-medium mb-1">Brand</label>
+            <label className="block text-sm font-medium mb-1">{t('client.filters.brand')}</label>
             <Select
-              label="Brand"
+              label={t('client.filters.brand')}
               value={brand}
               onChange={(val) => {
                 setBrand(val);
                 setModel('');
               }}
               options={brands}
-              placeholder="Select brand"
+              placeholder={t('client.filters.select_brand')}
             />
           </div>
 
           {/* Model Select */}
           <div>
-            <label className="block text-sm font-medium mb-1">Model</label>
+            <label className="block text-sm font-medium mb-1">{t('client.filters.model')}</label>
             <Select
-              label="Model"
+              label={t('client.filters.model')}
               value={model}
               onChange={(val) => setModel(val)}
               options={models}
-              placeholder="Select model"
+              placeholder={t('client.filters.select_model')}
             />
           </div>
 
@@ -176,21 +178,25 @@ export function SidebarFilters({
                 setFromYear(v[0]);
                 setToYear(v[1]);
               }}
+              labelFrom={t('client.filters.year_from')}
+              labelTo={t('client.filters.year_to')}
+              ariaFrom={`${t('client.filters.year_from')} year`}
+              ariaTo={`${t('client.filters.year_to')} year`}
               min={1980}
               max={new Date().getFullYear()}
           />
 
           <div>
-            <label className="block text-sm font-medium mb-1">Variants</label>
+            <label className="block text-sm font-medium mb-1">{t('client.filters.variants')}</label>
             <div className="flex gap-2 items-center mb-2">
               <button
                   type="button"
                   onClick={() => setVariant([])}
                   className="text-sm text-slate-600 hover:underline"
               >
-                Clear
+                {t('client.filters.clear')}
               </button>
-              <span className="text-xs text-slate-400">(hold Cmd/Ctrl to multi-select)</span>
+              <span className="text-xs text-slate-400">{t('client.filters.multi_select_hint')}</span>
             </div>
             <select
                 multiple
@@ -210,17 +216,17 @@ export function SidebarFilters({
 
           {/* Max Price */}
           <div>
-            <label className="block text-sm font-medium mb-1">Max Price</label>
+            <label className="block text-sm font-medium mb-1">{t('client.filters.max_price')}</label>
             <Input value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} type="number" />
           </div>
 
           {/* Buttons */}
           <div className="flex justify-between gap-2 pt-4">
             <Button variant="outline" className="w-full" onClick={resetFilters}>
-              Reset
+              {t('client.filters.reset')}
             </Button>
             <Button className="w-full" onClick={applyFilters}>
-              Apply
+              {t('client.filters.apply')}
             </Button>
           </div>
         </div>

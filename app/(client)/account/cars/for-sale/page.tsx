@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { ROUTES } from '@/lib/routes';
+import { useTypedTranslation } from '@/lib/i18n';
 
 const forSaleCars = [
   { id: '1', title: 'Audi A4', price: '$18,900', views: 240 },
@@ -10,16 +11,18 @@ const forSaleCars = [
 ];
 
 export default function CarsForSalePage() {
+  const { t } = useTypedTranslation();
+
   return (
     <div className="space-y-6">
       <div className="rounded-lg border border-muted bg-white p-6 shadow">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold">Cars for sale</h1>
-            <p className="text-sm text-muted-foreground">Listings currently available for sale.</p>
+            <h1 className="text-2xl font-semibold">{t('client.account_cars_for_sale.title')}</h1>
+            <p className="text-sm text-muted-foreground">{t('client.account_cars_for_sale.subtitle')}</p>
           </div>
           <Button asChild variant="secondary">
-            <Link href={ROUTES.ACCOUNT_CARS_NEW}>Add new car</Link>
+            <Link href={ROUTES.ACCOUNT_CARS_NEW}>{t('client.account.add_new_car')}</Link>
           </Button>
         </div>
       </div>
@@ -33,7 +36,7 @@ export default function CarsForSalePage() {
             </div>
             <p className="mt-2 text-sm text-muted-foreground">{car.views} views</p>
             <Button variant="ghost" size="sm" className="mt-4">
-              View details
+              {t('client.account_cars_for_sale.view_details')}
             </Button>
           </div>
         ))}

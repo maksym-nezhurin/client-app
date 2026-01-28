@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useTypedTranslation } from '@/lib/i18n';
 
 const partners = [
   { id: 1, name: 'AutoBrand', logo: '/partners/1.png' },
@@ -11,13 +12,15 @@ const partners = [
 ]
 
 export function PartnersSection() {
+  const { t } = useTypedTranslation();
+
   return (
     <section className="rounded-3xl border border-white/10 bg-white/5 p-8 text-center shadow-[0_0_40px_rgba(15,23,42,0.5)] backdrop-blur md:p-12">
       <div className="mx-auto max-w-6xl">
-        <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Trusted network</p>
-        <h2 className="mt-3 text-3xl font-semibold text-white">Our partners</h2>
+        <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{t('client.partners.eyebrow')}</p>
+        <h2 className="mt-3 text-3xl font-semibold text-white">{t('client.partners.title')}</h2>
         <p className="mt-3 text-sm text-slate-300">
-          We collaborate with the best companies in the automobile industry.
+          {t('client.partners.subtitle')}
         </p>
         <motion.div
           className="mt-10 grid grid-cols-2 items-center justify-center gap-6 sm:grid-cols-3 md:grid-cols-5"

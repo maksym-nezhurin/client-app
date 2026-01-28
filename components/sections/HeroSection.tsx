@@ -1,23 +1,28 @@
+'use client';
+
 import Image from 'next/image';
+import { useTypedTranslation } from '@/lib/i18n';
 
 export function HeroSection() {
+  const { t } = useTypedTranslation();
+
   return (
     <section className="grid gap-12 lg:grid-cols-2 lg:items-center">
       <div className="space-y-6">
         <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.2em] text-slate-200">
-          Trusted marketplace
+          {t('client.hero.badge')}
         </div>
         <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
-          Find your next car with clarity, speed, and confidence.
+          {t('client.hero.title')}
         </h1>
         <p className="text-lg text-slate-300">
-          Browse verified listings, compare offers, and move from search to ownership in a few clicks.
+          {t('client.hero.subtitle')}
         </p>
         <div className="grid gap-4 sm:grid-cols-3">
           {[
-            { label: 'Active listings', value: '1.2k+' },
-            { label: 'Verified users', value: '4.8k' },
-            { label: 'Avg. response', value: '12 min' },
+            { label: t('client.hero.stat_active'), value: '1.2k+' },
+            { label: t('client.hero.stat_users'), value: '4.8k' },
+            { label: t('client.hero.stat_response'), value: '12 min' },
           ].map((item) => (
             <div
               key={item.label}
@@ -42,8 +47,8 @@ export function HeroSection() {
             className="w-full rounded-2xl"
           />
           <div className="mt-6 flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200">
-            <span>Live inventory updated</span>
-            <span className="text-white">Every 5 min</span>
+            <span>{t('client.hero.inventory_label')}</span>
+            <span className="text-white">{t('client.hero.inventory_value')}</span>
           </div>
         </div>
       </div>
