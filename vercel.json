@@ -6,5 +6,5 @@
     }
   ],
   "buildCommand": "pnpm --filter web build",
-  "installCommand": "pnpm install --recursive"
+  "installCommand": "pnpm install --recursive --no-frozen-lockfile"
 }
