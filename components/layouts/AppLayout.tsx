@@ -21,14 +21,14 @@ export default function AppLayout({ children }: { children: ReactNode }) {
         <main
          className="flex-1 bg-muted/40"
          >
-          <div className='h-[calc(100vh-120px)] overflow-scroll p-4'>
+          <div className='h-[calc(100vh-120px)] overflow-scroll'>
             {children}
           </div>
         </main>
       </div>
 
       {/* Footer */}
-      <Footer className="h-16 flex items-center justify-center bg-muted text-muted-foreground text-sm">
+      <Footer className="h-16 flex items-center justify-center">
         © 2025 Car Rental Service
       </Footer>
     </div>
