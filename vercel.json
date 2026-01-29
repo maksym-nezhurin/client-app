@@ -1,11 +1,12 @@
 {
-  "buildCommand": "cd apps/client && pnpm run build",
-  "outputDirectory": "apps/client/.next",
+  "buildCommand": "pnpm run build",
+  "outputDirectory": ".next",
   "installCommand": "pnpm install",
   "framework": "nextjs",
   "build": {
     "env": {
-      "NEXT_TELEMETRY_DISABLED": "1"
+      "NEXT_TELEMETRY_DISABLED": "1",
+      "NEXT_FONT_GOOGLE_DISABLE_DOWNLOAD": "1"
     }
   }
 }
