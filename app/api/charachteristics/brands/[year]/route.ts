@@ -1,8 +1,8 @@
 export async function GET(
-    req,
-    context: RequestHandlerContext<{ year: string }>
+    req: Request,
+    { params }: { params: Promise<{ year: string }> }
 ) {
-    const { year } = await context.params;
+    const { year } = await params;
     const apiUrl = process.env.CARQUERY_API_URL;
     const url = `${apiUrl}?cmd=getMakes&year=${year}`;
 
