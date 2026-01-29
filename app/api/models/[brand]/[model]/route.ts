@@ -1,11 +1,11 @@
 import type { RequestHandlerContext } from 'next/server';
 
 export async function GET(
-    req,
-    context: RequestHandlerContext<{ brand: string; model: string }>
+    req: Request,
+    { params }: { params: Promise<{ brand: string; model: string }> }
 ) {
     const apiUrl = process.env.API_URL;
-    const { model } = context.params;
+    const { model } = await params;
     const res = await fetch(`${apiUrl}/cars/characteristics/models/${model}/variants`);
     const data = await res.json();
 

@@ -88,10 +88,10 @@ const convertCarItemInfo = (item) => {
 };
 
 export async function GET(
-    req,
-    context,
+    req: Request,
+    { params }: { params: Promise<{ model: string }> }
 ) {
-    const { model } = await context.params;
+    const { model } = await params;
     const apiUrl = process.env.CARQUERY_API_URL;
     const url = `${apiUrl}?cmd=getTrims&model=${model}`;
 
