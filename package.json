@@ -2,9 +2,9 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@9.14.4",
+  "packageManager": "pnpm@8.15.4",
   "engines": {
-    "node": "20.x"
+    "node": "18.x"
   },
   "scripts": {
     "dev": "next dev -p 3005",
@@ -22,7 +22,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.15.0",
     "lucide-react": "^0.511.0",
-    "next": "^16.1.6",
+    "next": "15.4.10",
     "postcss": "^8.5.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
