@@ -1,16 +1,6 @@
 {
-  "buildCommand": "cd apps/client && pnpm run build",
-  "outputDirectory": "apps/client/.next",
+  "buildCommand": "pnpm run build",
+  "outputDirectory": ".next",
   "installCommand": "pnpm install",
-  "framework": "nextjs",
-  "functions": {
-    "apps/client/app/api/**/*.ts": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "build": {
-    "env": {
-      "NEXT_TELEMETRY_DISABLED": "1"
-    }
-  }
+  "framework": "nextjs"
 }
