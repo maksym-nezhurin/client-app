@@ -38,7 +38,7 @@ export default function CarItem({ car, isLoading = false }: Props) {
       el.removeEventListener('mousemove', onMouseMove);
       el.removeEventListener('mouseleave', onMouseLeave);
     };
-  }, []);
+  }, [isLoading]);
 
   if (isLoading || !car) {
     return (
