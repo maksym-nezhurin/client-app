@@ -2,10 +2,6 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@10.8.1",
-  "engines": {
-    "node": "22.x"
-  },
   "scripts": {
     "dev": "next dev -p 3005",
     "build": "next build",
