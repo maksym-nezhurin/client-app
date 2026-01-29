@@ -1,13 +1,9 @@
-import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
-import CarItem from '@/components/car/CarItem';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { FeaturesSection } from '@/components/sections/FeaturesSection';
 import { PartnersSection } from '@/components/sections/PartnerSection';
 import TrustBenefits from '@/components/sections/TrustBenefitsSection';
 import { ActionCardsSection } from '@/components/sections/ActionCardsSection';
 import { LatestAnnouncementsSection } from '@/components/sections/LatestAnnouncementsSection';
-import { ROUTES } from '@/lib/routes';
 
 export default function HomePage() {
   return (
