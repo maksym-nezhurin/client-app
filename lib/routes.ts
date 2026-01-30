@@ -4,7 +4,8 @@ const VARIANTS_API_URL = `api/characteristics/variants`;
 export const ROUTES = {
     HOME: '/',
     BROWSE: '/browse',
-    SELL: '/sell',
+    EXPLORE: '/explore',
+    SELL: '/list',
     ABOUT: '/about',
     CARS: '/cars',
     CAR: (id?: string) => (id ? `/cars/${id}` : '/cars/[id]'),

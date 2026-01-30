@@ -36,6 +36,7 @@ export function Navbar() {
 
   const navLabelMap: Record<string, string> = {
     [ROUTES.BROWSE]: t('client.nav.browse'),
+    [ROUTES.EXPLORE]: t('client.nav.explore') || 'Explore',
     [ROUTES.SELL]: t('client.nav.sell'),
     [ROUTES.ABOUT]: t('client.nav.about'),
   };
@@ -174,21 +175,23 @@ export function Navbar() {
       {/* Mobile Menu */}
       {open && (
         <div className="md:hidden px-4 pb-4 space-y-2 bg-slate-900 border-t border-white/10">
-          <Link href="/browse" className="block text-text-primary">
-            Browse
+          <Link href={ROUTES.BROWSE} className="block text-text-primary">
+            {t('client.nav.browse')}
           </Link>
-          <Link href="/rent" className="block text-text-primary">
-            Rent
+          <Link href={ROUTES.EXPLORE} className="block text-text-primary">
+            {t('client.nav.explore') || 'Explore'}
           </Link>
-          <Link href="/sell" className="block text-text-primary">
-            Sell
+          <Link href={ROUTES.SELL} className="block text-text-primary">
+            {t('client.nav.sell')}
           </Link>
-          <Link href="/list" className="block text-brand-secondary font-semibold">
-            List Your Car
+          <Link href={ROUTES.ABOUT} className="block text-text-primary">
+            {t('client.nav.about')}
           </Link>
-          <Link href="/login" className="block text-text-secondary">
-            Login
-          </Link>
+          {!user && (
+            <Link href={ROUTES.AUTH.LOGIN} className="block text-text-secondary">
+              {t('client.nav.login')}
+            </Link>
+          )}
         </div>
       )}
     </header>

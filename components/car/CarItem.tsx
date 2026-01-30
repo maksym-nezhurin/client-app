@@ -3,8 +3,10 @@
 import { motion } from 'framer-motion';
 import { CarEmblemMap } from './CarEmblemMap';
 import { ICar } from './types';
-import { useRef, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { Calendar, Gauge, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
 
 interface Props {
   car?: ICar;
@@ -12,42 +14,29 @@ interface Props {
 }
 
 export default function CarItem({ car, isLoading = false }: Props) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (isLoading) return;
-    const el = containerRef.current;
-    if (!el) return;
-
-    const onMouseMove = (e: MouseEvent) => {
-      const { left, top, width, height } = el.getBoundingClientRect();
-      const x = ((e.clientX - left) / width - 0.5) * 10;
-      const y = ((e.clientY - top) / height - 0.5) * 10;
-      el.style.transform = `perspective(600px) rotateX(${-y}deg) rotateY(${x}deg) scale(1.05)`;
-    };
-
-    const onMouseLeave = () => {
-      if (!el) return;
-      el.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
-    };
-
-    el.addEventListener('mousemove', onMouseMove);
-    el.addEventListener('mouseleave', onMouseLeave);
-
-    return () => {
-      el.removeEventListener('mousemove', onMouseMove);
-      el.removeEventListener('mouseleave', onMouseLeave);
-    };
-  }, [isLoading]);
-
   if (isLoading || !car) {
     return (
-      <div className="relative rounded-2xl p-6 shadow-[0_0_25px_#00ffff30] bg-black text-white overflow-hidden animate-pulse border border-cyan-800">
-        <div className="w-16 h-16 mb-4 bg-cyan-900 rounded-full" />
-        <div className="h-6 bg-cyan-800 rounded w-3/4 mb-2" />
-        <div className="h-4 bg-cyan-800 rounded w-full mb-2" />
-        <div className="h-4 bg-cyan-800 rounded w-1/2 mb-2" />
-        <div className="h-4 bg-cyan-800 rounded w-1/3" />
+      <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/60 p-6 backdrop-blur-xl dark:bg-slate-900/60">
+        <div className="animate-pulse">
+          {/* Image Skeleton */}
+          <div className="mb-4 h-40 rounded-xl bg-slate-200 dark:bg-slate-800" />
+          
+          {/* Content Skeleton */}
+          <div className="mb-2 h-6 w-3/4 rounded bg-slate-200 dark:bg-slate-800" />
+          <div className="mb-4 h-4 w-full rounded bg-slate-200 dark:bg-slate-800" />
+          
+          {/* Stats Skeleton */}
+          <div className="mb-4 grid grid-cols-2 gap-3">
+            <div className="h-16 rounded-lg bg-slate-200 dark:bg-slate-800" />
+            <div className="h-16 rounded-lg bg-slate-200 dark:bg-slate-800" />
+          </div>
+          
+          {/* Footer Skeleton */}
+          <div className="flex items-center justify-between border-t border-slate-200 pt-4 dark:border-slate-800">
+            <div className="h-8 w-24 rounded bg-slate-200 dark:bg-slate-800" />
+            <div className="h-10 w-28 rounded-lg bg-slate-200 dark:bg-slate-800" />
+          </div>
+        </div>
       </div>
     );
   }
@@ -56,41 +45,89 @@ export default function CarItem({ car, isLoading = false }: Props) {
 
   return (
     <motion.div
-      ref={containerRef}
-      className="relative rounded-2xl p-6 shadow-[0_0_25px_#00ffff70] bg-black text-white overflow-hidden cursor-pointer
-        border border-cyan-500
-        before:absolute before:-inset-0.5 before:rounded-2xl before:bg-gradient-to-r before:from-cyan-400 before:via-blue-400 before:to-purple-600
-        before:bg-[length:200%_200%] before:animate-neonGlow
-        after:absolute after:inset-0 after:rounded-2xl after:border after:border-cyan-600 after:opacity-20
-        hover:shadow-[0_0_40px_#00ffffaa]
-        transition-transform duration-300"
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
     >
-      <svg
-        className="none hover:block absolute inset-0 w-full h-full pointer-events-none"
-
-        preserveAspectRatio="none"
-        viewBox="0 0 200 200"
+      <Link
+        href={`/browse/${car.id}`}
+        className="group relative block overflow-hidden rounded-2xl border border-white/20 bg-white/80 backdrop-blur-xl transition-all hover:scale-[1.02] hover:shadow-2xl dark:bg-slate-900/80"
       >
-        <path
-          d="M10 30 L50 90 L90 20 L130 80 L170 10"
-          stroke="#0ff"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-          className="animate-lightning"
-        />
-      </svg>
+        {/* Car Image/Logo Section */}
+        <div className="relative h-48 overflow-hidden bg-linear-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
+          {/* Brand Logo */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="rounded-2xl bg-white/90 p-8 shadow-xl backdrop-blur dark:bg-slate-900/90">
+              <Image 
+                src={emblem} 
+                alt={car.brand} 
+                width={80} 
+                height={80}
+                className="h-20 w-20 object-contain opacity-80 transition-all group-hover:scale-110 group-hover:opacity-100"
+              />
+            </div>
+          </div>
 
-      <Image src={emblem} alt={car.brand} className="w-16 h-16 mb-4 drop-shadow-[0_0_10px_cyan]" width={80} height={80} />
-      <h2 className="text-xl font-bold drop-shadow-[0_0_8px_cyan]">{car.brand} {car.model}</h2>
-      <p className="text-md relative">{car.description}</p>
-      {/* <p className="mt-2 text-red-400 font-semibold relative">${car.price.toLocaleString()}</p> */}
-      <p className="text-m relative">{car.year} year</p>
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+          {/* Title */}
+          <h3 className="mb-2 text-xl font-bold text-slate-900 dark:text-white">
+            {car.brand} {car.model}
+          </h3>
+
+          {/* Description */}
+          <p className="mb-4 line-clamp-2 text-sm text-slate-600 dark:text-slate-400">
+            {car.description}
+          </p>
+
+          {/* Stats Grid */}
+          <div className="mb-4 grid grid-cols-2 gap-3">
+            <div className="flex items-center gap-2 text-sm">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10">
+                <Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+              </div>
+              <div>
+                <div className="text-xs text-slate-500">Year</div>
+                <div className="font-semibold text-slate-900 dark:text-white">{car.year}</div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 text-sm">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-500/10">
+                <Gauge className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+              </div>
+              <div>
+                <div className="text-xs text-slate-500">Mileage</div>
+                <div className="font-semibold text-slate-900 dark:text-white">
+                  {car.mileage.toLocaleString()}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Price & CTA */}
+          <div className="flex items-center justify-between border-t border-slate-200 pt-4 dark:border-slate-800">
+            <div>
+              <div className="text-xs text-slate-500">Price</div>
+              <div className="text-2xl font-bold text-primary">
+                ${car.price.toLocaleString()}
+              </div>
+            </div>
+            <Button size="sm" className="gap-2">
+              View
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+
+        {/* Hover Effect */}
+        <div className="absolute -bottom-2 -right-2 h-24 w-24 rounded-full bg-linear-to-br from-blue-500 to-purple-600 opacity-0 blur-2xl transition-opacity group-hover:opacity-20" />
+      </Link>
     </motion.div>
   );
 }
