@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { ROUTES } from '@/lib/routes';
 import { Button } from '../ui/Button';
 import { Menu, X } from 'lucide-react';
 
@@ -37,7 +38,7 @@ export const Sidebar = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () =>
           About
         </Link>
 
-        <Link href="https://admin-liard-pi-71.vercel.app/" className="hover:bg-blue-100 px-3 py-2 rounded">
+        <Link href={ROUTES.AUTH.LOGIN} className="hover:bg-blue-100 px-3 py-2 rounded">
           Login
         </Link>
       </nav>

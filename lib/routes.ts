@@ -4,6 +4,9 @@ const VARIANTS_API_URL = `api/characteristics/variants`;
 export const ROUTES = {
     HOME: '/',
     BROWSE: '/browse',
+    EXPLORE: '/explore',
+    SELL: '/list',
+    ABOUT: '/about',
     CARS: '/cars',
     CAR: (id?: string) => (id ? `/cars/${id}` : '/cars/[id]'),
     ACCOUNT: '/account',
@@ -11,7 +14,7 @@ export const ROUTES = {
     ACCOUNT_CARS: '/account/cars',
     ACCOUNT_CARS_NEW: '/account/cars/new',
     ACCOUNT_CARS_FOR_SALE: '/account/cars/for-sale',
-    ACCOUNT_BILLING: '/account/billing',
+    ACCOUNT_BILLING: '/account/settings/billing',
     AUTH: {
         LOGIN: '/auth/login',
         SIGNUP: '/auth/signup',
