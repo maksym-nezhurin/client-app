@@ -1,6 +1,7 @@
 import { HeroSection } from '@/components/sections/HeroSection';
 import { FeaturesSection } from '@/components/sections/FeaturesSection';
 import { PartnersSection } from '@/components/sections/PartnerSection';
+import { LatestAnnouncementsSection } from '@/components/sections/LatestAnnouncementsSection';
 import TrustBenefits from '@/components/sections/TrustBenefitsSection';
 import { ActionCardsSection } from '@/components/sections/ActionCardsSection';
 import { LatestAnnouncementsSection } from '@/components/sections/LatestAnnouncementsSection';
@@ -25,7 +26,9 @@ export default function HomePage() {
         <LatestAnnouncementsSection />
 
         <FeaturesSection />
+        <FeaturesSection />
 
+        <PartnersSection />
         <PartnersSection />
 
         <TrustBenefits />
