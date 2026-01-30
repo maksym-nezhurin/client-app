@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const res = NextResponse.next()
 
   // Додаємо CORS тільки для /api/*
@@ -11,10 +11,10 @@ export function middleware(req: NextRequest) {
     res.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
   }
 
-  return res;
+  return res
 }
 
-// Вмикаємо middleware тільки на API-шляхах
+// Вмикаємо proxy тільки на API-шляхах
 export const config = {
   matcher: '/api/:path*',
 }
