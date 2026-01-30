@@ -89,7 +89,7 @@ export default function CarItem({ car, isLoading = false }: Props) {
       <Image src={emblem} alt={car.brand} className="w-16 h-16 mb-4 drop-shadow-[0_0_10px_cyan]" width={80} height={80} />
       <h2 className="text-xl font-bold drop-shadow-[0_0_8px_cyan]">{car.brand} {car.model}</h2>
       <p className="text-md relative">{car.description}</p>
-      <p className="mt-2 text-red-400 font-semibold relative">${car.price.toLocaleString()}</p>
+      {/* <p className="mt-2 text-red-400 font-semibold relative">${car.price.toLocaleString()}</p> */}
       <p className="text-m relative">{car.year} year</p>
     </motion.div>
   );

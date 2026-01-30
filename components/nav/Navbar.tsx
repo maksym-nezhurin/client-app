@@ -10,6 +10,7 @@ import { ROUTES } from '@/lib/routes';
 
 import { cn } from '@/lib/utils';
 import { useTypedTranslation } from '@/lib/i18n';
+import { useAuth } from '@/contexts/auth/AuthContext';
 import type { SupportedLanguage } from '@/lib/i18n';
 
 interface INavBarProps {
@@ -29,9 +30,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const isLoading = false;
-  const user = null;
-  // const { user, isLoading, logout } = useAuth();
+  const { user, isLoading, logout } = useAuth();
   const { i18n, t } = useTypedTranslation();
   const currentLanguage = (i18n.resolvedLanguage ?? i18n.language ?? 'en') as SupportedLanguage;
 
@@ -42,7 +41,7 @@ export function Navbar() {
   };
 
   const handleLogout = async () => {
-    // await logout();
+    await logout();
     setUserMenuOpen(false);
   };
 
