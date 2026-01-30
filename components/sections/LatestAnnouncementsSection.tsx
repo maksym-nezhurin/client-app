@@ -1,10 +1,10 @@
 'use client';
 
-// import { Button } from '@/components/ui/Button';
-// import { useTypedTranslation } from '@/lib/i18n';
+import { Button } from '@/components/ui/Button';
+import { useTypedTranslation } from '@/lib/i18n';
 import CarItem from '@/components/car/CarItem';
-// import Link from 'next/link';
-// import { ROUTES } from '@/lib/routes';
+import Link from 'next/link';
+import { ROUTES } from '@/lib/routes';
 import type { ICar } from '@/types/car';
 
 // Mock latest cars - Replace with real API later
@@ -45,18 +45,18 @@ const latestCars: ICar[] = [
 ];
 
 export function LatestAnnouncementsSection () {
-//   const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation();
 
   return (
     <section className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_0_45px_rgba(15,23,42,0.6)] backdrop-blur md:p-10">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        {/* <div>
+        <div>
           <h2 className="text-2xl font-semibold">{t('client.home.latest_title')}</h2>
           <p className="text-sm text-slate-300">{t('client.home.latest_subtitle')}</p>
-        </div> */}
-        {/* <Button asChild variant="secondary">
+        </div>
+        <Button asChild variant="secondary">
           <Link href={ROUTES.BROWSE}>{t('client.home.latest_cta')}</Link>
-        </Button> */}
+        </Button>
       </div>
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {latestCars.map((car) => (
@@ -64,12 +64,12 @@ export function LatestAnnouncementsSection () {
         ))}
       </div>
       <div className="mt-8 flex flex-wrap gap-3">
-        {/* <Button asChild>
+        <Button asChild>
           <Link href={ROUTES.AUTH.LOGIN}>{t('client.home.latest_create')}</Link>
         </Button>
         <Button asChild variant="ghost">
           <Link href={ROUTES.ACCOUNT_CARS_NEW}>{t('client.home.latest_add_car')}</Link>
-        </Button> */}
+        </Button>
       </div>
     </section>
   );

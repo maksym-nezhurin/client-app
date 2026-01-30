@@ -21,7 +21,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
         <main
          className="flex-1 bg-muted/40"
          >
-          <div className='h-[calc(100vh-120px)] overflow-scroll p-4'>
+          <div className='h-[calc(100vh-120px)] overflow-scroll'>
             {children}
           </div>
         </main>

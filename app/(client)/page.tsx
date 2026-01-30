@@ -1,10 +1,8 @@
-// import Link from 'next/link';
-// import { Button } from '@/components/ui/Button';
-// import CarItem from '@/components/car/CarItem';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { FeaturesSection } from '@/components/sections/FeaturesSection';
 import { PartnersSection } from '@/components/sections/PartnerSection';
 import { LatestAnnouncementsSection } from '@/components/sections/LatestAnnouncementsSection';
+import { ActionCardsSection } from '@/components/sections/ActionCardsSection';
 import TrustBenefits from '@/components/sections/TrustBenefitsSection';
 
 export default function HomePage() {
@@ -21,6 +19,8 @@ export default function HomePage() {
 
       <div className="relative z-10 mx-auto max-w-7xl space-y-20 px-4 py-16 sm:px-6 lg:px-8">
         <HeroSection />
+
+        <ActionCardsSection />
 
         <LatestAnnouncementsSection />
 
