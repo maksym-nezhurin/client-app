@@ -37,6 +37,9 @@ pnpm-lock.yml
 # vercel
 .vercel
 
+# turbo
+.turbo
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
