@@ -2,6 +2,8 @@ import { ICar } from '@/types/car';
 import { env } from 'process';
 import { CarList } from '@/components/car/CarList';
 
+export const dynamic = 'force-dynamic';
+
 const limit = 5;
 const page = 1;
 
