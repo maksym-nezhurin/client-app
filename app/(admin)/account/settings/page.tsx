@@ -25,7 +25,7 @@ export default function AccountSettingsPage() {
 
   if (!user) {
     return (
-      <div className="mx-auto max-w-xl space-y-4 rounded-lg border border-muted bg-white p-8 shadow">
+      <div className="mx-auto max-w-xl space-y-4 rounded-2xl border border-white/10 bg-white/95 p-8 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95">
         <h1 className="text-2xl font-semibold">{t('client.account_settings.title')}</h1>
         <p className="text-sm text-muted-foreground">
           {t('client.account_settings.guest_subtitle')}
@@ -61,12 +61,12 @@ export default function AccountSettingsPage() {
 
   return (
     <div className="mx-auto max-w-xl space-y-6">
-      <div className="rounded-lg border border-muted bg-white p-6 shadow">
+      <div className="rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95">
         <h1 className="text-2xl font-semibold">{t('client.account_settings.title')}</h1>
         <p className="text-sm text-muted-foreground">{t('client.account_settings.subtitle')}</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4 rounded-lg border border-muted bg-white p-6 shadow">
+      <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95">
         <Input
           id="firstName"
           type="text"

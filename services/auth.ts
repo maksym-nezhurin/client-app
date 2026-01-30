@@ -8,12 +8,20 @@ export type AuthUser = {
     countryCode?: string;
   } & Record<string, unknown>;
   
-  export type LoginPayload = {
-    email?: string;
-    username?: string;
-    password?: string;
-    phone?: string;
-  };
+export type LoginPayload = {
+  email?: string;
+  username?: string;
+  password?: string;
+  phone?: string;
+};
+
+export type SignupPayload = {
+  username: string;
+  email: string;
+  password: string;
+  firstName?: string;
+  lastName?: string;
+};
   
   type LoginResult = {
     ok: boolean;
@@ -26,27 +34,48 @@ export type AuthUser = {
     return data;
   }
   
-  export const authService = {
-    async login(payload: LoginPayload): Promise<LoginResult> {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify(payload),
-      });
-  
-      const data = await parseJson<AuthUser | { user?: AuthUser } | { message?: string }>(res);
-  
-      if (!res.ok) {
-        return {
-          ok: false,
-          error: (data as { message?: string } | null)?.message ?? 'Unable to login.',
-        };
-      }
-  
-      const user = (data as { user?: AuthUser } | null)?.user ?? (data as AuthUser | null) ?? null;
-      return { ok: true, user };
-    },
+export const authService = {
+  async login(payload: LoginPayload): Promise<LoginResult> {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(payload),
+    });
+
+    const data = await parseJson<AuthUser | { user?: AuthUser } | { message?: string }>(res);
+
+    if (!res.ok) {
+      return {
+        ok: false,
+        error: (data as { message?: string } | null)?.message ?? 'Unable to login.',
+      };
+    }
+
+    const user = (data as { user?: AuthUser } | null)?.user ?? (data as AuthUser | null) ?? null;
+    return { ok: true, user };
+  },
+
+  async signup(payload: SignupPayload): Promise<LoginResult> {
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(payload),
+    });
+
+    const data = await parseJson<AuthUser | { user?: AuthUser } | { message?: string }>(res);
+
+    if (!res.ok) {
+      return {
+        ok: false,
+        error: (data as { message?: string } | null)?.message ?? 'Registration failed.',
+      };
+    }
+
+    const user = (data as { user?: AuthUser } | null)?.user ?? (data as AuthUser | null) ?? null;
+    return { ok: true, user };
+  },
   
     async getSession(): Promise<AuthUser | null> {
       const res = await fetch('/api/auth/me', {

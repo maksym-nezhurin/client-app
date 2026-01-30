@@ -30,7 +30,7 @@ export default function AccountPage() {
 
   if (!user) {
     return (
-      <div className="mx-auto max-w-xl space-y-4 rounded-lg border border-muted bg-white p-8 shadow">
+      <div className="mx-auto max-w-xl space-y-4 rounded-2xl border border-white/10 bg-white/95 p-8 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95">
         <h1 className="text-2xl font-semibold">{t('client.account.account_dashboard_title')}</h1>
         <p className="text-sm text-muted-foreground">
           {t('client.account.account_dashboard_guest')}
@@ -44,7 +44,7 @@ export default function AccountPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-lg border border-muted bg-white p-6 shadow">
+      <div className="rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-semibold">{t('client.account.dashboard_title')}</h1>
@@ -65,15 +65,15 @@ export default function AccountPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {summaryCards.map((card) => (
-          <div key={card.labelKey} className="rounded-lg border border-muted bg-white p-4 shadow">
-            <p className="text-xs uppercase text-muted-foreground">{t(card.labelKey)}</p>
-            <p className="text-2xl font-semibold">{card.value}</p>
+          <div key={card.labelKey} className="rounded-2xl border border-white/10 bg-white/95 p-5 shadow-xl backdrop-blur-xl dark:bg-slate-900/95">
+            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{t(card.labelKey)}</p>
+            <p className="mt-2 text-3xl font-bold text-foreground">{card.value}</p>
           </div>
         ))}
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="rounded-lg border border-muted bg-white p-6 shadow lg:col-span-2">
+        <div className="rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95 lg:col-span-2">
           <h2 className="text-lg font-semibold">{t('client.account.recent_activity')}</h2>
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
             {recentActivity.map((item) => (
@@ -85,7 +85,7 @@ export default function AccountPage() {
           </ul>
         </div>
 
-        <div className="rounded-lg border border-muted bg-white p-6 shadow">
+        <div className="rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95">
           <h2 className="text-lg font-semibold">{t('client.account.profile_quick_view')}</h2>
           <dl className="mt-4 space-y-3 text-sm">
             <div>
@@ -103,7 +103,7 @@ export default function AccountPage() {
         </div>
       </div>
 
-      <div className="rounded-lg border border-muted bg-white p-6 shadow">
+      <div className="rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <h2 className="text-lg font-semibold">{t('client.account.primary_car.title')}</h2>
@@ -122,7 +122,7 @@ export default function AccountPage() {
           )}
         </div>
 
-        <div className="mt-6 rounded-xl border border-dashed border-slate-200 bg-slate-50 p-5">
+        <div className="mt-6 rounded-xl border border-dashed border-white/20 bg-muted/30 p-5 backdrop-blur-sm">
           {primaryCar ? (
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
