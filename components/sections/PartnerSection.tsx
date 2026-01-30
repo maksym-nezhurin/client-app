@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useTypedTranslation } from '@/lib/i18n';
 
 const partners = [
   { id: 1, name: 'AutoBrand', logo: '/partners/1.png' },
@@ -11,15 +12,18 @@ const partners = [
 ]
 
 export function PartnersSection() {
+  const { t } = useTypedTranslation();
+
   return (
-    <section className="py-16 bg-surface-base">
-      <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold text-text-primary mb-2">Our partners</h2>
-        <p className="text-text-secondary mb-10">
-            We are working with best companies in the automobile industry
+    <section className="rounded-3xl border border-white/10 bg-white/5 p-8 text-center shadow-[0_0_40px_rgba(15,23,42,0.5)] backdrop-blur md:p-12">
+      <div className="mx-auto max-w-6xl">
+        <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{t('client.partners.eyebrow')}</p>
+        <h2 className="mt-3 text-3xl font-semibold text-white">{t('client.partners.title')}</h2>
+        <p className="mt-3 text-sm text-slate-300">
+          {t('client.partners.subtitle')}
         </p>
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center justify-center"
+          className="mt-10 grid grid-cols-2 items-center justify-center gap-6 sm:grid-cols-3 md:grid-cols-5"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -31,7 +35,7 @@ export function PartnersSection() {
           {partners.map(({ id, name, logo }) => (
             <motion.div
               key={id}
-              className="flex items-center justify-center bg-surface-card rounded-2xl shadow-soft hover:scale-105 transition-transform duration-300"
+              className="flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-black/20 transition-transform duration-300 hover:scale-105"
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },

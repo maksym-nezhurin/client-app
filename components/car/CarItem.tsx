@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { CarEmblemMap } from './CarEmblemMap';
-import { ICar } from './types';
+import { ICar } from '@/types/car';
 import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 
@@ -38,7 +38,7 @@ export default function CarItem({ car, isLoading = false }: Props) {
       el.removeEventListener('mousemove', onMouseMove);
       el.removeEventListener('mouseleave', onMouseLeave);
     };
-  }, []);
+  }, [isLoading]);
 
   if (isLoading || !car) {
     return (
@@ -53,14 +53,17 @@ export default function CarItem({ car, isLoading = false }: Props) {
   }
 
   const emblem = CarEmblemMap[car.brand.toLowerCase()] || '/logos/default.svg';
+  const priceLabel = typeof car.price === 'number' ? `$${car.price.toLocaleString()}` : '—';
+  const yearLabel = car.year ? `${car.year}` : 'Year N/A';
+  const descriptionLabel = car.description ?? 'No description provided.';
 
   return (
     <motion.div
       ref={containerRef}
       className="relative rounded-2xl p-6 shadow-[0_0_25px_#00ffff70] bg-black text-white overflow-hidden cursor-pointer
         border border-cyan-500
-        before:absolute before:-inset-0.5 before:rounded-2xl before:bg-gradient-to-r before:from-cyan-400 before:via-blue-400 before:to-purple-600
-        before:bg-[length:200%_200%] before:animate-neonGlow
+        before:absolute before:-inset-0.5 before:rounded-2xl before:bg-linear-to-r before:from-cyan-400 before:via-blue-400 before:to-purple-600
+        before:bg-size-[200%_200%] before:animate-neonGlow
         after:absolute after:inset-0 after:rounded-2xl after:border after:border-cyan-600 after:opacity-20
         hover:shadow-[0_0_40px_#00ffffaa]
         transition-transform duration-300"
@@ -88,9 +91,9 @@ export default function CarItem({ car, isLoading = false }: Props) {
 
       <Image src={emblem} alt={car.brand} className="w-16 h-16 mb-4 drop-shadow-[0_0_10px_cyan]" width={80} height={80} />
       <h2 className="text-xl font-bold drop-shadow-[0_0_8px_cyan]">{car.brand} {car.model}</h2>
-      <p className="text-md relative">{car.description}</p>
-      <p className="mt-2 text-red-400 font-semibold relative">${car.price.toLocaleString()}</p>
-      <p className="text-m relative">{car.year} year</p>
+      <p className="text-md relative">{descriptionLabel}</p>
+      <p className="mt-2 text-red-400 font-semibold relative">{priceLabel}</p>
+      <p className="text-m relative">{yearLabel}</p>
     </motion.div>
   );
 }

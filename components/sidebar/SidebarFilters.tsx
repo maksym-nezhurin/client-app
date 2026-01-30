@@ -1,26 +1,59 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, type ChangeEvent } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { Select } from '@/components/ui/Select';
 import { Menu, X } from 'lucide-react';
+import { YearRangePicker } from '@/components/ui/YearRangePicker';
+import { ROUTES } from "@/lib/routes";
+import { useTypedTranslation } from '@/lib/i18n';
+import type { ICarModel } from '@/types/car';
 
-export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters) => void }) {
+export type Filters = Record<string, string | number | string[] | number[]>;
+
+// simple generic debounce hook
+function useDebounce<T>(value: T, delay = 300): T {
+  const [debounced, setDebounced] = useState<T>(value);
+
+  useEffect(() => {
+    const id = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(id);
+  }, [value, delay]);
+
+  return debounced;
+}
+
+export function SidebarFilters({
+  onFilterChange,
+  variant: displayVariant = 'drawer',
+  className,
+}: {
+  onFilterChange: (filters: Filters) => void;
+  variant?: 'drawer' | 'inline';
+  className?: string;
+}) {
+  const { t } = useTypedTranslation();
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
   const [type, setType] = useState('');
-  const [variant, setVariant] = useState('');
-  const [minYear, setMinYear] = useState('');
+  const [variant, setVariant] = useState<string[]>([]);
+  const [years, setYears] = useState<[number, number]>([1990, 2022]);
+  const [fromYear, setFromYear] = useState(2008);
+  const [toYear, setToYear] = useState(2022);
   const [maxPrice, setMaxPrice] = useState('');
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const debouncedFromYear = useDebounce<number>(fromYear, 400);
+  const debouncedToYear = useDebounce<number>(toYear, 400);
+  const isInline = displayVariant === 'inline';
+  const isOpen = isInline ? true : isSidebarOpen;
 
   const { data: brands = [] } = useQuery({
     queryKey: ['brands'],
     queryFn: async () => {
-      const res = await fetch('/api/brands');
+      const res = await fetch(ROUTES.API.CHARACTERISTICS.BRANDS);
       if (!res.ok) throw new Error('Failed to fetch brands');
       return res.json();
     },
@@ -30,41 +63,59 @@ export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters) =
     queryKey: ['models', brand],
     queryFn: async () => {
       if (!brand) return {};
-      const res = await fetch(`/api/models/${brand}`);
+      const res = await fetch(ROUTES.API.CHARACTERISTICS.MODELS(brand));
       if (!res.ok) throw new Error('Failed to fetch models');
       return res.json();
     },
     enabled: !!brand,
   });
 
+  const { data: variants = [] } = useQuery({
+    queryKey: ['variants', brand, model, debouncedFromYear, debouncedToYear],
+    queryFn: async () => {
+      if (!brand || !model) return [];
+      // append year range as query params (your backend can read them)
+      const url = `${ROUTES.API.CHARACTERISTICS.VARIANTS(model)}?from=${encodeURIComponent(
+          String(debouncedFromYear)
+      )}&to=${encodeURIComponent(String(debouncedToYear))}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Failed to fetch models');
+      return res.json();
+    },
+    enabled: !!brand && debouncedFromYear <= debouncedToYear,
+  });
+
   const applyFilters = () => {
-    onFilterChange({ brand, model, variant, type, minYear, maxPrice });
+    onFilterChange({ brand, model, variants: variant, type, fromYear, toYear, maxPrice });
   };
 
   const resetFilters = () => {
     setBrand('');
     setModel('');
-    setVariant('');
+    setVariant([]);
     setType('');
-    setMinYear('');
+    setFromYear(1980);
+    setToYear(2022);
+    setYears([1980, 2022]);
     setMaxPrice('');
     onFilterChange({});
   };
 
   return (
     <>
-      {/* Toggle button (always visible) */}
-      <Button
-        onClick={() => setSidebarOpen(true)}
-        className="-top-15 left-0 z-2 absolute"
-        variant="secondary"
-      >
-        <Menu className="w-5 h-5 mr-2" />
-        Filters
-      </Button>
+      {!isInline && (
+        <Button
+          onClick={() => setSidebarOpen(true)}
+          className="-top-15 left-0 z-2 absolute"
+          variant="secondary"
+        >
+          <Menu className="w-5 h-5 mr-2" />
+          {t('client.filters.open')}
+        </Button>
+      )}
 
       {/* Backdrop */}
-      {isSidebarOpen && (
+      {!isInline && isSidebarOpen && (
         <div
           className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm transition-opacity"
           onClick={() => setSidebarOpen(false)}
@@ -74,66 +125,108 @@ export function SidebarFilters({ onFilterChange }: { onFilterChange: (filters) =
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed p-4 pt-20 top-0 left-0 z-40 h-full w-64 bg-white shadow-md transition-transform transform',
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          isInline
+            ? 'w-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm'
+            : 'fixed p-4 pt-20 top-0 left-0 z-40 h-full w-64 bg-white shadow-md transition-transform transform',
+          isOpen ? 'translate-x-0' : '-translate-x-full',
+          className
         )}
       >
         {/* Close button */}
-        <div className="absolute top-4 right-4">
-          <Button size="icon" variant="ghost" onClick={() => setSidebarOpen(false)}>
-            <X className="w-5 h-5" />
-          </Button>
-        </div>
+        {!isInline && (
+          <div className="absolute top-4 right-4">
+            <Button size="icon" variant="ghost" onClick={() => setSidebarOpen(false)}>
+              <X className="w-5 h-5" />
+            </Button>
+          </div>
+        )}
 
-        <h2 className="text-xl font-semibold mb-4">Filters</h2>
+        <h2 className="text-xl font-semibold mb-4">{t('client.filters.title')}</h2>
 
         <div className="space-y-4">
           {/* Brand Select */}
           <div>
-            <label className="block text-sm font-medium mb-1">Brand</label>
+            <label className="block text-sm font-medium mb-1">{t('client.filters.brand')}</label>
             <Select
-              label="Brand"
+              label={t('client.filters.brand')}
               value={brand}
               onChange={(val) => {
                 setBrand(val);
                 setModel('');
               }}
               options={brands}
-              placeholder="Select brand"
+              placeholder={t('client.filters.select_brand')}
             />
           </div>
 
           {/* Model Select */}
           <div>
-            <label className="block text-sm font-medium mb-1">Model</label>
+            <label className="block text-sm font-medium mb-1">{t('client.filters.model')}</label>
             <Select
-              label="Model"
+              label={t('client.filters.model')}
               value={model}
               onChange={(val) => setModel(val)}
               options={models}
-              placeholder="Select model"
+              placeholder={t('client.filters.select_model')}
             />
           </div>
 
-          {/* Min Year */}
+          <YearRangePicker
+              value={years}
+              onChange={(v) => {
+                setYears(v);
+                setFromYear(v[0]);
+                setToYear(v[1]);
+              }}
+              labelFrom={t('client.filters.year_from')}
+              labelTo={t('client.filters.year_to')}
+              ariaFrom={`${t('client.filters.year_from')} year`}
+              ariaTo={`${t('client.filters.year_to')} year`}
+              min={1980}
+              max={new Date().getFullYear()}
+          />
+
           <div>
-            <label className="block text-sm font-medium mb-1">Min Year</label>
-            <Input value={minYear} onChange={(e) => setMinYear(e.target.value)} type="number" />
+            <label className="block text-sm font-medium mb-1">{t('client.filters.variants')}</label>
+            <div className="flex gap-2 items-center mb-2">
+              <button
+                  type="button"
+                  onClick={() => setVariant([])}
+                  className="text-sm text-slate-600 hover:underline"
+              >
+                {t('client.filters.clear')}
+              </button>
+              <span className="text-xs text-slate-400">{t('client.filters.multi_select_hint')}</span>
+            </div>
+            <select
+                multiple
+                value={variant}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                    setVariant(Array.from(e.target.selectedOptions, (o) => o.value))
+                }
+                className="w-full border rounded p-2 h-28"
+            >
+              {variants.map((opt: ICarModel) => (
+                  <option key={opt.id} value={opt.id}>
+                    {opt.name} {opt.trim && `- ${opt.trim}`}
+                  </option>
+              ))}
+            </select>
           </div>
 
           {/* Max Price */}
           <div>
-            <label className="block text-sm font-medium mb-1">Max Price</label>
+            <label className="block text-sm font-medium mb-1">{t('client.filters.max_price')}</label>
             <Input value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} type="number" />
           </div>
 
           {/* Buttons */}
           <div className="flex justify-between gap-2 pt-4">
             <Button variant="outline" className="w-full" onClick={resetFilters}>
-              Reset
+              {t('client.filters.reset')}
             </Button>
             <Button className="w-full" onClick={applyFilters}>
-              Apply
+              {t('client.filters.apply')}
             </Button>
           </div>
         </div>
