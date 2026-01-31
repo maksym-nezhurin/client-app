@@ -43,3 +43,5 @@ pnpm-lock.yml
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+public/locales/*
