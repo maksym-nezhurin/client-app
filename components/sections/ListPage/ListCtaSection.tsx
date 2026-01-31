@@ -9,7 +9,7 @@ export function ListCtaSection() {
   const { user } = useAuth();
 
   return user ? (
-    <section className="px-4 pb-20 sm:px-6 lg:px-8">
+    <section id="list-form" className="px-4 pb-20 sm:px-6 lg:px-8 scroll-mt-20">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 text-center">
           <h2 className="text-3xl font-bold">List Your Car Now</h2>
@@ -27,7 +27,7 @@ export function ListCtaSection() {
       </div>
     </section>
   ) : (
-    <section className="px-4 pb-20 sm:px-6 lg:px-8">
+    <section id="list-form" className="px-4 pb-20 sm:px-6 lg:px-8 scroll-mt-20">
         <div className="mx-auto max-w-4xl">
             <div className="rounded-3xl border border-white/10 bg-linear-to-br from-primary/10 via-purple-500/5 to-transparent p-8 text-center shadow-2xl backdrop-blur-xl md:p-12">
                 <h2 className="text-3xl font-bold">Ready to List Your Car?</h2>
