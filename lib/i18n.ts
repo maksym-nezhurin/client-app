@@ -1,8 +1,10 @@
+export type SupportedLanguage = 'en' | 'pl' | 'sk' | 'uk';
+
 const t = (key: string) => key;
 const i18n = {
-    resolvedLanguage: 'en',
-    language: 'en',
-    changeLanguage: async (language: string) => {
+    resolvedLanguage: 'en' as SupportedLanguage,
+    language: 'en' as SupportedLanguage,
+    changeLanguage: async (language: SupportedLanguage) => {
         console.log('Changing language to:', language);
         // TODO: Implement language change logic
     },

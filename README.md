@@ -1,5 +1,14 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## 📚 Documentation
+
+Comprehensive documentation is available in the [`/docs`](./docs) directory:
+
+- [Market System](./docs/MARKET_SYSTEM.md) - Multi-market configuration and usage
+- [Authentication](./docs/AUTHENTICATION_IMPLEMENTATION.md) - Auth system implementation
+- [Design System](./docs/DESIGN_THEME_COMPARISON.md) - Theme and design documentation
+- [Examples](./docs/MARKET_EXAMPLES.md) - Code examples and patterns
+
 ## Getting Started
 
 First, run the development server:
