@@ -1,0 +1,8 @@
+# Standalone project configuration
+# This file is required by pnpm to use onlyBuiltDependencies
+packages:
+  - '.'
+
+# Allow git-hosted packages to run build scripts
+onlyBuiltDependencies:
+  - "@reelo/i18n"
