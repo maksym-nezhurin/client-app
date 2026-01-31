@@ -9,8 +9,7 @@
   },
   "scripts": {
     "dev": "next dev -p 3005",
-    "postinstall": "node scripts/copy-locales.js || true",
-    "build": "echo '📦 Step 1: Copying translation files...' && (node scripts/copy-locales.js || echo '⚠️  Skipping translation copy') && echo '🔨 Step 2: Next.js build...' && next build && echo '✅ Build completed successfully!'",
+    "build": "next build",
     "start": "next start -p 3005",
     "lint": "next lint"
   },
@@ -19,7 +18,10 @@
     "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/themes": "^3.2.1",
-    "@reelo/i18n": "git+https://github.com/maksym-nezhurin/reelo-i18n.git",
+    "i18next": "^25.2.1",
+    "i18next-browser-languagedetector": "^8.1.0",
+    "i18next-http-backend": "^3.0.2",
+    "react-i18next": "^15.5.2",
     "@tanstack/react-query": "^5.79.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

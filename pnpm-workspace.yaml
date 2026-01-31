@@ -1,9 +1,0 @@
-# This file is ONLY to enable onlyBuiltDependencies configuration
-# packages: ['.'] means this directory only - NO workspace features
-# This is required by pnpm to allow git-hosted packages to run build scripts
-
-packages:
-  - '.'
-
-onlyBuiltDependencies:
-  - "@reelo/i18n"
