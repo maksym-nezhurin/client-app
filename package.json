@@ -9,8 +9,8 @@
   },
   "scripts": {
     "dev": "next dev -p 3005",
-    "postinstall": "node scripts/copy-locales.js",
-    "build": "echo '📦 Step 1: Copying translation files...' && node scripts/copy-locales.js && echo '🔨 Step 2: Next.js build...' && next build && echo '✅ Build completed successfully!'",
+    "postinstall": "node scripts/copy-locales.js || true",
+    "build": "echo '📦 Step 1: Copying translation files...' && (node scripts/copy-locales.js || echo '⚠️  Skipping translation copy') && echo '🔨 Step 2: Next.js build...' && next build && echo '✅ Build completed successfully!'",
     "start": "next start -p 3005",
     "lint": "next lint"
   },
