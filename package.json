@@ -2,13 +2,15 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "packageManager": "pnpm@10.28.2",
   "engines": {
     "node": "24.x"
   },
   "scripts": {
     "dev": "next dev -p 3005",
-    "build": "next build",
+    "postinstall": "node scripts/copy-locales.js",
+    "build": "echo '📦 Step 1: Copying translation files...' && node scripts/copy-locales.js && echo '🔨 Step 2: Next.js build...' && next build && echo '✅ Build completed successfully!'",
     "start": "next start -p 3005",
     "lint": "next lint"
   },
@@ -17,6 +19,7 @@
     "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/themes": "^3.2.1",
+    "@reelo/i18n": "git+https://github.com/maksym-nezhurin/reelo-i18n.git",
     "@tanstack/react-query": "^5.79.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

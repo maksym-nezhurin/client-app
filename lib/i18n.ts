@@ -1,14 +1,7 @@
-export type SupportedLanguage = 'en' | 'pl' | 'sk' | 'uk';
+// Import and re-export from shared i18n package
+import i18n from '@reelo/i18n';
+export { useTypedTranslation } from '@reelo/i18n';
+export type { TranslationKey, TranslationOptions, SupportedLanguage } from '@reelo/i18n';
 
-const t = (key: string) => key;
-const i18n = {
-    resolvedLanguage: 'en' as SupportedLanguage,
-    language: 'en' as SupportedLanguage,
-    changeLanguage: async (language: SupportedLanguage) => {
-        console.log('Changing language to:', language);
-        // TODO: Implement language change logic
-    },
-};
-const useTypedTranslation = () => ({ t, i18n });
-
-export { t, useTypedTranslation };
+// Ensure i18n is initialized before export
+export default i18n;
