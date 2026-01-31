@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server'
 export function proxy(req: NextRequest) {
   const res = NextResponse.next()
 
-  // Додаємо CORS тільки для /api/*
+  // Add CORS headers only for /api/*
   if (req.nextUrl.pathname.startsWith('/api/')) {
     res.headers.set('Access-Control-Allow-Origin', '*')
     res.headers.set('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
@@ -14,7 +14,7 @@ export function proxy(req: NextRequest) {
   return res
 }
 
-// Вмикаємо proxy тільки на API-шляхах
+// Enable proxy only on API routes
 export const config = {
   matcher: '/api/:path*',
 }

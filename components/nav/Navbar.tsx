@@ -11,7 +11,10 @@ import { ROUTES } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 import { useTypedTranslation } from '@/lib/i18n';
 import { useAuth } from '@/contexts/auth/AuthContext';
-import type { SupportedLanguage } from '@/lib/i18n';
+import { useMarket } from '@/contexts/market/MarketContext';
+import { Market, MARKET_OPTIONS } from '@/types/market';
+import { useFeature } from '@/hooks/useFeature';
+import { FeatureKey, isFeatureEnabledForMarket } from '@/types/features';
 
 interface INavBarProps {
   items: {
@@ -20,35 +23,62 @@ interface INavBarProps {
   }[];
 }
 
-const languageOptions: { value: SupportedLanguage; label: string }[] = [
-  { value: 'en', label: 'EN' },
-  { value: 'uk', label: 'UA' },
-  { value: 'pl', label: 'PL' },
-];
-
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { user, isLoading, logout } = useAuth();
-  const { i18n, t } = useTypedTranslation();
-  const currentLanguage = (i18n.resolvedLanguage ?? i18n.language ?? 'en') as SupportedLanguage;
+  const { t } = useTypedTranslation();
+  const { market, setMarket, isDetecting } = useMarket();
 
-  const navLabelMap: Record<string, string> = {
-    [ROUTES.BROWSE]: t('client.nav.browse'),
-    [ROUTES.EXPLORE]: t('client.nav.explore') || 'Explore',
-    [ROUTES.SELL]: t('client.nav.sell'),
-    [ROUTES.ABOUT]: t('client.nav.about'),
-  };
+  // Check all features at top level (hooks must be called unconditionally)
+  const exploreFeature = useFeature(FeatureKey.EXPLORE_PAGE);
+  
+  // Check if SELL_CARS is available in current market (ignore auth status)
+  const canSellInMarket = isFeatureEnabledForMarket(FeatureKey.SELL_CARS, market);
+
+  // All navigation items with feature flags (including action buttons)
+  const navItems = [
+    {
+      href: ROUTES.BROWSE,
+      label: t('client.nav.browse'),
+      icon: '🚗',
+      isEnabled: true,
+      type: 'link' as const,
+    },
+    {
+      href: ROUTES.SELL,
+      label: t('client.nav.list'),
+      icon: '✨',
+      isEnabled: canSellInMarket,
+      type: 'action' as const,
+      fallbackLabel: 'Coming Soon',
+      fallbackIcon: '🚧',
+    },
+    {
+      href: ROUTES.EXPLORE,
+      label: t('client.nav.explore') || 'Explore',
+      icon: '🔍',
+      isEnabled: exploreFeature.isEnabled,
+      type: 'link' as const,
+    },
+    {
+      href: ROUTES.ABOUT,
+      label: t('client.nav.about'),
+      icon: 'ℹ️',
+      isEnabled: true,
+      type: 'link' as const,
+    },
+  ];
 
   const handleLogout = async () => {
     await logout();
     setUserMenuOpen(false);
   };
 
-  const handleLanguageChange = async (value: SupportedLanguage) => {
-    if (value !== currentLanguage) {
-      await i18n.changeLanguage(value);
+  const handleMarketChange = (value: Market) => {
+    if (value !== market) {
+      setMarket(value);
     }
   };
 
@@ -58,55 +88,72 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 text-white">
           <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 shadow-lg shadow-black/20">
-            <Image src="/logo.webp" alt="Logo" width={28} height={28} />
+            <Image src="/logo.webp" alt="Logo" width={50} height={50} />
           </div>
           <span className="text-lg font-semibold tracking-wide">CarRentPro</span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden items-center space-x-6 text-sm text-slate-200 md:flex">
-          {Object.keys(navLabelMap).map((href, key) => (
-            <Link
-              key={key}
-              href={href}
-              className={cn(
-                'transition-colors hover:text-white',
-                pathname === key && 'text-white'
-              )}
-              aria-current={pathname === key ? 'page' : undefined}
-            >
-              {navLabelMap[href]}
-            </Link>
-          ))}
+        {/* Desktop Nav - All Navigation Items */}
+        <nav className="hidden items-center gap-2 md:flex">
+          {navItems.map((item) => {
+            // Item is enabled - show as clickable link
+            if (item.isEnabled) {
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    'flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-white/20 hover:border-white/30',
+                    pathname === item.href && 'bg-white/20 border-white/40'
+                  )}
+                >
+                  <span>{item.icon}</span>
+                  <span>{item.label}</span>
+                </Link>
+              );
+            }
+            
+            // Item is disabled - show "Coming Soon" badge
+            if (item.type === 'action') {
+              return (
+                <div
+                  key={item.href}
+                  className="flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-2 text-sm font-medium text-yellow-600 shadow-sm"
+                >
+                  <span>{item.fallbackIcon}</span>
+                  <span>{item.fallbackLabel}</span>
+                </div>
+              );
+            }
+            
+            return null;
+          })}
         </nav>
 
-        {/* Actions */}
+        {/* Right Side Actions */}
         <div className="hidden items-center space-x-4 md:flex">
-          {/* Language Selector */}
+          {/* Market Selector */}
           <div className="flex items-center rounded-full border border-white/10 bg-white/5 p-1">
-            {languageOptions.map((option) => (
+            {MARKET_OPTIONS.map((option) => (
               <button
                 key={option.value}
                 type="button"
-                onClick={() => handleLanguageChange(option.value)}
+                onClick={() => handleMarketChange(option.value)}
+                disabled={isDetecting}
                 className={cn(
-                  'rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide transition',
-                  currentLanguage === option.value
+                  'rounded-full px-3 py-1.5 text-xs font-semibold tracking-wide transition flex items-center gap-1.5',
+                  market === option.value
                     ? 'bg-white text-slate-900 shadow'
-                    : 'text-slate-300 hover:text-white'
+                    : 'text-slate-300 hover:text-white',
+                  isDetecting && 'opacity-50 cursor-not-allowed'
                 )}
+                title={option.label}
               >
-                {option.label}
+                <span className="text-sm">{option.flag}</span>
+                <span className="uppercase">{option.shortLabel}</span>
               </button>
             ))}
           </div>
-
-          <Link
-            href="/list"
-            className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:bg-white/20"
-          >
-            {t('client.nav.list')}
-          </Link>
           
           {!isLoading &&
             (user ? (
@@ -175,22 +222,54 @@ export function Navbar() {
       {/* Mobile Menu */}
       {open && (
         <div className="md:hidden px-4 pb-4 space-y-2 bg-slate-900 border-t border-white/10">
-          <Link href={ROUTES.BROWSE} className="block text-text-primary">
-            {t('client.nav.browse')}
-          </Link>
-          <Link href={ROUTES.EXPLORE} className="block text-text-primary">
-            {t('client.nav.explore') || 'Explore'}
-          </Link>
-          <Link href={ROUTES.SELL} className="block text-text-primary">
-            {t('client.nav.sell')}
-          </Link>
-          <Link href={ROUTES.ABOUT} className="block text-text-primary">
-            {t('client.nav.about')}
-          </Link>
+          {/* All Navigation Items */}
+          <div className="space-y-2 py-3">
+            {navItems.map((item) => {
+              // Item is enabled - show as clickable link
+              if (item.isEnabled) {
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      'flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/20 hover:border-white/30',
+                      pathname === item.href && 'bg-white/20 border-white/40'
+                    )}
+                  >
+                    <span>{item.icon}</span>
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              }
+              
+              // Item is disabled - show "Coming Soon" badge
+              if (item.type === 'action') {
+                return (
+                  <div
+                    key={item.href}
+                    className="flex items-center gap-2 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-4 py-3 text-sm font-medium text-yellow-600"
+                  >
+                    <span>{item.fallbackIcon}</span>
+                    <span>{item.fallbackLabel}</span>
+                  </div>
+                );
+              }
+              
+              return null;
+            })}
+          </div>
+          
           {!user && (
-            <Link href={ROUTES.AUTH.LOGIN} className="block text-text-secondary">
-              {t('client.nav.login')}
-            </Link>
+            <div className="pt-2 border-t border-white/10">
+              <Link 
+                href={ROUTES.AUTH.LOGIN} 
+                onClick={() => setOpen(false)}
+                className="block text-slate-400 py-2 hover:text-white transition-colors"
+              >
+                {t('client.nav.login')}
+              </Link>
+            </div>
           )}
         </div>
       )}

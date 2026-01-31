@@ -36,9 +36,11 @@ export const ROUTES = {
     },
 } as const;
 
+import { Market } from '@/types/market';
+
 export type Routes = typeof ROUTES;
 
-export function withMarketPrefix(path: string, market?: 'ua' | 'pl' | 'sk'): string {
+export function withMarketPrefix(path: string, market?: Lowercase<Market>): string {
   if (!market) return path;
   if (path.startsWith(`/${market}`)) return path;
   return `/${market}${path.startsWith('/') ? '' : '/'}${path}`;

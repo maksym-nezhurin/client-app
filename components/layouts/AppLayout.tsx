@@ -2,6 +2,7 @@
 
 import { ReactNode } from 'react';
 import { AuthProvider } from '@/contexts/auth/AuthContext';
+import { MarketProvider } from '@/contexts/market/MarketContext';
 // import { Sidebar } from '../ui/Sidebar';
 import { Header } from '../ui/Header';
 import { Footer } from '../ui/Footer';
@@ -11,7 +12,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
 
   return (
     <AuthProvider>
-      <div className="flex min-h-screen flex-col">
+      <MarketProvider>
+        <div className="flex min-h-screen flex-col">
         {/* Header */}
         <Header className="h-16 px-6 flex items-center justify-between bg-primary text-primary-foreground shadow" />
 
@@ -33,7 +35,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
         <Footer className="h-16 flex items-center justify-center bg-muted text-muted-foreground text-sm">
           © 2025 Car Rental Service
         </Footer>
-      </div>
+        </div>
+      </MarketProvider>
     </AuthProvider>
   
   );

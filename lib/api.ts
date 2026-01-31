@@ -2,6 +2,17 @@
 
 import axios from 'axios';
 
+/**
+ * Get current market from cookie (for SSR compatibility)
+ */
+function getMarketFromCookie(): string | null {
+  if (typeof document === 'undefined') return null;
+  
+  const cookies = document.cookie.split(';');
+  const marketCookie = cookies.find(c => c.trim().startsWith('market='));
+  return marketCookie ? marketCookie.split('=')[1] : null;
+}
+
 export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL, // Make sure this is set in your .env
   headers: {
@@ -23,6 +34,12 @@ apiClient.interceptors.response.use(
 
 apiClient.interceptors.request.use(
   (config) => {
+    // Inject market header
+    const market = getMarketFromCookie();
+    if (market) {
+      config.headers['X-Market'] = market;
+    }
+
     // You can modify headers here (e.g., inject auth token)
     // const token = getAuthToken();
     // if (token) config.headers.Authorization = `Bearer ${token}`;

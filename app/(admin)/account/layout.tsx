@@ -57,14 +57,14 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
           icon: Car,
         },
         { 
-          href: ROUTES.ACCOUNT_CARS_NEW, 
-          label: t('client.account_menu.list_for_sale') || 'List for Sale',
-          icon: Tag,
-        },
-        { 
           href: '/account/cars/add-to-garage', 
           label: t('client.account_menu.add_to_garage') || 'Add to Garage',
           icon: Plus,
+        },
+        { 
+          href: ROUTES.ACCOUNT_CARS_NEW, 
+          label: t('client.account_menu.list_for_sale') || 'List for Sale',
+          icon: Tag,
         },
       ],
     },
@@ -177,7 +177,7 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
     <div className="relative min-h-screen w-full overflow-hidden">
       <AnimatedBackground />
       
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 p-4 py-8 md:flex-row md:gap-8">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 py-8 md:flex-row md:gap-8">
         <aside className="w-full rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95 md:w-64">
           <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
