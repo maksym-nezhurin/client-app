@@ -37,10 +37,10 @@ export default function ProfileSettingsPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-              {t('client.settings.profile.title') || 'Profile Settings'}
+              {t('settings.profile.title') || 'Profile Settings'}
             </h1>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-              {t('client.settings.profile.description') || 'Manage your personal information and profile'}
+              {t('settings.profile.description') || 'Manage your personal information and profile'}
             </p>
           </div>
         </div>

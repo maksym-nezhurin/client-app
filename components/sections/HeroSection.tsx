@@ -5,8 +5,10 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Search, Sparkles, Shield, Bot, Database, UserRound } from 'lucide-react';
 import { ROUTES } from '@/lib/routes';
+import { useTypedTranslation } from '@/lib/i18n';
 
 export function HeroSection() {
+  const { t } = useTypedTranslation('client');
   return (
     <section className="px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -15,15 +17,15 @@ export function HeroSection() {
           <div className="text-center lg:text-left">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-4 py-1.5 text-sm font-medium text-blue-700 backdrop-blur-xl dark:border-blue-800 dark:bg-blue-950/50 dark:text-blue-300">
               <Sparkles size={16} />
-              <span>AI-Powered Car Search Assistant</span>
+              <span>{t('hero_new.badge')}</span>
             </div>
             
             <h1 className="bg-linear-to-br from-slate-900 to-slate-700 bg-clip-text text-5xl font-bold leading-tight tracking-tight text-transparent dark:from-white dark:to-slate-300 md:text-6xl lg:text-7xl">
-              Smart Car Search with AI Assistance
+              {t('hero_new.title')}
             </h1>
             
             <p className="mt-6 text-lg text-slate-600 dark:text-slate-300 md:text-xl">
-              Get personalized help finding your perfect car with our AI assistant. We gather comprehensive vehicle data from trusted sources like CarVertical, analyze market trends, and provide expert recommendations.
+              {t('hero_new.subtitle')}
             </p>
 
             {/* CTA Buttons */}
@@ -31,13 +33,13 @@ export function HeroSection() {
               <Button asChild size="lg" className="gap-2 text-base">
                 <Link href={ROUTES.BROWSE} className="inline-flex items-center gap-2">
                   <Bot size={18} />
-                  Start AI Search
+                  {t('hero_new.cta_primary')}
                 </Link>
               </Button>
               <Button asChild variant="secondary" size="lg" className="gap-2 text-base">
                 <Link href={ROUTES.EXPLORE}>
                   <Database size={18} />
-                  Explore Market Data
+                  {t('hero_new.cta_secondary')}
                 </Link>
               </Button>
             </div>
@@ -46,15 +48,15 @@ export function HeroSection() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
               <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                 <Bot size={16} className="text-primary" />
-                <span>AI Assistant</span>
+                <span>{t('hero_new.trust_ai')}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                 <Database size={16} className="text-primary" />
-                <span>CarVertical Data</span>
+                <span>{t('hero_new.trust_data')}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                 <UserRound size={16} className="text-primary" />
-                <span>Personal Helper</span>
+                <span>{t('hero_new.trust_helper')}</span>
               </div>
             </div>
           </div>
@@ -65,7 +67,7 @@ export function HeroSection() {
               <div className="relative overflow-hidden rounded-2xl">
                 <Image
                   src="/images/car-logo.png"
-                  alt="Premium Car Marketplace"
+                  alt={t('hero_new.image_alt')}
                   width={600}
                   height={500}
                   className="w-full object-cover"
@@ -77,16 +79,16 @@ export function HeroSection() {
               {/* Stats Overlay */}
               <div className="mt-6 grid grid-cols-3 gap-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">AI</div>
-                  <div className="text-xs text-slate-600 dark:text-slate-400">Powered</div>
+                  <div className="text-2xl font-bold text-primary">{t('hero_new.stats_ai')}</div>
+                  <div className="text-xs text-slate-600 dark:text-slate-400">{t('hero_new.stats_ai_label')}</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">50k+</div>
-                  <div className="text-xs text-slate-600 dark:text-slate-400">Verified Cars</div>
+                  <div className="text-2xl font-bold text-primary">{t('hero_new.stats_cars')}</div>
+                  <div className="text-xs text-slate-600 dark:text-slate-400">{t('hero_new.stats_cars_label')}</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">24/7</div>
-                  <div className="text-xs text-slate-600 dark:text-slate-400">AI Support</div>
+                  <div className="text-2xl font-bold text-primary">{t('hero_new.stats_support')}</div>
+                  <div className="text-xs text-slate-600 dark:text-slate-400">{t('hero_new.stats_support_label')}</div>
                 </div>
               </div>
             </div>

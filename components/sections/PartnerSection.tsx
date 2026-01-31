@@ -13,15 +13,15 @@ const partners = [
 ]
 
 export function PartnersSection() {
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
 
   return (
     <section className="rounded-3xl border border-white/10 bg-white/5 p-8 text-center shadow-[0_0_40px_rgba(15,23,42,0.5)] backdrop-blur md:p-12">
       <div className="mx-auto max-w-6xl">
-        <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{t('client.partners.eyebrow')}</p>
-        <h2 className="mt-3 text-3xl font-semibold text-white">{t('client.partners.title')}</h2>
+        <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{t('partners.eyebrow')}</p>
+        <h2 className="mt-3 text-3xl font-semibold text-white">{t('partners.title')}</h2>
         <p className="mt-3 text-sm text-slate-300">
-          {t('client.partners.subtitle')}
+          {t('partners.subtitle')}
         </p>
         <motion.div
           className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-5"

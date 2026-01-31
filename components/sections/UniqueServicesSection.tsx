@@ -4,8 +4,10 @@ import { Bot, Database, UserRound, Shield, FileCheck, Sparkles, TrendingUp, Mess
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/routes';
+import { useTypedTranslation } from '@/lib/i18n';
 
 export function UniqueServicesSection() {
+  const { t } = useTypedTranslation('client');
   const services = [
     {
       icon: Bot,

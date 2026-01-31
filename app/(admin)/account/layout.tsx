@@ -32,7 +32,7 @@ interface MenuItem {
 export default function AccountLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user, isLoading } = useAuth();
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
   
   // Check if any cars submenu item is active
   const isCarsMenuActive = pathname?.startsWith('/account/cars');
@@ -44,57 +44,57 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
   const menuItems: MenuItem[] = [
     { 
       href: ROUTES.ACCOUNT, 
-      label: t('client.account_menu.dashboard') || 'Dashboard',
+      label: t('account_menu.dashboard') || 'Dashboard',
       icon: Home,
     },
     { 
-      label: t('client.account_menu.cars') || 'My Vehicles',
+      label: t('account_menu.cars') || 'My Vehicles',
       icon: Car,
       children: [
         { 
           href: ROUTES.ACCOUNT_CARS, 
-          label: t('client.account_menu.my_cars') || 'Overview',
+          label: t('account_menu.my_cars') || 'Overview',
           icon: Car,
         },
         { 
           href: '/account/cars/add-to-garage', 
-          label: t('client.account_menu.add_to_garage') || 'Add to Garage',
+          label: t('account_menu.add_to_garage') || 'Add to Garage',
           icon: Plus,
         },
         { 
           href: ROUTES.ACCOUNT_CARS_NEW, 
-          label: t('client.account_menu.list_for_sale') || 'List for Sale',
+          label: t('account_menu.list_for_sale') || 'List for Sale',
           icon: Tag,
         },
       ],
     },
     { 
-      label: t('client.account_menu.settings') || 'Settings',
+      label: t('account_menu.settings') || 'Settings',
       icon: Settings,
       children: [
         { 
           href: ROUTES.ACCOUNT_SETTINGS, 
-          label: t('client.account_menu.profile') || 'Profile',
+          label: t('account_menu.profile') || 'Profile',
           icon: User,
         },
         { 
           href: '/account/settings/notifications', 
-          label: t('client.account_menu.notifications') || 'Notifications',
+          label: t('account_menu.notifications') || 'Notifications',
           icon: Bell,
         },
         { 
           href: '/account/settings/privacy', 
-          label: t('client.account_menu.privacy') || 'Privacy & Security',
+          label: t('account_menu.privacy') || 'Privacy & Security',
           icon: Shield,
         },
         { 
           href: '/account/settings/billing', 
-          label: t('client.account_menu.billing') || 'Billing',
+          label: t('account_menu.billing') || 'Billing',
           icon: CreditCard,
         },
         { 
           href: '/account/settings/preferences', 
-          label: t('client.account_menu.preferences') || 'Preferences',
+          label: t('account_menu.preferences') || 'Preferences',
           icon: Palette,
         },
       ],
@@ -181,10 +181,10 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
         <aside className="w-full rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95 md:w-64">
           <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              {t('client.account_menu.label')}
+              {t('account_menu.label')}
             </p>
             <p className="mt-1 text-lg font-semibold text-foreground">
-              {isLoading ? t('client.account_menu.loading') : user?.name ?? user?.username ?? t('client.account_menu.guest')}
+              {isLoading ? t('account_menu.loading') : user?.name ?? user?.username ?? t('account_menu.guest')}
             </p>
           </div>
           <nav className="space-y-1">

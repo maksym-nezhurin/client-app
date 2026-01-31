@@ -1,6 +1,7 @@
 {
   "nav": {
     "browse": "Przeglądaj",
+    "explore": "Odkrywaj",
     "sell": "Sprzedaż",
     "about": "O nas",
     "list": "Dodaj auto",
@@ -198,5 +199,137 @@
     "select_model": "Wybierz model",
     "year_from": "Od",
     "year_to": "Do"
+  },
+  "hero_new": {
+    "badge": "Asystent wyszukiwania samochodów oparty na AI",
+    "title": "Inteligentne wyszukiwanie samochodów z asystentem AI",
+    "subtitle": "Otrzymaj spersonalizowaną pomoc w znalezieniu idealnego samochodu dzięki naszemu asystentowi AI. Zbieramy kompleksowe dane o pojazdach z zaufanych źródeł takich jak CarVertical, analizujemy trendy rynkowe i zapewniamy eksperckie rekomendacje.",
+    "cta_primary": "Rozpocznij wyszukiwanie AI",
+    "cta_secondary": "Odkryj dane rynkowe",
+    "trust_ai": "Asystent AI",
+    "trust_data": "Dane CarVertical",
+    "trust_helper": "Osobisty pomocnik",
+    "stats_ai": "AI",
+    "stats_ai_label": "Napędzane",
+    "stats_cars": "50k+",
+    "stats_cars_label": "Zweryfikowane auta",
+    "stats_support": "24/7",
+    "stats_support_label": "Wsparcie AI",
+    "image_alt": "Premium marketplace samochodowy"
+  },
+  "features_new": {
+    "title": "Dlaczego my",
+    "ai_search_title": "Wyszukiwanie oparte na AI",
+    "ai_search_desc": "Nasz inteligentny asystent uczy się Twoich preferencji i znajduje idealne dopasowanie.",
+    "vehicle_history_title": "Pełna historia pojazdu",
+    "vehicle_history_desc": "Dostęp do kompleksowych danych z CarVertical i innych zaufanych źródeł dla każdego pojazdu.",
+    "personal_helper_title": "Osobisty pomocnik",
+    "personal_helper_desc": "Otrzymaj dedykowaną pomoc przez cały proces zakupu samochodu, od wyszukiwania po zakup."
+  },
+  "unique_services": {
+    "badge": "Co nas wyróżnia",
+    "title": "Twoja kompletna platforma",
+    "title_highlight": "inteligentnego wyszukiwania",
+    "subtitle": "Nie tylko wystawiamy samochody. Zapewniamy inteligentne narzędzia, zweryfikowane dane i osobiste wsparcie, aby pomóc Ci podjąć najlepszą decyzję.",
+    "ai_assistant": {
+      "title": "Asystent AI",
+      "description": "Twój osobisty doradca samochodowy oparty na AI, który rozumie Twoje potrzeby i preferencje.",
+      "feature_1": "Wyszukiwanie językiem naturalnym",
+      "feature_2": "Inteligentne rekomendacje",
+      "feature_3": "Prognozy cen",
+      "feature_4": "Analiza porównawcza"
+    },
+    "carvertical": {
+      "title": "Integracja CarVertical",
+      "description": "Dostęp do kompleksowych raportów historii pojazdu z wielu zaufanych źródeł.",
+      "feature_1": "Historia wypadków",
+      "feature_2": "Weryfikacja przebiegu",
+      "feature_3": "Rejestry właścicieli",
+      "feature_4": "Historia serwisowa"
+    },
+    "personal_helper": {
+      "title": "Osobisty pomocnik",
+      "description": "Dedykowane wsparcie ludzkie, które poprowadzi Cię przez każdy etap zakupu samochodu.",
+      "feature_1": "Konsultacje eksperckie",
+      "feature_2": "Pomoc w negocjacjach",
+      "feature_3": "Pomoc dokumentacyjna",
+      "feature_4": "Wsparcie po zakupie"
+    },
+    "additional": {
+      "verified_data_title": "Zweryfikowane dane",
+      "verified_data_desc": "Wszystkie informacje sprawdzone z wielu wiarygodnych źródeł",
+      "market_analytics_title": "Analityka rynku",
+      "market_analytics_desc": "Trendy cenowe i wgląd w rynek w czasie rzeczywistym",
+      "smart_reports_title": "Inteligentne raporty",
+      "smart_reports_desc": "Kompleksowa analiza pojazdów generowana przez AI",
+      "chat_support_title": "Wsparcie czatu 24/7",
+      "chat_support_desc": "Natychmiastowe odpowiedzi na wszystkie Twoje pytania o każdej porze"
+    },
+    "cta_title": "Gotowy na doświadczenie inteligentnego wyszukiwania?",
+    "cta_subtitle": "Dołącz do tysięcy zadowolonych użytkowników, którzy znaleźli idealny samochód dzięki naszej platformie opartej na AI",
+    "cta_primary": "Wypróbuj wyszukiwanie AI",
+    "cta_secondary": "Dowiedz się więcej"
+  },
+  "personal_assistant": {
+    "badge": "Ludzki dotyk, moc AI",
+    "title": "Twój osobisty asystent",
+    "title_highlight": "wyszukiwania samochodów",
+    "subtitle": "Nie wiesz, jaki samochód pasuje do Twojego stylu życia? Nasi dedykowani eksperci pracują z Tobą jeden na jeden, aby zrozumieć Twoje potrzeby, zdefiniować idealne kryteria i znaleźć najlepsze dopasowanie.",
+    "benefits": {
+      "benefit_1": "Prawdziwy ekspert ludzki, nie tylko chatbot",
+      "benefit_2": "Bezstronne rekomendacje oparte na Twoich potrzebach",
+      "benefit_3": "Zaoszczędź godziny badań i porównań",
+      "benefit_4": "Uniknij powszechnych błędów zakupowych",
+      "benefit_5": "Wskazówki negocjacyjne i wgląd w ceny",
+      "benefit_6": "Pełne wsparcie od wyszukiwania po zakup"
+    },
+    "cta_consultation": "Zarezerwuj bezpłatną konsultację",
+    "cta_chat": "Rozmawiaj z ekspertem",
+    "stats": {
+      "clients": "5 000+",
+      "clients_label": "Zadowolonych klientów",
+      "rating": "4.9/5",
+      "rating_label": "Średnia ocena",
+      "cost": "Gratis",
+      "cost_label": "Bezpłatna usługa"
+    },
+    "expert_card": {
+      "title": "Poznaj swojego eksperta",
+      "quote": "Pomogłem tysiącom ludzi znaleźć idealny samochód. Pozwól, że pomogę Ci podjąć najlepszą decyzję w oparciu o Twoje unikalne potrzeby i styl życia.",
+      "name": "Zespół doradców samochodowych",
+      "role": "Starsi eksperci samochodowi"
+    },
+    "steps": {
+      "title": "Jak to działa:",
+      "step_1_title": "Podziel się potrzebami",
+      "step_1_desc": "Opowiedz nam o swoim stylu życia, budżecie i preferencjach w swobodnej rozmowie",
+      "step_2_title": "Zdefiniuj kryteria",
+      "step_2_desc": "Nasz ekspert pomoże Ci określić, co jest najważniejsze w Twoim idealnym samochodzie",
+      "step_3_title": "Spersonalizowane wyszukiwanie",
+      "step_3_desc": "Wyszukujemy, analizujemy i wybieramy najlepsze opcje dostosowane specjalnie dla Ciebie",
+      "step_4_title": "Znajdź swoje dopasowanie",
+      "step_4_desc": "Otrzymaj eksperckie wskazówki przez cały proces wyboru, aż znajdziesz idealny samochód"
+    },
+    "banner": {
+      "title": "Dlaczego wybrać osobistego asystenta?",
+      "subtitle": "Podczas gdy nasze AI pomaga Ci efektywnie wyszukiwać, nasi eksperci zapewniają osobisty kontakt, doświadczenie i intuicję, których technologia nie może zastąpić. Uzyskaj to, co najlepsze z obu światów!",
+      "cta": "Zacznij za darmo"
+    }
+  },
+  "trust_benefits": {
+    "title": "Dlaczego wybrać",
+    "title_highlight": "AutoMarket",
+    "secure_title": "Bezpieczne transakcje",
+    "secure_desc": "Gwarantujemy przejrzystość i niezawodność w każdym zakupie.",
+    "fast_title": "Szybkie wyszukiwanie",
+    "fast_desc": "Wygodne filtry i inteligentne wyszukiwanie pomagają znaleźć samochód w sekundy.",
+    "support_title": "Wsparcie 24/7",
+    "support_desc": "Nasz zespół jest zawsze gotowy, aby pomóc Ci na każdym kroku.",
+    "deals_title": "Świetne oferty",
+    "deals_desc": "Oferujemy najlepsze ceny i oferty od dealerów i właścicieli.",
+    "mobile_title": "Przyjazne dla urządzeń mobilnych",
+    "mobile_desc": "Korzystaj z naszej usługi gdziekolwiek i kiedykolwiek.",
+    "cta_search": "Rozpocznij wyszukiwanie",
+    "cta_post": "Wystaw ogłoszenie"
   }
 }

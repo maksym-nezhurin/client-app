@@ -1,6 +1,7 @@
 {
   "nav": {
     "browse": "Browse",
+    "explore": "Explore",
     "sell": "Sell",
     "about": "About",
     "list": "List your car",
@@ -198,5 +199,137 @@
     "select_model": "Select model",
     "year_from": "From",
     "year_to": "To"
+  },
+  "hero_new": {
+    "badge": "AI-Powered Car Search Assistant",
+    "title": "Smart Car Search with AI Assistance",
+    "subtitle": "Get personalized help finding your perfect car with our AI assistant. We gather comprehensive vehicle data from trusted sources like CarVertical, analyze market trends, and provide expert recommendations.",
+    "cta_primary": "Start AI Search",
+    "cta_secondary": "Explore Market Data",
+    "trust_ai": "AI Assistant",
+    "trust_data": "CarVertical Data",
+    "trust_helper": "Personal Helper",
+    "stats_ai": "AI",
+    "stats_ai_label": "Powered",
+    "stats_cars": "50k+",
+    "stats_cars_label": "Verified Cars",
+    "stats_support": "24/7",
+    "stats_support_label": "AI Support",
+    "image_alt": "Premium Car Marketplace"
+  },
+  "features_new": {
+    "title": "Why Choose Us",
+    "ai_search_title": "AI-Powered Search",
+    "ai_search_desc": "Our intelligent assistant learns your preferences and finds the perfect match for you.",
+    "vehicle_history_title": "Complete Vehicle History",
+    "vehicle_history_desc": "Access comprehensive data from CarVertical and other trusted sources for every vehicle.",
+    "personal_helper_title": "Personal Helper",
+    "personal_helper_desc": "Get dedicated assistance throughout your car buying journey, from search to purchase."
+  },
+  "unique_services": {
+    "badge": "What Makes Us Different",
+    "title": "Your Complete Car Search",
+    "title_highlight": "Intelligence Platform",
+    "subtitle": "We don't just list cars. We provide intelligent tools, verified data, and personal support to help you make the best decision.",
+    "ai_assistant": {
+      "title": "AI Assistant",
+      "description": "Your personal AI-powered car advisor that understands your needs and preferences.",
+      "feature_1": "Natural language search",
+      "feature_2": "Smart recommendations",
+      "feature_3": "Price predictions",
+      "feature_4": "Comparison analysis"
+    },
+    "carvertical": {
+      "title": "CarVertical Integration",
+      "description": "Access comprehensive vehicle history reports from multiple trusted sources.",
+      "feature_1": "Accident history",
+      "feature_2": "Mileage verification",
+      "feature_3": "Ownership records",
+      "feature_4": "Service history"
+    },
+    "personal_helper": {
+      "title": "Personal Helper",
+      "description": "Dedicated human support to guide you through every step of your car buying journey.",
+      "feature_1": "Expert consultation",
+      "feature_2": "Negotiation assistance",
+      "feature_3": "Documentation help",
+      "feature_4": "Post-purchase support"
+    },
+    "additional": {
+      "verified_data_title": "Verified Data",
+      "verified_data_desc": "All information cross-checked from multiple reliable sources",
+      "market_analytics_title": "Market Analytics",
+      "market_analytics_desc": "Real-time pricing trends and market insights",
+      "smart_reports_title": "Smart Reports",
+      "smart_reports_desc": "AI-generated comprehensive vehicle analysis",
+      "chat_support_title": "24/7 Chat Support",
+      "chat_support_desc": "Instant answers to all your questions anytime"
+    },
+    "cta_title": "Ready to Experience Smart Car Search?",
+    "cta_subtitle": "Join thousands of satisfied users who found their perfect car with our AI-powered platform",
+    "cta_primary": "Try AI Search Now",
+    "cta_secondary": "Learn More"
+  },
+  "personal_assistant": {
+    "badge": "Human Touch, AI Power",
+    "title": "Your Personal Car",
+    "title_highlight": "Search Assistant",
+    "subtitle": "Not sure what car fits your lifestyle? Our dedicated human experts work with you one-on-one to understand your needs, define your perfect criteria, and find the best match for you.",
+    "benefits": {
+      "benefit_1": "Real human expert, not just a chatbot",
+      "benefit_2": "Unbiased recommendations based on your needs",
+      "benefit_3": "Save hours of research and comparison",
+      "benefit_4": "Avoid common buying mistakes",
+      "benefit_5": "Negotiation tips and price insights",
+      "benefit_6": "Complete support from search to purchase"
+    },
+    "cta_consultation": "Book Free Consultation",
+    "cta_chat": "Chat with Expert",
+    "stats": {
+      "clients": "5,000+",
+      "clients_label": "Happy Clients",
+      "rating": "4.9/5",
+      "rating_label": "Average Rating",
+      "cost": "Free",
+      "cost_label": "No Cost Service"
+    },
+    "expert_card": {
+      "title": "Meet Your Expert",
+      "quote": "I've helped thousands of people find their perfect car. Let me help you make the best decision based on your unique needs and lifestyle.",
+      "name": "Car Advisor Team",
+      "role": "Senior Car Experts"
+    },
+    "steps": {
+      "title": "How It Works:",
+      "step_1_title": "Share Your Needs",
+      "step_1_desc": "Tell us about your lifestyle, budget, and preferences in a casual conversation",
+      "step_2_title": "Define Your Criteria",
+      "step_2_desc": "Our expert helps you identify exactly what matters most in your perfect car",
+      "step_3_title": "Personalized Search",
+      "step_3_desc": "We search, analyze, and shortlist the best options tailored specifically for you",
+      "step_4_title": "Find Your Match",
+      "step_4_desc": "Get expert guidance through the selection process until you find the perfect car"
+    },
+    "banner": {
+      "title": "Why Choose a Personal Assistant?",
+      "subtitle": "While our AI helps you search efficiently, our human experts provide the personal touch, experience, and intuition that technology can't replace. Get the best of both worlds!",
+      "cta": "Get Started Free"
+    }
+  },
+  "trust_benefits": {
+    "title": "Why Choose",
+    "title_highlight": "AutoMarket",
+    "secure_title": "Secure Transactions",
+    "secure_desc": "We guarantee transparency and reliability in every purchase.",
+    "fast_title": "Fast Search",
+    "fast_desc": "Convenient filters and smart search help you find your car in seconds.",
+    "support_title": "24/7 Support",
+    "support_desc": "Our team is always ready to assist you at every step.",
+    "deals_title": "Great Deals",
+    "deals_desc": "We offer the best prices and offers from dealers and owners.",
+    "mobile_title": "Mobile Friendly",
+    "mobile_desc": "Use our service anywhere, anytime.",
+    "cta_search": "Start Searching",
+    "cta_post": "Post an Ad"
   }
 }

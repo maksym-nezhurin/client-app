@@ -28,7 +28,7 @@ export function Navbar() {
   const pathname = usePathname();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { user, isLoading, logout } = useAuth();
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
   const { market, setMarket, isDetecting } = useMarket();
 
   // Check all features at top level (hooks must be called unconditionally)
@@ -41,14 +41,14 @@ export function Navbar() {
   const navItems = [
     {
       href: ROUTES.BROWSE,
-      label: t('client.nav.browse'),
+      label: t('nav.browse'),
       icon: '🚗',
       isEnabled: true,
       type: 'link' as const,
     },
     {
       href: ROUTES.SELL,
-      label: t('client.nav.list'),
+      label: t('nav.list'),
       icon: '✨',
       isEnabled: canSellInMarket,
       type: 'action' as const,
@@ -57,14 +57,14 @@ export function Navbar() {
     },
     {
       href: ROUTES.EXPLORE,
-      label: t('client.nav.explore') || 'Explore',
+      label: t('nav.explore') || 'Explore',
       icon: '🔍',
       isEnabled: exploreFeature.isEnabled,
       type: 'link' as const,
     },
     {
       href: ROUTES.ABOUT,
-      label: t('client.nav.about'),
+      label: t('nav.about'),
       icon: 'ℹ️',
       isEnabled: true,
       type: 'link' as const,
@@ -173,28 +173,28 @@ export function Navbar() {
                       onClick={() => setUserMenuOpen(false)}
                       className="block px-4 py-3 text-sm text-slate-200 hover:bg-white/10"
                     >
-                      {t('client.nav.dashboard')}
+                      {t('nav.dashboard')}
                     </Link>
                     <Link
                       href={ROUTES.ACCOUNT_SETTINGS}
                       onClick={() => setUserMenuOpen(false)}
                       className="block px-4 py-3 text-sm text-slate-200 hover:bg-white/10"
                     >
-                      {t('client.nav.settings')}
+                      {t('nav.settings')}
                     </Link>
                     <Link
                       href={ROUTES.ACCOUNT_BILLING}
                       onClick={() => setUserMenuOpen(false)}
                       className="block px-4 py-3 text-sm text-slate-200 hover:bg-white/10"
                     >
-                      {t('client.nav.billing')}
+                      {t('nav.billing')}
                     </Link>
                     <button
                       type="button"
                       onClick={handleLogout}
                       className="block w-full px-4 py-3 text-left text-sm text-slate-200 hover:bg-white/10"
                     >
-                      {t('client.nav.logout')}
+                      {t('nav.logout')}
                     </button>
                   </div>
                 )}
@@ -204,7 +204,7 @@ export function Navbar() {
                 href={ROUTES.AUTH.LOGIN}
                 className="text-sm font-medium text-slate-200 hover:text-white"
               >
-                {t('client.nav.login')}
+                {t('nav.login')}
               </Link>
             ))}
           
@@ -267,7 +267,7 @@ export function Navbar() {
                 onClick={() => setOpen(false)}
                 className="block text-slate-400 py-2 hover:text-white transition-colors"
               >
-                {t('client.nav.login')}
+                {t('nav.login')}
               </Link>
             </div>
           )}

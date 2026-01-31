@@ -26,6 +26,8 @@ export const NAMESPACES = [
   'api',
   'time',
   'errors',
+  'client',
+  'system',
 ] as const;
 
 export type TranslationNamespace = typeof NAMESPACES[number];
