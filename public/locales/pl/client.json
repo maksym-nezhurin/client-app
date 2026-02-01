@@ -34,10 +34,56 @@
     "settings": "Ustawienia",
     "billing": "Płatności",
     "my_cars": "Moje auta",
+    "overview": "Przegląd",
     "cars_for_sale": "Auta na sprzedaż",
     "add_new_car": "Dodaj auto",
     "loading": "Ładowanie...",
-    "guest": "Gość"
+    "guest": "Gość",
+    "profile": "Profil",
+    "notifications": "Powiadomienia",
+    "privacy": "Prywatność i bezpieczeństwo",
+    "preferences": "Preferencje",
+    "not_found_title": "Strona nie znaleziona",
+    "not_found_description": "Strona konta, której szukasz, nie istnieje lub została przeniesiona.",
+    "back_to_dashboard": "Powrót do panelu",
+    "back_to_home": "Powrót do domu"
+  },
+  "not_found": {
+    "title": "Strona nie znaleziona",
+    "description": "Strona, której szukasz, nie istnieje lub została przeniesiona.",
+    "back_to_home": "Powrót do domu",
+    "back_to_dashboard": "Powrót do panelu",
+    "go_to_search": "Szukaj aut",
+    "contact_support": "Wsparcie"
+  },
+  "cars": {
+    "title": "Moje auta",
+    "subtitle": "Zarządzaj swoją kolekcją pojazdów i ogłoszeniami",
+    "no_cars_title": "Brak aut",
+    "no_cars_subtitle": "Zacznij od dodania pierwszego pojazdu do garażu",
+    "list_for_sale": "Wystaw na sprzedaż",
+    "add_to_garage": "Dodaj do garażu",
+    "in_garage": "W garażu",
+    "for_sale": "Na sprzedaż",
+    "rented": "W wynajmie",
+    "views": "Wyświetlenia",
+    "inquiries": "Zapytania",
+    "actions": "Akcje",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "view_stats": "Zobacz statystyki",
+    "manage": "Zarządzaj",
+    "mark_as_sold": "Oznacz jako sprzedane",
+    "feature_not_available": "Funkcja niedostępna",
+    "coming_soon": "Wkrótce w Twoim regionie",
+    "new_car": {
+      "title": "Wystaw auto na sprzedaż",
+      "subtitle": "Stwórz profesjonalne ogłoszenie, aby szybko sprzedać swoje auto",
+      "feature_disabled_title": "Funkcja niedostępna",
+      "feature_disabled_subtitle": "Sprzedaż aut jeszcze nie jest dostępna w",
+      "feature_disabled_description": "Pracujemy nad wprowadzeniem tej funkcji w Twoim regionie wkrótce!",
+      "back_to_cars": "Powrót do moich aut"
+    }
   },
   "account": {
     "loading_dashboard": "Ładowanie panelu...",
@@ -331,5 +377,85 @@
     "mobile_desc": "Korzystaj z naszej usługi gdziekolwiek i kiedykolwiek.",
     "cta_search": "Rozpocznij wyszukiwanie",
     "cta_post": "Wystaw ogłoszenie"
+  },
+  "auth": {
+    "login": {
+      "title": "Witaj ponownie",
+      "subtitle": "Zaloguj się do swojego konta, aby kontynuować",
+      "username_label": "Nazwa użytkownika lub Email",
+      "username_placeholder": "Wprowadź nazwę użytkownika lub email",
+      "password_label": "Hasło",
+      "password_placeholder": "Wprowadź swoje hasło",
+      "remember_me": "Zapamiętaj mnie",
+      "forgot_password": "Zapomniałeś hasła?",
+      "sign_in_button": "Zaloguj się",
+      "signing_in": "Logowanie...",
+      "no_account": "Nie masz konta?",
+      "sign_up_link": "Zarejestruj się",
+      "errors": {
+        "username_required": "Nazwa użytkownika lub email jest wymagany",
+        "password_required": "Hasło jest wymagane",
+        "password_min_length": "Hasło musi mieć co najmniej 6 znaków",
+        "login_failed": "Nie można się zalogować. Spróbuj ponownie.",
+        "unexpected_error": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie."
+      }
+    },
+    "signup": {
+      "title": "Utwórz konto",
+      "subtitle": "Dołącz do nas, aby rozpocząć kupowanie i sprzedawanie samochodów",
+      "first_name_label": "Imię",
+      "first_name_placeholder": "Jan",
+      "last_name_label": "Nazwisko",
+      "last_name_placeholder": "Kowalski",
+      "username_label": "Nazwa użytkownika",
+      "username_placeholder": "Wybierz nazwę użytkownika",
+      "username_helper": "3-20 znaków, tylko litery, cyfry i podkreślenia",
+      "email_label": "Email",
+      "email_placeholder": "your.email@example.com",
+      "password_label": "Hasło",
+      "password_placeholder": "Utwórz silne hasło",
+      "confirm_password_label": "Potwierdź hasło",
+      "confirm_password_placeholder": "Powtórz swoje hasło",
+      "agree_terms": "Zgadzam się z",
+      "terms_of_service": "Regulaminem",
+      "privacy_policy": "Polityką prywatności",
+      "create_account_button": "Utwórz konto",
+      "creating_account": "Tworzenie konta...",
+      "has_account": "Masz już konto?",
+      "sign_in_link": "Zaloguj się",
+      "password_strength": {
+        "weak": "Słabe",
+        "fair": "Dostateczne",
+        "good": "Dobre",
+        "strong": "Silne",
+        "label": "Siła hasła:"
+      },
+      "errors": {
+        "first_name_required": "Imię jest wymagane",
+        "first_name_min_length": "Imię musi mieć co najmniej 2 znaki",
+        "last_name_required": "Nazwisko jest wymagane",
+        "last_name_min_length": "Nazwisko musi mieć co najmniej 2 znaki",
+        "username_required": "Nazwa użytkownika jest wymagana",
+        "username_min_length": "Nazwa użytkownika musi mieć co najmniej 3 znaki",
+        "username_invalid": "Nazwa użytkownika może zawierać tylko litery, cyfry i podkreślenia",
+        "email_required": "Email jest wymagany",
+        "email_invalid": "Wprowadź poprawny adres email",
+        "password_required": "Hasło jest wymagane",
+        "password_min_length": "Hasło musi mieć co najmniej 8 znaków",
+        "password_weak": "Wybierz silniejsze hasło",
+        "confirm_password_required": "Potwierdź swoje hasło",
+        "passwords_not_match": "Hasła nie są zgodne",
+        "terms_required": "Musisz zgodzić się na warunki regulaminu",
+        "registration_failed": "Rejestracja nie powiodła się. Spróbuj ponownie.",
+        "unexpected_error": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie."
+      }
+    },
+    "social": {
+      "continue_with_google": "Kontynuuj z Google",
+      "continue_with_github": "Kontynuuj z GitHub"
+    },
+    "divider": {
+      "or": "lub"
+    }
   }
 }

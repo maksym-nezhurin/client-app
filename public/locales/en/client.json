@@ -34,10 +34,56 @@
     "settings": "Settings",
     "billing": "Billing",
     "my_cars": "My cars",
+    "overview": "Overview",
     "cars_for_sale": "Cars for sale",
     "add_new_car": "Add new car",
     "loading": "Loading...",
-    "guest": "Guest"
+    "guest": "Guest",
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "privacy": "Privacy & Security",
+    "preferences": "Preferences",
+    "not_found_title": "Page Not Found",
+    "not_found_description": "The account page you're looking for doesn't exist or has been moved.",
+    "back_to_dashboard": "Back to Dashboard",
+    "back_to_home": "Back to Home"
+  },
+  "not_found": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "back_to_home": "Back to Home",
+    "back_to_dashboard": "Back to Dashboard",
+    "go_to_search": "Search Cars",
+    "contact_support": "Contact Support"
+  },
+  "cars": {
+    "title": "My Cars",
+    "subtitle": "Manage your vehicle collection and listings",
+    "no_cars_title": "No cars yet",
+    "no_cars_subtitle": "Start by adding your first vehicle to your garage",
+    "list_for_sale": "List for Sale",
+    "add_to_garage": "Add to Garage",
+    "in_garage": "In Garage",
+    "for_sale": "For Sale",
+    "rented": "Rented",
+    "views": "Views",
+    "inquiries": "Inquiries",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view_stats": "View Stats",
+    "manage": "Manage",
+    "mark_as_sold": "Mark as Sold",
+    "feature_not_available": "Feature Not Available",
+    "coming_soon": "Coming soon to your market",
+    "new_car": {
+      "title": "List Your Car",
+      "subtitle": "Create a professional listing to sell your car quickly",
+      "feature_disabled_title": "Feature Not Available",
+      "feature_disabled_subtitle": "Car selling is not yet available in",
+      "feature_disabled_description": "We're working to bring this feature to your market soon!",
+      "back_to_cars": "Back to My Cars"
+    }
   },
   "account": {
     "loading_dashboard": "Loading dashboard...",
@@ -331,5 +377,85 @@
     "mobile_desc": "Use our service anywhere, anytime.",
     "cta_search": "Start Searching",
     "cta_post": "Post an Ad"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your account to continue",
+      "username_label": "Username or Email",
+      "username_placeholder": "Enter your username or email",
+      "password_label": "Password",
+      "password_placeholder": "Enter your password",
+      "remember_me": "Remember me",
+      "forgot_password": "Forgot password?",
+      "sign_in_button": "Sign in",
+      "signing_in": "Signing in...",
+      "no_account": "Don't have an account?",
+      "sign_up_link": "Sign up",
+      "errors": {
+        "username_required": "Username or email is required",
+        "password_required": "Password is required",
+        "password_min_length": "Password must be at least 6 characters",
+        "login_failed": "Unable to login. Please try again.",
+        "unexpected_error": "An unexpected error occurred. Please try again."
+      }
+    },
+    "signup": {
+      "title": "Create an account",
+      "subtitle": "Join us to start buying and selling cars",
+      "first_name_label": "First Name",
+      "first_name_placeholder": "John",
+      "last_name_label": "Last Name",
+      "last_name_placeholder": "Doe",
+      "username_label": "Username",
+      "username_placeholder": "Choose a username",
+      "username_helper": "3-20 characters, letters, numbers, and underscores only",
+      "email_label": "Email",
+      "email_placeholder": "your.email@example.com",
+      "password_label": "Password",
+      "password_placeholder": "Create a strong password",
+      "confirm_password_label": "Confirm Password",
+      "confirm_password_placeholder": "Repeat your password",
+      "agree_terms": "I agree to the",
+      "terms_of_service": "Terms of Service",
+      "privacy_policy": "Privacy Policy",
+      "create_account_button": "Create account",
+      "creating_account": "Creating account...",
+      "has_account": "Already have an account?",
+      "sign_in_link": "Sign in",
+      "password_strength": {
+        "weak": "Weak",
+        "fair": "Fair",
+        "good": "Good",
+        "strong": "Strong",
+        "label": "Password strength:"
+      },
+      "errors": {
+        "first_name_required": "First name is required",
+        "first_name_min_length": "First name must be at least 2 characters",
+        "last_name_required": "Last name is required",
+        "last_name_min_length": "Last name must be at least 2 characters",
+        "username_required": "Username is required",
+        "username_min_length": "Username must be at least 3 characters",
+        "username_invalid": "Username can only contain letters, numbers, and underscores",
+        "email_required": "Email is required",
+        "email_invalid": "Please enter a valid email address",
+        "password_required": "Password is required",
+        "password_min_length": "Password must be at least 8 characters",
+        "password_weak": "Please choose a stronger password",
+        "confirm_password_required": "Please confirm your password",
+        "passwords_not_match": "Passwords do not match",
+        "terms_required": "You must agree to the terms and conditions",
+        "registration_failed": "Registration failed. Please try again.",
+        "unexpected_error": "An unexpected error occurred. Please try again."
+      }
+    },
+    "social": {
+      "continue_with_google": "Continue with Google",
+      "continue_with_github": "Continue with GitHub"
+    },
+    "divider": {
+      "or": "or"
+    }
   }
 }

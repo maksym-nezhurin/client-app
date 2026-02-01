@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { AuthFormContainer } from '@/components/auth/AuthFormContainer';
 import { FormField } from '@/components/auth/FormField';
 import { useAuth } from '@/contexts/auth/AuthContext';
+import { useTypedTranslation } from '@/lib/i18n';
 import { ROUTES } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 
@@ -24,15 +25,16 @@ function getPasswordStrength(password: string): PasswordStrength {
   if (/\d/.test(password)) score++;
   if (/[^a-zA-Z0-9]/.test(password)) score++;
 
-  if (score <= 2) return { score, label: 'Weak', color: 'bg-destructive' };
-  if (score <= 3) return { score, label: 'Fair', color: 'bg-orange-500' };
-  if (score <= 4) return { score, label: 'Good', color: 'bg-yellow-500' };
-  return { score, label: 'Strong', color: 'bg-green-500' };
+  if (score <= 2) return { score, label: 'auth.signup.password_strength.weak', color: 'bg-destructive' };
+  if (score <= 3) return { score, label: 'auth.signup.password_strength.fair', color: 'bg-orange-500' };
+  if (score <= 4) return { score, label: 'auth.signup.password_strength.good', color: 'bg-yellow-500' };
+  return { score, label: 'auth.signup.password_strength.strong', color: 'bg-green-500' };
 }
 
 function SignupForm() {
   const router = useRouter();
   const { user, isLoading } = useAuth();
+  const { t } = useTypedTranslation('client');
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -60,53 +62,53 @@ function SignupForm() {
 
     // First name validation
     if (!formData.firstName.trim()) {
-      newErrors.firstName = 'First name is required';
+      newErrors.firstName = t('auth.signup.errors.first_name_required');
     } else if (formData.firstName.length < 2) {
-      newErrors.firstName = 'First name must be at least 2 characters';
+      newErrors.firstName = t('auth.signup.errors.first_name_min_length');
     }
 
     // Last name validation
     if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Last name is required';
+      newErrors.lastName = t('auth.signup.errors.last_name_required');
     } else if (formData.lastName.length < 2) {
-      newErrors.lastName = 'Last name must be at least 2 characters';
+      newErrors.lastName = t('auth.signup.errors.last_name_min_length');
     }
 
     // Username validation
     if (!formData.username.trim()) {
-      newErrors.username = 'Username is required';
+      newErrors.username = t('auth.signup.errors.username_required');
     } else if (formData.username.length < 3) {
-      newErrors.username = 'Username must be at least 3 characters';
+      newErrors.username = t('auth.signup.errors.username_min_length');
     } else if (!/^[a-zA-Z0-9_]+$/.test(formData.username)) {
-      newErrors.username = 'Username can only contain letters, numbers, and underscores';
+      newErrors.username = t('auth.signup.errors.username_invalid');
     }
 
     // Email validation
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = t('auth.signup.errors.email_required');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = t('auth.signup.errors.email_invalid');
     }
 
     // Password validation
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = t('auth.signup.errors.password_required');
     } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
+      newErrors.password = t('auth.signup.errors.password_min_length');
     } else if (passwordStrength.score < 3) {
-      newErrors.password = 'Please choose a stronger password';
+      newErrors.password = t('auth.signup.errors.password_weak');
     }
 
     // Confirm password validation
     if (!formData.confirmPassword) {
-      newErrors.confirmPassword = 'Please confirm your password';
+      newErrors.confirmPassword = t('auth.signup.errors.confirm_password_required');
     } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
+      newErrors.confirmPassword = t('auth.signup.errors.passwords_not_match');
     }
 
     // Terms validation
     if (!formData.agreeToTerms) {
-      newErrors.agreeToTerms = 'You must agree to the terms and conditions';
+      newErrors.agreeToTerms = t('auth.signup.errors.terms_required');
     }
 
     setErrors(newErrors);
@@ -140,14 +142,14 @@ function SignupForm() {
       const data = await response.json();
 
       if (!response.ok) {
-        setErrors({ submit: data.message ?? 'Registration failed. Please try again.' });
+        setErrors({ submit: data.message ?? t('auth.signup.errors.registration_failed') });
         return;
       }
 
       // Redirect to login with success message
       router.push(`${ROUTES.AUTH.LOGIN}?registered=true`);
     } catch (error) {
-      setErrors({ submit: 'An unexpected error occurred. Please try again.' });
+      setErrors({ submit: t('auth.signup.errors.unexpected_error') });
     } finally {
       setSubmitting(false);
     }
@@ -170,11 +172,11 @@ function SignupForm() {
 
   return (
     <AuthFormContainer
-      title="Create an account"
-      subtitle="Join us to start buying and selling cars"
+      title={t('auth.signup.title')}
+      subtitle={t('auth.signup.subtitle')}
       footer={{
-        text: 'Already have an account?',
-        linkText: 'Sign in',
+        text: t('auth.signup.has_account'),
+        linkText: t('auth.signup.sign_in_link'),
         linkHref: ROUTES.AUTH.LOGIN,
       }}
     >
@@ -183,8 +185,8 @@ function SignupForm() {
           <FormField
             id="firstName"
             type="text"
-            label="First Name"
-            placeholder="John"
+            label={t('auth.signup.first_name_label')}
+            placeholder={t('auth.signup.first_name_placeholder')}
             autoComplete="given-name"
             value={formData.firstName}
             onChange={handleChange('firstName')}
@@ -195,8 +197,8 @@ function SignupForm() {
           <FormField
             id="lastName"
             type="text"
-            label="Last Name"
-            placeholder="Doe"
+            label={t('auth.signup.last_name_label')}
+            placeholder={t('auth.signup.last_name_placeholder')}
             autoComplete="family-name"
             value={formData.lastName}
             onChange={handleChange('lastName')}
@@ -209,22 +211,22 @@ function SignupForm() {
         <FormField
           id="username"
           type="text"
-          label="Username"
-          placeholder="Choose a username"
+          label={t('auth.signup.username_label')}
+          placeholder={t('auth.signup.username_placeholder')}
           autoComplete="username"
           value={formData.username}
           onChange={handleChange('username')}
           error={errors.username}
           icon={<User size={18} />}
-          helperText="3-20 characters, letters, numbers, and underscores only"
+          helperText={t('auth.signup.username_helper')}
           required
         />
 
         <FormField
           id="email"
           type="email"
-          label="Email"
-          placeholder="your.email@example.com"
+          label={t('auth.signup.email_label')}
+          placeholder={t('auth.signup.email_placeholder')}
           autoComplete="email"
           value={formData.email}
           onChange={handleChange('email')}
@@ -237,8 +239,8 @@ function SignupForm() {
           <FormField
             id="password"
             type="password"
-            label="Password"
-            placeholder="Create a strong password"
+            label={t('auth.signup.password_label')}
+            placeholder={t('auth.signup.password_placeholder')}
             autoComplete="new-password"
             value={formData.password}
             onChange={handleChange('password')}
@@ -261,7 +263,7 @@ function SignupForm() {
                 ))}
               </div>
               <p className="text-xs text-muted-foreground">
-                Password strength: <span className="font-medium">{passwordStrength.label}</span>
+                {t('auth.signup.password_strength.label')} <span className="font-medium">{t(passwordStrength.label)}</span>
               </p>
             </div>
           )}
@@ -270,8 +272,8 @@ function SignupForm() {
         <FormField
           id="confirmPassword"
           type="password"
-          label="Confirm Password"
-          placeholder="Repeat your password"
+          label={t('auth.signup.confirm_password_label')}
+          placeholder={t('auth.signup.confirm_password_placeholder')}
           autoComplete="new-password"
           value={formData.confirmPassword}
           onChange={handleChange('confirmPassword')}
@@ -309,13 +311,13 @@ function SignupForm() {
               )}
             />
             <span className="text-muted-foreground">
-              I agree to the{' '}
+              {t('auth.signup.agree_terms')}{' '}
               <a href="/terms" className="text-primary hover:underline">
-                Terms of Service
+                {t('auth.signup.terms_of_service')}
               </a>{' '}
               and{' '}
               <a href="/privacy" className="text-primary hover:underline">
-                Privacy Policy
+                {t('auth.signup.privacy_policy')}
               </a>
             </span>
           </label>
@@ -334,10 +336,10 @@ function SignupForm() {
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Creating account...
+              {t('auth.signup.creating_account')}
             </>
           ) : (
-            'Create account'
+            t('auth.signup.create_account_button')
           )}
         </Button>
       </form>

@@ -5,7 +5,7 @@ import { Palette, Globe, Moon, Sun, Monitor, Gauge, MapPin } from 'lucide-react'
 import { useTypedTranslation } from '@/lib/i18n';
 
 export default function PreferencesSettingsPage() {
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
   
   const [preferences, setPreferences] = useState({
     theme: 'system',

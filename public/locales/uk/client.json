@@ -30,14 +30,60 @@
   },
   "account_menu": {
     "label": "Акаунт",
-    "dashboard": "Кабінет",
+    "dashboard": "Панель",
     "settings": "Налаштування",
     "billing": "Оплата",
     "my_cars": "Мої авто",
+    "overview": "Огляд",
     "cars_for_sale": "Авто на продаж",
     "add_new_car": "Додати авто",
     "loading": "Завантаження...",
-    "guest": "Гість"
+    "guest": "Гість",
+    "profile": "Профіль",
+    "notifications": "Сповіщення",
+    "privacy": "Приватність та безпека",
+    "preferences": "Налаштування",
+    "not_found_title": "Сторінку не знайдено",
+    "not_found_description": "Сторінка акаунту, яку ви шукаєте, не існує або була переміщена.",
+    "back_to_dashboard": "Повернутися до панелі",
+    "back_to_home": "Повернутися додому"
+  },
+  "not_found": {
+    "title": "Сторінку не знайдено",
+    "description": "Сторінка, яку ви шукаєте, не існує або була переміщена.",
+    "back_to_home": "Повернутися додому",
+    "back_to_dashboard": "Повернутися до панелі",
+    "go_to_search": "Пошук авто",
+    "contact_support": "Підтримка"
+  },
+  "cars": {
+    "title": "Мої авто",
+    "subtitle": "Керуйте своєю колекцією транспортних засобів та оголошеннями",
+    "no_cars_title": "Авто ще немає",
+    "no_cars_subtitle": "Почніть з додавання першого транспортного засобу до гаража",
+    "list_for_sale": "Виставити на продаж",
+    "add_to_garage": "Додати до гаража",
+    "in_garage": "В гаражі",
+    "for_sale": "На продажі",
+    "rented": "В оренді",
+    "views": "Перегляди",
+    "inquiries": "Запити",
+    "actions": "Дії",
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "view_stats": "Переглянути статистику",
+    "manage": "Керувати",
+    "mark_as_sold": "Позначити як продане",
+    "feature_not_available": "Функція недоступна",
+    "coming_soon": "Скоро у вашому регіоні",
+    "new_car": {
+      "title": "Виставити авто на продаж",
+      "subtitle": "Створіть професійне оголошення для швидкого продажу авто",
+      "feature_disabled_title": "Функція недоступна",
+      "feature_disabled_subtitle": "Продаж авто ще не доступний в",
+      "feature_disabled_description": "Ми працюємо над тим, щоб незабаром запустити цю функцію у вашому регіоні!",
+      "back_to_cars": "Повернутися до моїх авто"
+    }
   },
   "account": {
     "loading_dashboard": "Завантаження кабінету...",
@@ -331,5 +377,85 @@
     "mobile_desc": "Використовуйте наш сервіс де завгодно і коли завгодно.",
     "cta_search": "Розпочати пошук",
     "cta_post": "Розмістити оголошення"
+  },
+  "auth": {
+    "login": {
+      "title": "Ласкаво просимо назад",
+      "subtitle": "Увійдіть у свій акаунт, щоб продовжити",
+      "username_label": "Ім'я користувача або Email",
+      "username_placeholder": "Введіть ваше ім'я користувача або email",
+      "password_label": "Пароль",
+      "password_placeholder": "Введіть ваш пароль",
+      "remember_me": "Запам'ятати мене",
+      "forgot_password": "Забули пароль?",
+      "sign_in_button": "Увійти",
+      "signing_in": "Вхід...",
+      "no_account": "Немає акаунту?",
+      "sign_up_link": "Зареєструватися",
+      "errors": {
+        "username_required": "Ім'я користувача або email обов'язковий",
+        "password_required": "Пароль обов'язковий",
+        "password_min_length": "Пароль повинен містити щонайменше 6 символів",
+        "login_failed": "Не вдалося увійти. Спробуйте ще раз.",
+        "unexpected_error": "Сталася неочікувана помилка. Спробуйте ще раз."
+      }
+    },
+    "signup": {
+      "title": "Створити акаунт",
+      "subtitle": "Приєднуйтесь до нас, щоб починати купувати та продавати авто",
+      "first_name_label": "Ім'я",
+      "first_name_placeholder": "Іван",
+      "last_name_label": "Прізвище",
+      "last_name_placeholder": "Петренко",
+      "username_label": "Ім'я користувача",
+      "username_placeholder": "Оберіть ім'я користувача",
+      "username_helper": "3-20 символів, лише літери, цифри та підкреслення",
+      "email_label": "Email",
+      "email_placeholder": "your.email@example.com",
+      "password_label": "Пароль",
+      "password_placeholder": "Створіть надійний пароль",
+      "confirm_password_label": "Підтвердіть пароль",
+      "confirm_password_placeholder": "Повторіть ваш пароль",
+      "agree_terms": "Я погоджуюся з",
+      "terms_of_service": "Умовами використання",
+      "privacy_policy": "Політикою конфіденційності",
+      "create_account_button": "Створити акаунт",
+      "creating_account": "Створення акаунту...",
+      "has_account": "Вже є акаунт?",
+      "sign_in_link": "Увійти",
+      "password_strength": {
+        "weak": "Слабкий",
+        "fair": "Задовільний",
+        "good": "Хороший",
+        "strong": "Надійний",
+        "label": "Надійність пароля:"
+      },
+      "errors": {
+        "first_name_required": "Ім'я обов'язкове",
+        "first_name_min_length": "Ім'я повинно містити щонайменше 2 символи",
+        "last_name_required": "Прізвище обов'язкове",
+        "last_name_min_length": "Прізвище повинно містити щонайменше 2 символи",
+        "username_required": "Ім'я користувача обов'язкове",
+        "username_min_length": "Ім'я користувача повинно містити щонайменше 3 символи",
+        "username_invalid": "Ім'я користувача може містити лише літери, цифри та підкреслення",
+        "email_required": "Email обов'язковий",
+        "email_invalid": "Будь ласка, введіть коректну email адресу",
+        "password_required": "Пароль обов'язковий",
+        "password_min_length": "Пароль повинен містити щонайменше 8 символів",
+        "password_weak": "Будь ласка, оберіть надійніший пароль",
+        "confirm_password_required": "Будь ласка, підтвердіть ваш пароль",
+        "passwords_not_match": "Паролі не збігаються",
+        "terms_required": "Ви повинні погодитися з умовами використання",
+        "registration_failed": "Реєстрація не вдалася. Спробуйте ще раз.",
+        "unexpected_error": "Сталася неочікувана помилка. Спробуйте ще раз."
+      }
+    },
+    "social": {
+      "continue_with_google": "Продовжити з Google",
+      "continue_with_github": "Продовжити з GitHub"
+    },
+    "divider": {
+      "or": "або"
+    }
   }
 }

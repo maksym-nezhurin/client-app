@@ -7,7 +7,7 @@ import { useAuth } from '@/contexts/auth/AuthContext';
 import Image from 'next/image';
 
 export default function ProfileSettingsPage() {
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
   const { user } = useAuth();
   
   const [formData, setFormData] = useState({

@@ -6,7 +6,7 @@ import { useTypedTranslation } from '@/lib/i18n';
 import { Toggle } from '@/components/ui/Toggle';
 
 export default function PrivacySettingsPage() {
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
   
   const [privacy, setPrivacy] = useState({
     profileVisibility: 'public',

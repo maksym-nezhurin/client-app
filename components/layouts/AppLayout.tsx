@@ -32,7 +32,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
         </div>
 
         {/* Footer */}
-        <Footer className="h-16 flex items-center justify-center bg-muted text-muted-foreground text-sm">
+        <Footer className="h-16 flex items-center justify-center bg-primary text-muted-foreground text-sm">
           © 2025 Car Rental Service
         </Footer>
         </div>

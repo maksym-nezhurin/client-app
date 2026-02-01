@@ -5,18 +5,13 @@ import { useAuth } from '@/contexts/auth/AuthContext';
 import { ROUTES } from '@/lib/routes';
 import { Button } from '@/components/ui/Button';
 import { useTypedTranslation } from '@/lib/i18n';
+import { RecentActivitySection } from '@/components/dashboard/RecentActivitySection';
 
 const summaryCards = [
   { labelKey: 'client.account.summary.active_listings', value: '4' },
   { labelKey: 'client.account.summary.cars_for_sale', value: '2' },
   { labelKey: 'client.account.summary.total_views', value: '1,284' },
   { labelKey: 'client.account.summary.new_inquiries', value: '6' },
-];
-
-const recentActivity = [
-  { titleKey: 'client.account.recent_activity_items.item_1', detailKey: 'client.account.recent_activity_times.item_1' },
-  { titleKey: 'client.account.recent_activity_items.item_2', detailKey: 'client.account.recent_activity_times.item_2' },
-  { titleKey: 'client.account.recent_activity_items.item_3', detailKey: 'client.account.recent_activity_times.item_3' },
 ];
 
 export default function AccountPage() {
@@ -73,17 +68,11 @@ export default function AccountPage() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95 lg:col-span-2">
-          <h2 className="text-lg font-semibold">{t('account.recent_activity')}</h2>
-          <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-            {recentActivity.map((item) => (
-              <li key={item.titleKey} className="flex items-center justify-between">
-                <span className="text-text-primary">{t(item.titleKey)}</span>
-                <span>{t(item.detailKey)}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <RecentActivitySection 
+          limit={5} 
+          showFilters={true}
+          className="lg:col-span-2"
+        />
 
         <div className="rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95">
           <h2 className="text-lg font-semibold">{t('account.profile_quick_view')}</h2>
@@ -149,7 +138,7 @@ export default function AccountPage() {
                 </p>
               </div>
               <Button asChild variant="secondary">
-                <Link href={ROUTES.ACCOUNT_CARS_NEW}>{t('account.primary_car.create_listing')}</Link>
+                <Link href={ROUTES.ACCOUNT_CARS_NEW}>{t('account.primary_car.add')}</Link>
               </Button>
             </div>
           )}

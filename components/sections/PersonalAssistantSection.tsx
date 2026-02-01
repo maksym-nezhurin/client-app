@@ -5,38 +5,41 @@ import { UserRound, MessageCircle, Target, FileSearch, CheckCircle, Calendar, Sp
 import Link from 'next/link';
 import { ROUTES } from '@/lib/routes';
 import Image from 'next/image';
+import { useTypedTranslation } from '@/lib/i18n';
 
 export function PersonalAssistantSection() {
+  const { t } = useTypedTranslation('client');
+  
   const steps = [
     {
       icon: MessageCircle,
-      title: 'Share Your Needs',
-      description: 'Tell us about your lifestyle, budget, and preferences in a casual conversation',
+      title: t('personal_assistant.steps.step_1_title'),
+      description: t('personal_assistant.steps.step_1_desc'),
     },
     {
       icon: Target,
-      title: 'Define Your Criteria',
-      description: 'Our expert helps you identify exactly what matters most in your perfect car',
+      title: t('personal_assistant.steps.step_2_title'),
+      description: t('personal_assistant.steps.step_2_desc'),
     },
     {
       icon: FileSearch,
-      title: 'Personalized Search',
-      description: 'We search, analyze, and shortlist the best options tailored specifically for you',
+      title: t('personal_assistant.steps.step_3_title'),
+      description: t('personal_assistant.steps.step_3_desc'),
     },
     {
       icon: CheckCircle,
-      title: 'Find Your Match',
-      description: 'Get expert guidance through the selection process until you find the perfect car',
+      title: t('personal_assistant.steps.step_4_title'),
+      description: t('personal_assistant.steps.step_4_desc'),
     },
   ];
 
   const benefits = [
-    'Real human expert, not just a chatbot',
-    'Unbiased recommendations based on your needs',
-    'Save hours of research and comparison',
-    'Avoid common buying mistakes',
-    'Negotiation tips and price insights',
-    'Complete support from search to purchase',
+    t('personal_assistant.benefits.benefit_1'),
+    t('personal_assistant.benefits.benefit_2'),
+    t('personal_assistant.benefits.benefit_3'),
+    t('personal_assistant.benefits.benefit_4'),
+    t('personal_assistant.benefits.benefit_5'),
+    t('personal_assistant.benefits.benefit_6'),
   ];
 
   return (
@@ -49,21 +52,21 @@ export function PersonalAssistantSection() {
             {/* Badge */}
             <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-medium text-orange-700 dark:border-orange-800 dark:bg-orange-950/50 dark:text-orange-400">
               <UserRound className="h-4 w-4" />
-              Human Touch, AI Power
+              {t('personal_assistant.badge')}
             </div>
 
             {/* Heading */}
             <h2 className="mb-6 text-3xl font-bold text-slate-900 dark:text-white md:text-4xl lg:text-5xl">
-              Your Personal Car
+              {t('personal_assistant.title')}
               <br />
               <span className="bg-linear-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
-                Search Assistant
+                {t('personal_assistant.title_highlight')}
               </span>
             </h2>
 
             {/* Description */}
             <p className="mb-8 text-lg text-slate-600 dark:text-slate-400">
-              Not sure what car fits your lifestyle? Our dedicated human experts work with you one-on-one to understand your needs, define your perfect criteria, and find the best match for you.
+              {t('personal_assistant.subtitle')}
             </p>
 
             {/* Benefits List */}
@@ -82,29 +85,29 @@ export function PersonalAssistantSection() {
             <div className="flex flex-wrap gap-4">
               <Button size="lg" className="gap-2">
                 <Calendar className="h-5 w-5" />
-                Book Free Consultation
+                {t('personal_assistant.cta_consultation')}
               </Button>
               <Button size="lg" variant="secondary" className="gap-2">
                 <MessageCircle className="h-5 w-5" />
-                Chat with Expert
+                {t('personal_assistant.cta_chat')}
               </Button>
             </div>
 
             {/* Trust Indicator */}
             <div className="mt-8 flex items-center gap-6 border-t border-slate-200 pt-6 dark:border-slate-800">
               <div>
-                <div className="text-2xl font-bold text-slate-900 dark:text-white">5,000+</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">Happy Clients</div>
+                <div className="text-2xl font-bold text-slate-900 dark:text-white">{t('personal_assistant.stats.clients')}</div>
+                <div className="text-sm text-slate-600 dark:text-slate-400">{t('personal_assistant.stats.clients_label')}</div>
               </div>
               <div className="h-12 w-px bg-slate-200 dark:bg-slate-800" />
               <div>
-                <div className="text-2xl font-bold text-slate-900 dark:text-white">4.9/5</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">Average Rating</div>
+                <div className="text-2xl font-bold text-slate-900 dark:text-white">{t('personal_assistant.stats.rating')}</div>
+                <div className="text-sm text-slate-600 dark:text-slate-400">{t('personal_assistant.stats.rating_label')}</div>
               </div>
               <div className="h-12 w-px bg-slate-200 dark:bg-slate-800" />
               <div>
-                <div className="text-2xl font-bold text-slate-900 dark:text-white">Free</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">No Cost Service</div>
+                <div className="text-2xl font-bold text-slate-900 dark:text-white">{t('personal_assistant.stats.cost')}</div>
+                <div className="text-sm text-slate-600 dark:text-slate-400">{t('personal_assistant.stats.cost_label')}</div>
               </div>
             </div>
           </div>
@@ -124,10 +127,10 @@ export function PersonalAssistantSection() {
                 </div>
 
                 <h3 className="mb-3 text-2xl font-bold text-slate-900 dark:text-white">
-                  Meet Your Expert
+                  {t('personal_assistant.expert_card.title')}
                 </h3>
                 <p className="mb-6 text-slate-600 dark:text-slate-400">
-                  "I've helped thousands of people find their perfect car. Let me help you make the best decision based on your unique needs and lifestyle."
+                  {t('personal_assistant.expert_card.quote')}
                 </p>
 
                 <div className="flex items-center gap-4">
@@ -135,8 +138,8 @@ export function PersonalAssistantSection() {
                     CA
                   </div>
                   <div>
-                    <div className="font-semibold text-slate-900 dark:text-white">Car Advisor Team</div>
-                    <div className="text-sm text-slate-600 dark:text-slate-400">Senior Car Experts</div>
+                    <div className="font-semibold text-slate-900 dark:text-white">{t('personal_assistant.expert_card.name')}</div>
+                    <div className="text-sm text-slate-600 dark:text-slate-400">{t('personal_assistant.expert_card.role')}</div>
                   </div>
                 </div>
               </div>
@@ -144,7 +147,7 @@ export function PersonalAssistantSection() {
 
             {/* Process Steps */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">How It Works:</h3>
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{t('personal_assistant.steps.title')}:</h3>
               
               {steps.map((step, index) => (
                 <div
@@ -183,15 +186,15 @@ export function PersonalAssistantSection() {
             </div>
             <div className="flex-1">
               <h3 className="mb-2 text-2xl font-bold text-slate-900 dark:text-white">
-                Why Choose a Personal Assistant?
+                {t('personal_assistant.banner.title')}
               </h3>
               <p className="text-slate-600 dark:text-slate-400">
-                While our AI helps you search efficiently, our human experts provide the personal touch, experience, and intuition that technology can't replace. Get the best of both worlds!
+                {t('personal_assistant.banner.subtitle')}
               </p>
             </div>
             <Button asChild size="lg" className="gap-2 whitespace-nowrap">
               <Link href={ROUTES.BROWSE}>
-                Get Started Free
+                {t('personal_assistant.banner.cta')}
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>

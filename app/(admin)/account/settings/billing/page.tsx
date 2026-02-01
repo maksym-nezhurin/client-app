@@ -4,7 +4,7 @@ import { CreditCard, Calendar, Download, Plus, Check } from 'lucide-react';
 import { useTypedTranslation } from '@/lib/i18n';
 
 export default function BillingSettingsPage() {
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
 
   const paymentMethods = [
     {

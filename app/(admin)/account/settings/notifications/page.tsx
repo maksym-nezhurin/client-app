@@ -6,7 +6,7 @@ import { useTypedTranslation } from '@/lib/i18n';
 import { Toggle } from '@/components/ui/Toggle';
 
 export default function NotificationsSettingsPage() {
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
   
   const [notifications, setNotifications] = useState({
     email: {
