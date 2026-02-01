@@ -9,6 +9,8 @@ import { ROUTES } from '@/lib/routes';
 import { useAuth } from '@/contexts/auth/AuthContext';
 import { useTypedTranslation } from '@/lib/i18n';
 import { AnimatedBackground } from '@/components/layouts/AnimatedBackground';
+import { AccountSideBar } from '@/components/nav/AccountSideBar';
+
 import { 
   ChevronDown, 
   Car, 
@@ -34,7 +36,7 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
   const router = useRouter();
   const pathname = usePathname();
   const { user, isLoading } = useAuth();
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
   
   // Check if any cars submenu item is active
   const isCarsMenuActive = pathname?.startsWith('/account/cars');
@@ -217,15 +219,14 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
         <aside className="w-full rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95 md:w-64">
           <div className="mb-6">
             <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              {t('client.account_menu.label')}
+              {t('account_menu.label')}
             </p>
             <p className="mt-1 text-lg font-semibold text-foreground">
-              {isLoading ? t('client.account_menu.loading') : user?.name ?? user?.username ?? t('client.account_menu.guest')}
+              {isLoading ? t('account_menu.loading') : user?.name ?? user?.username ?? t('account_menu.guest')}
             </p>
           </div>
-          <nav className="space-y-1">
-            {menuItems.map((item) => renderMenuItem(item))}
-          </nav>
+
+          <AccountSideBar />
         </aside>
 
         <section className="flex-1">{children}</section>

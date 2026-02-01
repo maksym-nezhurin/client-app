@@ -6,7 +6,7 @@ import { useTypedTranslation } from '@/lib/i18n';
 import { Toggle } from '@/components/ui/Toggle';
 
 export default function PrivacySettingsPage() {
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
   
   const [privacy, setPrivacy] = useState({
     profileVisibility: 'public',
@@ -27,10 +27,10 @@ export default function PrivacySettingsPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-              {t('client.settings.privacy.title') || 'Privacy & Security'}
+              {t('settings.privacy.title') || 'Privacy & Security'}
             </h1>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-              {t('client.settings.privacy.description') || 'Manage your privacy preferences and security settings'}
+              {t('settings.privacy.subtitle') || 'Manage your privacy preferences and security settings'}
             </p>
           </div>
         </div>

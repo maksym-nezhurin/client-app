@@ -62,7 +62,7 @@ const latestCars: ICar[] = [
 ];
 
 export function LatestAnnouncementsSection() {
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
 
   return (
     <section className="py-8">
@@ -74,15 +74,15 @@ export function LatestAnnouncementsSection() {
             Just Listed
           </div>
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white md:text-4xl">
-            {t('client.home.latest_title') || 'Latest Vehicles'}
+            {t('home.latest_title') || 'Latest Vehicles'}
           </h2>
           <p className="mt-2 text-slate-600 dark:text-slate-400">
-            {t('client.home.latest_subtitle') || 'Discover recently added vehicles with AI-verified data'}
+            {t('home.latest_subtitle') || 'Discover recently added vehicles with AI-verified data'}
           </p>
         </div>
         <Button asChild variant="outline" className="gap-2">
           <Link href={ROUTES.BROWSE}>
-            {t('client.home.latest_cta') || 'View All'}
+            {t('home.latest_cta') || 'View All'}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>
@@ -200,12 +200,12 @@ export function LatestAnnouncementsSection() {
             <Button asChild size="lg" className="gap-2">
               <Link href={ROUTES.ACCOUNT_CARS_NEW}>
                 <Sparkles className="h-5 w-5" />
-                {t('client.home.latest_add_car') || 'List Your Car'}
+                {t('home.latest_add_car') || 'List Your Car'}
               </Link>
             </Button>
             <Button asChild variant="secondary" size="lg">
               <Link href={ROUTES.BROWSE}>
-                {t('client.home.latest_cta') || 'Browse All Cars'}
+                {t('home.latest_cta') || 'Browse All Cars'}
               </Link>
             </Button>
           </div>

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { AuthFormContainer } from '@/components/auth/AuthFormContainer';
 import { FormField } from '@/components/auth/FormField';
 import { useAuth } from '@/contexts/auth/AuthContext';
+import { useTypedTranslation } from '@/lib/i18n';
 import { ROUTES } from '@/lib/routes';
 import { AuthDivider } from '@/components/auth/AuthDivider';
 import { SocialLoginButtons } from '@/components/auth/SocialLoginButtons';
@@ -17,6 +18,7 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get('redirect') ?? searchParams.get('returnTo') ?? ROUTES.ACCOUNT;
   const { login, user, isLoading } = useAuth();
+  const { t } = useTypedTranslation('client');
 
   const [formData, setFormData] = useState({
     username: '',
@@ -36,13 +38,13 @@ function LoginForm() {
     const newErrors: Record<string, string> = {};
 
     if (!formData.username.trim()) {
-      newErrors.username = 'Username or email is required';
+      newErrors.username = t('auth.login.errors.username_required');
     }
 
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = t('auth.login.errors.password_required');
     } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = t('auth.login.errors.password_min_length');
     }
 
     setErrors(newErrors);
@@ -66,13 +68,13 @@ function LoginForm() {
       });
 
       if (!result.ok) {
-        setErrors({ submit: result.error ?? 'Unable to login. Please try again.' });
+        setErrors({ submit: result.error ?? t('auth.login.errors.login_failed') });
         return;
       }
 
       router.replace(redirectTo);
     } catch (error) {
-      setErrors({ submit: 'An unexpected error occurred. Please try again.' });
+      setErrors({ submit: t('auth.login.errors.unexpected_error') });
     } finally {
       setSubmitting(false);
     }
@@ -95,11 +97,11 @@ function LoginForm() {
 
   return (
     <AuthFormContainer
-      title="Welcome back"
-      subtitle="Sign in to your account to continue"
+      title={t('auth.login.title')}
+      subtitle={t('auth.login.subtitle')}
       footer={{
-        text: "Don't have an account?",
-        linkText: 'Sign up',
+        text: t('auth.login.no_account'),
+        linkText: t('auth.login.sign_up_link'),
         linkHref: ROUTES.AUTH.SIGNUP,
       }}
     >
@@ -107,8 +109,8 @@ function LoginForm() {
         <FormField
           id="username"
           type="text"
-          label="Username or Email"
-          placeholder="Enter your username or email"
+          label={t('auth.login.username_label')}
+          placeholder={t('auth.login.username_placeholder')}
           autoComplete="username"
           value={formData.username}
           onChange={handleChange('username')}
@@ -120,8 +122,8 @@ function LoginForm() {
         <FormField
           id="password"
           type="password"
-          label="Password"
-          placeholder="Enter your password"
+          label={t('auth.login.password_label')}
+          placeholder={t('auth.login.password_placeholder')}
           autoComplete="current-password"
           value={formData.password}
           onChange={handleChange('password')}
@@ -140,13 +142,13 @@ function LoginForm() {
               }
               className="h-4 w-4 rounded border-input text-primary focus:ring-2 focus:ring-primary/20"
             />
-            <span className="text-muted-foreground">Remember me</span>
+            <span className="text-muted-foreground">{t('auth.login.remember_me')}</span>
           </label>
           <Link
             href="/auth/forgot-password"
             className="text-sm font-medium text-primary hover:underline"
           >
-            Forgot password?
+            {t('auth.login.forgot_password')}
           </Link>
         </div>
 
@@ -165,10 +167,10 @@ function LoginForm() {
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Signing in...
+              {t('auth.login.signing_in')}
             </>
           ) : (
-            'Sign in'
+            t('auth.login.sign_in_button')
           )}
         </Button>
       </form>

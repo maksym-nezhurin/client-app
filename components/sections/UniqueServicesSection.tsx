@@ -4,44 +4,46 @@ import { Bot, Database, UserRound, Shield, FileCheck, Sparkles, TrendingUp, Mess
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/routes';
+import { useTypedTranslation } from '@/lib/i18n';
 
 export function UniqueServicesSection() {
+  const { t } = useTypedTranslation('client');
   const services = [
     {
       icon: Bot,
-      title: 'AI Assistant',
-      description: 'Your personal AI-powered car advisor that understands your needs and preferences.',
+      title: t('unique_services.ai_assistant.title'),
+      description: t('unique_services.ai_assistant.description'),
       features: [
-        'Natural language search',
-        'Smart recommendations',
-        'Price predictions',
-        'Comparison analysis'
+        t('unique_services.ai_assistant.feature_1'),
+        t('unique_services.ai_assistant.feature_2'),
+        t('unique_services.ai_assistant.feature_3'),
+        t('unique_services.ai_assistant.feature_4')
       ],
       color: 'blue',
       gradient: 'from-blue-500 to-cyan-500'
     },
     {
       icon: Database,
-      title: 'CarVertical Integration',
-      description: 'Access comprehensive vehicle history reports from multiple trusted sources.',
+      title: t('unique_services.carvertical.title'),
+      description: t('unique_services.carvertical.description'),
       features: [
-        'Accident history',
-        'Mileage verification',
-        'Ownership records',
-        'Service history'
+        t('unique_services.carvertical.feature_1'),
+        t('unique_services.carvertical.feature_2'),
+        t('unique_services.carvertical.feature_3'),
+        t('unique_services.carvertical.feature_4')
       ],
       color: 'purple',
       gradient: 'from-purple-500 to-pink-500'
     },
     {
       icon: UserRound,
-      title: 'Personal Helper',
-      description: 'Dedicated human support to guide you through every step of your car buying journey.',
+      title: t('unique_services.personal_helper.title'),
+      description: t('unique_services.personal_helper.description'),
       features: [
-        'Expert consultation',
-        'Negotiation assistance',
-        'Documentation help',
-        'Post-purchase support'
+        t('unique_services.personal_helper.feature_1'),
+        t('unique_services.personal_helper.feature_2'),
+        t('unique_services.personal_helper.feature_3'),
+        t('unique_services.personal_helper.feature_4')
       ],
       color: 'green',
       gradient: 'from-green-500 to-emerald-500'
@@ -51,23 +53,23 @@ export function UniqueServicesSection() {
   const additionalFeatures = [
     {
       icon: Shield,
-      title: 'Verified Data',
-      description: 'All information cross-checked from multiple reliable sources'
+      title: t('unique_services.additional.verified_data_title'),
+      description: t('unique_services.additional.verified_data_desc')
     },
     {
       icon: TrendingUp,
-      title: 'Market Analytics',
-      description: 'Real-time pricing trends and market insights'
+      title: t('unique_services.additional.market_analytics_title'),
+      description: t('unique_services.additional.market_analytics_desc')
     },
     {
       icon: FileCheck,
-      title: 'Smart Reports',
-      description: 'AI-generated comprehensive vehicle analysis'
+      title: t('unique_services.additional.smart_reports_title'),
+      description: t('unique_services.additional.smart_reports_desc')
     },
     {
       icon: MessageSquare,
-      title: '24/7 Chat Support',
-      description: 'Instant answers to all your questions anytime'
+      title: t('unique_services.additional.chat_support_title'),
+      description: t('unique_services.additional.chat_support_desc')
     }
   ];
 
@@ -78,17 +80,17 @@ export function UniqueServicesSection() {
         <div className="mb-16 text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-4 py-2 text-sm font-medium text-purple-700 dark:border-purple-800 dark:bg-purple-950/50 dark:text-purple-400">
             <Sparkles className="h-4 w-4" />
-            What Makes Us Different
+            {t('unique_services.badge')}
           </div>
           <h2 className="mb-4 text-3xl font-bold text-slate-900 dark:text-white md:text-4xl lg:text-5xl">
-            Your Complete Car Search
+            {t('unique_services.title')}
             <br />
             <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Intelligence Platform
+              {t('unique_services.title_highlight')}
             </span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-            We don't just list cars. We provide intelligent tools, verified data, and personal support to help you make the best decision.
+            {t('unique_services.subtitle')}
           </p>
         </div>
 
@@ -151,21 +153,21 @@ export function UniqueServicesSection() {
         {/* CTA */}
         <div className="rounded-3xl border border-white/20 bg-white/80 p-12 text-center backdrop-blur-xl dark:bg-slate-900/80">
           <h3 className="mb-4 text-3xl font-bold text-slate-900 dark:text-white md:text-4xl">
-            Ready to Experience Smart Car Search?
+            {t('unique_services.cta_title')}
           </h3>
           <p className="mb-8 text-lg text-slate-600 dark:text-slate-400">
-            Join thousands of satisfied users who found their perfect car with our AI-powered platform
+            {t('unique_services.cta_subtitle')}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Button asChild size="lg" className="gap-2">
               <Link href={ROUTES.BROWSE}>
                 <Bot className="h-5 w-5" />
-                Try AI Search Now
+                {t('unique_services.cta_primary')}
               </Link>
             </Button>
             <Button asChild size="lg" variant="secondary" className="gap-2">
               <Link href={ROUTES.EXPLORE}>
-                Learn More
+                {t('unique_services.cta_secondary')}
               </Link>
             </Button>
           </div>

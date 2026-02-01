@@ -7,7 +7,7 @@ import { useAuth } from '@/contexts/auth/AuthContext';
 import Image from 'next/image';
 
 export default function ProfileSettingsPage() {
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
   const { user } = useAuth();
   
   const [formData, setFormData] = useState({
@@ -37,10 +37,10 @@ export default function ProfileSettingsPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-              {t('client.settings.profile.title') || 'Profile Settings'}
+              {t('settings.account.title') || 'Profile Settings'}
             </h1>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-              {t('client.settings.profile.description') || 'Manage your personal information and profile'}
+              {t('settings.account.subtitle') || 'Manage your personal information and profile'}
             </p>
           </div>
         </div>

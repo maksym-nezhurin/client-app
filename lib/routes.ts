@@ -13,7 +13,7 @@ export const ROUTES = {
     ACCOUNT_SETTINGS: '/account/settings',
     ACCOUNT_CARS: '/account/cars',
     ACCOUNT_CARS_NEW: '/account/cars/new',
-    ACCOUNT_CARS_FOR_SALE: '/account/cars/for-sale',
+    ACCOUNT_CARS_SALE: '/account/cars/sale',
     ACCOUNT_BILLING: '/account/settings/billing',
     AUTH: {
         LOGIN: '/auth/login',
