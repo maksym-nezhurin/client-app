@@ -6,7 +6,7 @@ import { useTypedTranslation } from '@/lib/i18n';
 import { Toggle } from '@/components/ui/Toggle';
 
 export default function NotificationsSettingsPage() {
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
   
   const [notifications, setNotifications] = useState({
     email: {
@@ -48,10 +48,10 @@ export default function NotificationsSettingsPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-              {t('client.settings.notifications.title') || 'Notification Settings'}
+              {t('settings.notification.title') || 'Notification Settings'}
             </h1>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-              {t('client.settings.notifications.description') || 'Manage how you receive notifications from us'}
+              {t('settings.notification.subtitle') || 'Manage how you receive notifications from us'}
             </p>
           </div>
         </div>

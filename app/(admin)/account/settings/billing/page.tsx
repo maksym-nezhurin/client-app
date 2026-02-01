@@ -4,7 +4,7 @@ import { CreditCard, Calendar, Download, Plus, Check } from 'lucide-react';
 import { useTypedTranslation } from '@/lib/i18n';
 
 export default function BillingSettingsPage() {
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
 
   const paymentMethods = [
     {
@@ -59,10 +59,10 @@ export default function BillingSettingsPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-              {t('client.settings.billing.title') || 'Billing & Payment'}
+              {t('settings.billing.title') || 'Billing & Payment'}
             </h1>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-              {t('client.settings.billing.description') || 'Manage your payment methods and billing history'}
+              {t('settings.billing.description') || 'Manage your payment methods and billing history'}
             </p>
           </div>
         </div>

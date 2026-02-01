@@ -5,6 +5,7 @@ import { useAuth } from '@/contexts/auth/AuthContext';
 import { ROUTES } from '@/lib/routes';
 import { Button } from '@/components/ui/Button';
 import { useTypedTranslation } from '@/lib/i18n';
+import { RecentActivitySection } from '@/components/dashboard/RecentActivitySection';
 
 const summaryCards = [
   { labelKey: 'client.account.summary.active_listings', value: '4' },
@@ -13,30 +14,24 @@ const summaryCards = [
   { labelKey: 'client.account.summary.new_inquiries', value: '6' },
 ];
 
-const recentActivity = [
-  { titleKey: 'client.account.recent_activity_items.item_1', detailKey: 'client.account.recent_activity_times.item_1' },
-  { titleKey: 'client.account.recent_activity_items.item_2', detailKey: 'client.account.recent_activity_times.item_2' },
-  { titleKey: 'client.account.recent_activity_items.item_3', detailKey: 'client.account.recent_activity_times.item_3' },
-];
-
 export default function AccountPage() {
   const { user, isLoading } = useAuth();
-  const { t } = useTypedTranslation();
+  const { t } = useTypedTranslation('client');
   const primaryCar = (user as { primaryCar?: { name?: string; year?: number; status?: string } })?.primaryCar;
 
   if (isLoading) {
-    return <div className="p-6 text-sm text-muted-foreground">{t('client.account.loading_dashboard')}</div>;
+    return <div className="p-6 text-sm text-muted-foreground">{t('account.loading_dashboard')}</div>;
   }
 
   if (!user) {
     return (
       <div className="mx-auto max-w-xl space-y-4 rounded-2xl border border-white/10 bg-white/95 p-8 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95">
-        <h1 className="text-2xl font-semibold">{t('client.account.account_dashboard_title')}</h1>
+        <h1 className="text-2xl font-semibold">{t('account.account_dashboard_title')}</h1>
         <p className="text-sm text-muted-foreground">
-          {t('client.account.account_dashboard_guest')}
+          {t('account.account_dashboard_guest')}
         </p>
         <Button asChild>
-          <Link href={ROUTES.AUTH.LOGIN}>{t('client.account.go_to_login')}</Link>
+          <Link href={ROUTES.AUTH.LOGIN}>{t('account.go_to_login')}</Link>
         </Button>
       </div>
     );
@@ -47,17 +42,17 @@ export default function AccountPage() {
       <div className="rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold">{t('client.account.dashboard_title')}</h1>
+            <h1 className="text-2xl font-semibold">{t('account.dashboard_title')}</h1>
             <p className="text-sm text-muted-foreground">
-              {t('client.account.dashboard_subtitle')}
+              {t('account.dashboard_subtitle')}
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Button asChild variant="secondary">
-              <Link href={ROUTES.ACCOUNT_CARS_NEW}>{t('client.account.add_new_car')}</Link>
+              <Link href={ROUTES.ACCOUNT_CARS_NEW}>{t('account.add_new_car')}</Link>
             </Button>
             <Button asChild>
-              <Link href={ROUTES.ACCOUNT_CARS}>{t('client.account.manage_cars')}</Link>
+              <Link href={ROUTES.ACCOUNT_CARS}>{t('account.manage_cars')}</Link>
             </Button>
           </div>
         </div>
@@ -73,32 +68,26 @@ export default function AccountPage() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95 lg:col-span-2">
-          <h2 className="text-lg font-semibold">{t('client.account.recent_activity')}</h2>
-          <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-            {recentActivity.map((item) => (
-              <li key={item.titleKey} className="flex items-center justify-between">
-                <span className="text-text-primary">{t(item.titleKey)}</span>
-                <span>{t(item.detailKey)}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <RecentActivitySection 
+          limit={5} 
+          showFilters={true}
+          className="lg:col-span-2"
+        />
 
         <div className="rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95">
-          <h2 className="text-lg font-semibold">{t('client.account.profile_quick_view')}</h2>
+          <h2 className="text-lg font-semibold">{t('account.profile_quick_view')}</h2>
           <dl className="mt-4 space-y-3 text-sm">
             <div>
-              <dt className="text-xs uppercase text-muted-foreground">{t('client.account.name')}</dt>
+              <dt className="text-xs uppercase text-muted-foreground">{t('account.name')}</dt>
               <dd className="font-medium">{user.name ?? user.username ?? '—'}</dd>
             </div>
             <div>
-              <dt className="text-xs uppercase text-muted-foreground">{t('client.account.email')}</dt>
+              <dt className="text-xs uppercase text-muted-foreground">{t('account.email')}</dt>
               <dd className="font-medium">{user.email ?? '—'}</dd>
             </div>
           </dl>
           <Button asChild variant="ghost" className="mt-4 w-full">
-            <Link href={ROUTES.ACCOUNT_SETTINGS}>{t('client.account.edit_settings')}</Link>
+            <Link href={ROUTES.ACCOUNT_SETTINGS}>{t('account.edit_settings')}</Link>
           </Button>
         </div>
       </div>
@@ -106,18 +95,18 @@ export default function AccountPage() {
       <div className="rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h2 className="text-lg font-semibold">{t('client.account.primary_car.title')}</h2>
+            <h2 className="text-lg font-semibold">{t('account.primary_car.title')}</h2>
             <p className="text-sm text-muted-foreground">
-              {t('client.account.primary_car.subtitle')}
+              {t('account.primary_car.subtitle')}
             </p>
           </div>
           {primaryCar ? (
             <Button asChild variant="secondary">
-              <Link href={ROUTES.ACCOUNT_CARS}>{t('client.account.primary_car.manage')}</Link>
+              <Link href={ROUTES.ACCOUNT_CARS}>{t('account.primary_car.manage')}</Link>
             </Button>
           ) : (
             <Button asChild>
-              <Link href={ROUTES.ACCOUNT_CARS_NEW}>{t('client.account.primary_car.add')}</Link>
+              <Link href={ROUTES.ACCOUNT_CARS_NEW}>{t('account.primary_car.add')}</Link>
             </Button>
           )}
         </div>
@@ -126,7 +115,7 @@ export default function AccountPage() {
           {primaryCar ? (
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <p className="text-sm text-muted-foreground">{t('client.account.primary_car.selected_label')}</p>
+                <p className="text-sm text-muted-foreground">{t('account.primary_car.selected_label')}</p>
                 <p className="text-xl font-semibold">
                   {primaryCar.name ?? 'Your car'}
                 </p>
@@ -142,14 +131,14 @@ export default function AccountPage() {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="text-sm font-semibold text-slate-700">
-                  {t('client.account.primary_car.empty_title')}
+                  {t('account.primary_car.empty_title')}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {t('client.account.primary_car.empty_subtitle')}
+                  {t('account.primary_car.empty_subtitle')}
                 </p>
               </div>
               <Button asChild variant="secondary">
-                <Link href={ROUTES.ACCOUNT_CARS_NEW}>{t('client.account.primary_car.create_listing')}</Link>
+                <Link href={ROUTES.ACCOUNT_CARS_NEW}>{t('account.primary_car.add')}</Link>
               </Button>
             </div>
           )}

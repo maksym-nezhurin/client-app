@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
+import { useTypedTranslation } from '@/lib/i18n';
 import { 
   Car, 
   Plus, 
@@ -39,6 +40,7 @@ interface Car {
 }
 
 export default function MyCarsPage() {
+  const { t } = useTypedTranslation('client');
   // Mock data - Replace with actual API call
   const [cars] = useState<Car[]>([
     {
@@ -73,25 +75,25 @@ export default function MyCarsPage() {
       <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
         <div>
           <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
-            My Vehicles
+            {t('cars.title')}
           </h1>
           <p className="mt-2 text-slate-600 dark:text-slate-400">
-            Manage your listed vehicles and personal garage
+            {t('cars.subtitle')}
           </p>
         </div>
 
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-3">
           <Button asChild className="gap-2">
-            <Link href={ROUTES.ACCOUNT_CARS_NEW}>
+            <Link href={ROUTES.ACCOUNT_CARS_SALE}>
               <Tag className="h-4 w-4" />
-              List for Sale
+              {t('cars.list_for_sale')}
             </Link>
           </Button>
           <Button asChild variant="secondary" className="gap-2">
-            <Link href="/account/cars/add-to-garage">
+            <Link href={ROUTES.ACCOUNT_CARS_NEW}>
               <Plus className="h-4 w-4" />
-              Add to Garage
+              {t('cars.add_to_garage')}
             </Link>
           </Button>
         </div>
@@ -170,7 +172,7 @@ export default function MyCarsPage() {
               </div>
             </div>
             <Button asChild variant="outline" size="sm">
-              <Link href={ROUTES.ACCOUNT_CARS_FOR_SALE}>View All</Link>
+              <Link href={ROUTES.ACCOUNT_CARS_SALE}>View All</Link>
             </Button>
           </div>
 
@@ -441,7 +443,7 @@ export default function MyCarsPage() {
               </Link>
             </Button>
             <Button asChild variant="secondary" className="gap-2">
-              <Link href="/account/cars/add-to-garage">
+              <Link href={ROUTES.ACCOUNT_CARS_NEW}>
                 <Plus className="h-4 w-4" />
                 Add to Garage
               </Link>
@@ -465,7 +467,7 @@ export default function MyCarsPage() {
             </p>
           </div>
           <Button asChild variant="secondary" size="sm" className="gap-2 whitespace-nowrap">
-            <Link href="/account/cars/add-to-garage">
+            <Link href={ROUTES.ACCOUNT_CARS_NEW}>
               Learn More
             </Link>
           </Button>
