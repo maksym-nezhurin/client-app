@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -32,10 +33,183 @@ interface MenuItem {
 }
 
 export default function AccountLayout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+  const pathname = usePathname();
   const { user, isLoading } = useAuth();
   const { t } = useTypedTranslation('client');
   
   // Check if any cars submenu item is active
+  const isCarsMenuActive = pathname?.startsWith('/account/cars');
+  const isSettingsMenuActive = pathname?.startsWith('/account/settings');
+  
+  const [carsMenuOpen, setCarsMenuOpen] = useState(isCarsMenuActive);
+  const [settingsMenuOpen, setSettingsMenuOpen] = useState(isSettingsMenuActive);
+
+  // Redirect to login if not authenticated - always run this hook
+  useEffect(() => {
+    // Only redirect after we've checked authentication status
+    if (!isLoading && !user) {
+      const returnUrl = `${ROUTES.AUTH.LOGIN}?returnTo=${encodeURIComponent(pathname)}`;
+
+      router.push(returnUrl);
+    }
+  }, [user, isLoading, router, pathname]);
+  
+  // Show loading state while checking authentication
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="mb-4 h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+          <p className="text-sm text-muted-foreground">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
+  
+  // Don't render content if not authenticated (let useEffect handle redirect)
+  if (!user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="mb-4 h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+          <p className="text-sm text-muted-foreground">Redirecting to login...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const menuItems: MenuItem[] = [
+    { 
+      href: ROUTES.ACCOUNT, 
+      label: t('client.account_menu.dashboard') || 'Dashboard',
+      icon: Home,
+    },
+    { 
+      label: t('client.account_menu.cars') || 'My Vehicles',
+      icon: Car,
+      children: [
+        { 
+          href: ROUTES.ACCOUNT_CARS, 
+          label: t('client.account_menu.my_cars') || 'Overview',
+          icon: Car,
+        },
+        { 
+          href: '/account/cars/add-to-garage', 
+          label: t('client.account_menu.add_to_garage') || 'Add to Garage',
+          icon: Plus,
+        },
+        { 
+          href: ROUTES.ACCOUNT_CARS_NEW, 
+          label: t('client.account_menu.list_for_sale') || 'List for Sale',
+          icon: Tag,
+        },
+      ],
+    },
+    { 
+      label: t('client.account_menu.settings') || 'Settings',
+      icon: Settings,
+      children: [
+        { 
+          href: ROUTES.ACCOUNT_SETTINGS, 
+          label: t('client.account_menu.profile') || 'Profile',
+          icon: User,
+        },
+        { 
+          href: '/account/settings/notifications', 
+          label: t('client.account_menu.notifications') || 'Notifications',
+          icon: Bell,
+        },
+        { 
+          href: '/account/settings/privacy', 
+          label: t('client.account_menu.privacy') || 'Privacy & Security',
+          icon: Shield,
+        },
+        { 
+          href: '/account/settings/billing', 
+          label: t('client.account_menu.billing') || 'Billing',
+          icon: CreditCard,
+        },
+        { 
+          href: '/account/settings/preferences', 
+          label: t('client.account_menu.preferences') || 'Preferences',
+          icon: Palette,
+        },
+      ],
+    },
+  ];
+
+  const renderMenuItem = (item: MenuItem, depth: number = 0) => {
+    const hasChildren = item.children && item.children.length > 0;
+    const isActive = pathname === item.href;
+    const Icon = item.icon;
+
+    if (hasChildren) {
+      // Determine which menu this is and its state
+      const isCarsMenu = item.label.includes('Vehicles') || item.label.includes('cars');
+      const isSettingsMenu = item.label.includes('Settings') || item.label.includes('settings');
+      
+      const isOpen = isCarsMenu ? carsMenuOpen : isSettingsMenu ? settingsMenuOpen : false;
+      const isMenuActive = isCarsMenu ? isCarsMenuActive : isSettingsMenu ? isSettingsMenuActive : false;
+      
+      const toggleMenu = () => {
+        if (isCarsMenu) {
+          setCarsMenuOpen(!isOpen);
+        } else if (isSettingsMenu) {
+          setSettingsMenuOpen(!isOpen);
+        }
+      };
+      
+      return (
+        <div key={item.label}>
+          <button
+            onClick={toggleMenu}
+            className={cn(
+              'flex w-full items-center justify-between rounded-lg px-4 py-2.5 text-left text-sm font-medium transition-all',
+              isMenuActive
+                ? 'bg-primary/10 text-primary shadow-sm'
+                : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
+            )}
+          >
+            <span className="flex items-center gap-2">
+              {Icon && <Icon className="h-4 w-4" />}
+              {item.label}
+            </span>
+            <ChevronDown
+              className={cn(
+                'h-4 w-4 transition-transform',
+                isOpen && 'rotate-180'
+              )}
+            />
+          </button>
+          
+          {isOpen && (
+            <div className="ml-4 mt-1 space-y-1 border-l-2 border-slate-200 pl-2 dark:border-slate-800">
+              {item.children!.map((child) => renderMenuItem(child, depth + 1))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    return (
+      <Link
+        key={item.href}
+        href={item.href!}
+        className={cn(
+          'flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all',
+          depth > 0 && 'pl-3',
+          isActive
+            ? 'bg-primary/10 text-primary shadow-sm ring-1 ring-primary/20'
+            : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
+        )}
+        aria-current={isActive ? 'page' : undefined}
+      >
+        {Icon && <Icon className="h-4 w-4" />}
+        {item.label}
+      </Link>
+    );
+  };
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">

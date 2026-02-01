@@ -16,7 +16,7 @@ import { SocialLoginButtons } from '@/components/auth/SocialLoginButtons';
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get('redirect') ?? ROUTES.ACCOUNT;
+  const redirectTo = searchParams.get('redirect') ?? searchParams.get('returnTo') ?? ROUTES.ACCOUNT;
   const { login, user, isLoading } = useAuth();
   const { t } = useTypedTranslation('client');
 
