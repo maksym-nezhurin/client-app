@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -30,6 +31,7 @@ interface MenuItem {
 }
 
 export default function AccountLayout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   const pathname = usePathname();
   const { user, isLoading } = useAuth();
   const { t } = useTypedTranslation();
@@ -40,6 +42,40 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
   
   const [carsMenuOpen, setCarsMenuOpen] = useState(isCarsMenuActive);
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(isSettingsMenuActive);
+
+  // Redirect to login if not authenticated - always run this hook
+  useEffect(() => {
+    // Only redirect after we've checked authentication status
+    if (!isLoading && !user) {
+      const returnUrl = `${ROUTES.AUTH.LOGIN}?returnTo=${encodeURIComponent(pathname)}`;
+
+      router.push(returnUrl);
+    }
+  }, [user, isLoading, router, pathname]);
+  
+  // Show loading state while checking authentication
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="mb-4 h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+          <p className="text-sm text-muted-foreground">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
+  
+  // Don't render content if not authenticated (let useEffect handle redirect)
+  if (!user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="mb-4 h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+          <p className="text-sm text-muted-foreground">Redirecting to login...</p>
+        </div>
+      </div>
+    );
+  }
 
   const menuItems: MenuItem[] = [
     { 
