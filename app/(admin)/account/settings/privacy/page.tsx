@@ -30,7 +30,7 @@ export default function PrivacySettingsPage() {
               {t('settings.privacy.title') || 'Privacy & Security'}
             </h1>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-              {t('settings.privacy.description') || 'Manage your privacy preferences and security settings'}
+              {t('settings.privacy.subtitle') || 'Manage your privacy preferences and security settings'}
             </p>
           </div>
         </div>

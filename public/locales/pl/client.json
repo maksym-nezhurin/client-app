@@ -126,19 +126,40 @@
       "create_listing": "Utwórz ogłoszenie"
     }
   },
-  "account_settings": {
-    "loading": "Ładowanie ustawień...",
-    "title": "Ustawienia konta",
-    "subtitle": "Zaktualizuj informacje profilu.",
-    "guest_subtitle": "Zaloguj się, aby zarządzać ustawieniami.",
-    "first_name": "Imię",
-    "last_name": "Nazwisko",
-    "country_code": "Kod kraju",
-    "save_changes": "Zapisz zmiany",
-    "saving": "Zapisywanie...",
-    "back_to_profile": "Wróć do profilu",
-    "updated": "Ustawienia zapisane.",
-    "update_error": "Nie udało się zapisać ustawień."
+  "settings": {
+    "notification": {
+      "title": "Ustawienia powiadomień",
+      "subtitle": "Zarządzaj swoimi preferencjami powiadomień." 
+    },
+    "account": {
+      "loading": "Ładowanie ustawień...",
+      "title": "Ustawienia konta",
+      "subtitle": "Zaktualizuj informacje swojego profilu.",
+      "guest_subtitle": "Zaloguj się, aby zarządzać ustawieniami.",
+      "first_name": "Imię",
+      "last_name": "Nazwisko",
+      "country_code": "Kod kraju",
+      "save_changes": "Zapisz zmiany",
+      "saving": "Zapisywanie...",
+      "back_to_profile": "Powrót do profilu",
+      "updated": "Ustawienia zaktualizowane.",
+      "update_error": "Nie udało się zaktualizować ustawień."
+    },
+    "privacy": {
+      "title": "Ustawienia prywatności",
+      "subtitle": "Zarządzaj swoimi preferencjami prywatności."
+    },
+    "billing": {
+      "title": "Płatności i rozliczenia",
+      "description": "Zarządzaj metodami płatności i historią rozliczeń",
+      "redirecting": "Przekierowywanie...",
+      "pay_with_stripe": "Zapłać przez Stripe",
+      "checkout_error": "Nie udało się rozpocząć procesu Stripe."
+    },
+    "preferences": {
+      "title": "Preferencje",
+      "description": "Zarządzaj swoimi preferencjami."
+    }
   },
   "account_cars": {
     "title": "Moje auta",

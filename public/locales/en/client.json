@@ -126,19 +126,40 @@
       "create_listing": "Create listing"
     }
   },
-  "account_settings": {
-    "loading": "Loading settings...",
-    "title": "Account settings",
-    "subtitle": "Update your profile information.",
-    "guest_subtitle": "Please sign in to manage your settings.",
-    "first_name": "First name",
-    "last_name": "Last name",
-    "country_code": "Country code",
-    "save_changes": "Save changes",
-    "saving": "Saving...",
-    "back_to_profile": "Back to profile",
-    "updated": "Settings updated.",
-    "update_error": "Unable to update settings."
+  "settings": {
+    "notification": {
+      "title": "Notification settings",
+      "subtitle": "Manage your notification preferences." 
+    },
+    "account": {
+      "loading": "Loading settings...",
+      "title": "Account settings",
+      "subtitle": "Update your profile information.",
+      "guest_subtitle": "Please sign in to manage your settings.",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "country_code": "Country code",
+      "save_changes": "Save changes",
+      "saving": "Saving...",
+      "back_to_profile": "Back to profile",
+      "updated": "Settings updated.",
+      "update_error": "Unable to update settings."
+    },
+    "privacy": {
+      "title": "Privacy settings",
+      "subtitle": "Manage your privacy preferences."
+    },
+    "billing": {
+      "title": "Billing & Payment",
+      "description": "Manage your payment methods and billing history",
+      "redirecting": "Redirecting...",
+      "pay_with_stripe": "Pay with Stripe",
+      "checkout_error": "Unable to start Stripe checkout."
+    },
+    "preferences": {
+      "title": "Preferences",
+      "description": "Manage your preferences."
+    }
   },
   "account_cars": {
     "title": "My cars",
@@ -164,13 +185,6 @@
     "mark_for_sale": "Mark as car for sale",
     "save_listing": "Save listing",
     "saving": "Saving..."
-  },
-  "account_billing": {
-    "title": "Billing & plans",
-    "subtitle": "Choose a plan and pay securely via Stripe.",
-    "redirecting": "Redirecting...",
-    "pay_with_stripe": "Pay with Stripe",
-    "checkout_error": "Unable to start Stripe checkout."
   },
   "browse": {
     "title": "Browse cars",
